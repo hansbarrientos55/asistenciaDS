@@ -20,3 +20,9 @@ Route::get('/', function () {
 //Route::get('/departamento/crear','DepartamentoController@create');
 
 Route::resource('departamento','DepartamentoController');
+
+Route::resource('facultad','FacultadController');
+
+Route::resource('materia','MateriaController');
+
+Route::resource('carrera','CarreraController');

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Facultad;
+use App\Carrera;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class FacultadController extends Controller
+class CarreraController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class FacultadController extends Controller
      */
     public function index()
     {
-        $datos['facultades']=Facultad::paginate(20);
-        return view('facultad.index', $datos);
+        $datos['carreras']=Carrera::paginate(20);
+        return view('carrera.index', $datos);
     }
 
     /**
@@ -26,7 +26,7 @@ class FacultadController extends Controller
      */
     public function create()
     {
-        return view('facultad.create');
+        return view('carrera.create');
     }
 
     /**
@@ -37,22 +37,20 @@ class FacultadController extends Controller
      */
     public function store(Request $request)
     {
-        //$datosDepartamento=request()->all();
-
-        $datosFacultad=request()->except('_token');
-        Facultad::insert($datosFacultad);
+        $datosCarrera=request()->except('_token');
+        Carrera::insert($datosCarrera);
 
        // return response()->json($datosDepartamento);
-       return redirect('facultad');
+       return redirect('carrera');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Facultad  $facultad
+     * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
-    public function show(Facultad $facultad)
+    public function show(Carrera $carrera)
     {
         //
     }
@@ -60,41 +58,41 @@ class FacultadController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Facultad  $facultad
+     * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $facu = Facultad::findOrFail($id);
+        $carre = Carrera::findOrFail($id);
 
-        return view('facultad.edit', compact('facu'));
+        return view('carrera.edit', compact('carre'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Facultad  $facultad
+     * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $datosFacultad=request()->except(['_token','_method']);
-        Facultad::where('id','=',$id)->update($datosFacultad);
+        $datosCarrera=request()->except(['_token','_method']);
+        Carrera::where('id','=',$id)->update($datosCarrera);
 
-        return redirect('facultad');
+        return redirect('carrera');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Facultad  $facultad
+     * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Facultad::destroy($id);
+        Carrera::destroy($id);
 
-        return redirect('facultad');
+        return redirect('carrera');
     }
 }
