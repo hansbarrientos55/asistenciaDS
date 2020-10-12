@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::get('/departamento', 'DepartamentoController@index');
+
+//Route::get('/departamento/crear','DepartamentoController@create');
+
+Route::resource('departamento','DepartamentoController');
