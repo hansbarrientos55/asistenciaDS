@@ -20,6 +20,7 @@ class CreateMateriasTable extends Migration
             $table->string('descripcionmate');
             $table->string('nivelmate');
             $table->boolean('estaactivo')->default('1');
+            $table->unsignedInteger('departamento_id')->default('0'); // Relación con categorias
             $table->timestamps();
         });
     }

@@ -26,3 +26,21 @@ Route::resource('facultad','FacultadController');
 Route::resource('materia','MateriaController');
 
 Route::resource('carrera','CarreraController');
+
+Route::resource('usuario','UsuarioController');
+
+Route::resource('grupo','GrupoController');
+
+Route::resource('gestion','GestionController');
+
+//Route::resource('asignacion','AsignacionController');
+
+Route::get('asignacion', 'AsignacionController@asignacion')->name('asignacion');
+
+Route::post('pedido', 'AsignacionController@pedido')->name('pedido');
+
+Route::get('pedido', 'AsignacionController@pedido')->name('pedido');
+
+Route::get('listado', 'AsignacionController@listado')->name('listado');
+
+Route::post('listado', 'AsignacionController@listado')->name('listado');
