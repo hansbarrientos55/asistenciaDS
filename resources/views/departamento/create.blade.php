@@ -3,10 +3,10 @@ Crear departamento
 <form action="{{ url('/departamento') }}" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
     <label for="nombredepa">{{ 'Nombre' }}</label>
-    <input type="text" name="nombredepa" id="nombredepa" value="">
+    <input type="text" name="nombredepa" id="nombredepa" value="" required>
     <br/>
     <label for="descripciondepa">{{ 'Descripcion' }}</label>
-    <input type="text" name="descripciondepa" id="descripciondepa" value="">
+    <input type="text" name="descripciondepa" id="descripciondepa" value="" required>
     <br/>
     
 

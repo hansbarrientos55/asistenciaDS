@@ -43,7 +43,7 @@ class UsuarioController extends Controller
          Usuario::insert($datosUsuario);
  
         // return response()->json($datosDepartamento);
-        return redirect('usuario');
+        return redirect('usuario')->with('mensaje','Usuario registrado con exito');
     }
 
     /**

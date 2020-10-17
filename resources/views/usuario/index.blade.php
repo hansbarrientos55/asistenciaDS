@@ -3,6 +3,13 @@ Inicio
 Usuarios
 <br/>
 
+@if (Session::has('mensaje')){{
+    Session::get('mensaje')
+}}
+    
+@endif
+
+
 <a href="{{url('usuario/create')}}">Agregar usuario</a>
 
 
