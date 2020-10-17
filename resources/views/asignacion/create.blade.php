@@ -59,5 +59,5 @@
         </div>
 
         <button class="btn btn-primary btn-block" type="submit">Guardar</button>
-        <button class="btn btn-secondary btn-block">Cancelar</button>
+        <a href="{{url('asignacion')}}">Cancelar</a>
     </form>
