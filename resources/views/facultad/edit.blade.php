@@ -4,13 +4,13 @@ Editar facultad
     {{ csrf_field() }}
     {{method_field('PATCH')}}
     <label for="nombrefacu">{{ 'Nombre' }}</label>
-<input type="text" name="nombrefacu" id="nombrefacu" value="{{$facu->nombrefacu}}">
+<input type="text" name="nombrefacu" id="nombrefacu" value="{{$facu->nombrefacu}}" required>
     <br/>
     <label for="descripcionfacu">{{ 'Descripcion' }}</label>
-    <input type="text" name="descripcionfacu" id="descripcionfacu" value="{{$facu->descripcionfacu}}">
+    <input type="text" name="descripcionfacu" id="descripcionfacu" value="{{$facu->descripcionfacu}}" required>
     <br/>
     <label for="estaactivo">{{ 'Activo' }}</label>
-    <input type="text" name="estaactivo" id="estaactivo" value="{{$facu->estaactivo}}">
+    <input type="text" name="estaactivo" id="estaactivo" value="{{$facu->estaactivo}}" required>
     <br/>
 
     <input type="submit" value="Guardar cambios">

@@ -1,6 +1,6 @@
 
     <h1 class="text-center">Asignacion Grupo Materia</h1>
-    <form action="{{route('pedido')}}" method="POST">
+    <form action="{{url('asignacion/store')}}" method="POST">
         @csrf
         <div class="form-group">
             <label for="exampleFormControlSelect1">Gestión</label>
@@ -59,5 +59,5 @@
         </div>
 
         <button class="btn btn-primary btn-block" type="submit">Guardar</button>
-        <button class="btn btn-secondary btn-block">Cancelar</button>
+        <a href="{{url('asignacion')}}">Cancelar</a>
     </form>

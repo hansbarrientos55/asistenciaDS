@@ -1,5 +1,8 @@
 
     <h1 class="text-center">Lista de Asignaciones de Docentes</h1>
+
+    <a href="{{url('asignacion/create')}}">Asignar materia a docente</a>
+
     <table class="table">
         <thead>
         <tr>
@@ -24,7 +27,16 @@
                 <td>{{$item->grupo}}</td>
                 <td>{{$item->horario}}</td>
                 <td>
-                   
+                    <a href="{{ url('/asignacion/'.$item->id.'/edit') }}">Modificar</a>
+                    
+                    
+                    | Archivar | Desarchivar |
+
+                <form action="{{ url('/asignacion/'.$item->id) }}" method="post">
+                     {{ csrf_field() }}   
+                     {{method_field('DELETE')}}
+                    <button type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
+                </form>
                 </td>
             </tr>
             @endforeach

@@ -15,9 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('/departamento', 'DepartamentoController@index');
-
-//Route::get('/departamento/crear','DepartamentoController@create');
 
 Route::resource('departamento','DepartamentoController');
 
@@ -33,14 +30,11 @@ Route::resource('grupo','GrupoController');
 
 Route::resource('gestion','GestionController');
 
-//Route::resource('asignacion','AsignacionController');
+Route::resource('asignacion','AsignacionController');
 
-Route::get('asignacion', 'AsignacionController@asignacion')->name('asignacion');
+Route::post('asignacion/store', 'AsignacionController@store');
 
-Route::post('pedido', 'AsignacionController@pedido')->name('pedido');
+//Route::get('asignacion/store', 'AsignacionController@store');
+Auth::routes();
 
-Route::get('pedido', 'AsignacionController@pedido')->name('pedido');
-
-Route::get('listado', 'AsignacionController@listado')->name('listado');
-
-Route::post('listado', 'AsignacionController@listado')->name('listado');
+Route::get('/home', 'HomeController@index')->name('home');

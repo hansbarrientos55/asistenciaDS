@@ -85,8 +85,28 @@
                 </div>
 
                 <div class="links">
+
                     
                 </div>
+
+                <table class="table table-light">
+                    <thead class="thead-light">
+                        <tr>
+                
+                            <th> <a href="{{url('usuario')}}">Usuarios</a> </th>
+                            <th><a href="{{url('facultad')}}">Facultad</a></th>
+                            <th><a href="{{url('departamento')}}">Departamento</a></th>
+                            <th><a href="{{url('carrera')}}">Carrera</a></th>
+                            <th><a href="{{url('materia')}}">Materia</a></th>
+                            <th><a href="{{url('grupo')}}">Grupo</a></th>
+                            <th><a href="{{url('horario')}}">Horario</a></th>
+                            <th><a href="{{url('gestion')}}">Gestion</a></th>
+                            <th><a href="{{url('asignacion')}}">Asignacion</a></th>
+                        </tr>
+                    </thead>
+
+                </table>
+
             </div>
         </div>
     </body>

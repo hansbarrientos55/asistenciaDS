@@ -4,10 +4,10 @@ Editar gestion
     {{ csrf_field() }}
     {{method_field('PATCH')}}
     <label for="periodogestion">{{ 'Periodo' }}</label>
-<input type="text" name="periodogestion" id="periodogestion" value="{{$ges->periodogestion}}">
+<input type="text" name="periodogestion" id="periodogestion" value="{{$ges->periodogestion}}" required>
     <br/>
     <label for="añogestion">{{ 'Año' }}</label>
-    <input type="text" name="añogestion" id="añogestion" value="{{$ges->añogestion}}">
+    <input type="text" name="añogestion" id="añogestion" value="{{$ges->añogestion}}" required>
     <br/>
     
 

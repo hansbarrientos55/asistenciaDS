@@ -3,7 +3,7 @@ Crear grupo
 <form action="{{ url('/grupo') }}" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
     <label for="numerogrupo">{{ 'Numero' }}</label>
-    <input type="text" name="numerogrupo" id="numerogrupo" value="">
+    <input type="text" name="numerogrupo" id="numerogrupo" value="" required>
     <br/>
 
     

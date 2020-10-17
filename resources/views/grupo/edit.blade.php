@@ -4,7 +4,7 @@ Editar grupo
     {{ csrf_field() }}
     {{method_field('PATCH')}}
     <label for="numerogrupo">{{ 'Numero' }}</label>
-    <input type="text" name="numerogrupo" id="numerogrupo" value="{{$gru->numerogrupo}}">
+    <input type="text" name="numerogrupo" id="numerogrupo" value="{{$gru->numerogrupo}}" required>
     <br/>
 
 

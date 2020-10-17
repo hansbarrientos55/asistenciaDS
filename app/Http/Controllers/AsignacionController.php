@@ -16,16 +16,40 @@ class AsignacionController extends Controller
 {
     
     
-    public function asignacion(){
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $asignaciones = Asignacion::all();
+        return view('asignacion.index',compact('asignaciones'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
         $gestiones = Gestion::all();
         $departamentos = Departamento::all();
         $docentes = Docente::all();
         $materias = Materia::all();
         $grupos = Grupo::all();
-        return view('asignacion.asignacion', compact('gestiones','departamentos', 'docentes', 'materias', 'grupos'));
+        return view('asignacion.create', compact('gestiones','departamentos', 'docentes', 'materias', 'grupos'));
     }
 
-    public function pedido(Request $request){
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         //return view('crud');
         //return $request->all();
         $asignacion = new Asignacion;
@@ -37,51 +61,9 @@ class AsignacionController extends Controller
         $asignacion->horario = $request->horario;
 
         $asignacion->save();
-        $asignaciones = Asignacion::all();
-        return view('asignacion.pedido',compact('asignaciones'));
-    }
-
-    public function listado(){
-       
-        $asignaciones = Asignacion::all();
-        return view('asignacion.listado',compact('asignaciones'));
-
-        //$asignaciones['asignacions']=Asignacion::paginate(20);
-        //return view('asignacion.listado', $asignaciones);
-    }
-    
-    
-    
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        //$asignaciones = Asignacion::all();
+        //return view('asignacion.index',compact('asignaciones'));
+        return redirect('asignacion');
     }
 
     /**
@@ -113,9 +95,12 @@ class AsignacionController extends Controller
      * @param  \App\Asignacion  $asignacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Asignacion $asignacion)
+    public function update(Request $request, $id)
     {
-        //
+        $datosAsignacion=request()->except(['_token','_method']);
+        Asignacion::where('id','=',$id)->update($datosAsignacion);
+
+        return redirect('asignacion');
     }
 
     /**
@@ -124,8 +109,10 @@ class AsignacionController extends Controller
      * @param  \App\Asignacion  $asignacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Asignacion $asignacion)
+    public function destroy($id)
     {
-        //
+        Asignacion::destroy($id);
+
+        return redirect('asignacion');
     }
 }
