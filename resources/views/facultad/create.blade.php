@@ -1,5 +1,5 @@
 Crear facultad
-
+<title>Crear facultad</title>
 <form action="{{ url('/facultad') }}" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
     <label for="nombrefacu">{{ 'Nombre' }}</label>

@@ -2,7 +2,7 @@ Inicio
 <br/>
 Materia
 <br/>
-
+<title>Administracion de Materias</title>
 <a href="{{url('materia/create')}}">Agregar materia</a>
 
 
@@ -10,7 +10,7 @@ Materia
     <thead class="thead-light">
         <tr>
 
-            <th> # </th>
+            <th>Id</th>
             <th>Nombre</th>
             <th>Codigo</th>
             <th>Descripcion</th>
@@ -26,7 +26,7 @@ Materia
             
         
             <tr>
-                <td>{{$loop->iteration}}</td>
+                <td>{{$item->id}}</td>
                 <td>{{$item->nombremate}}</td>
                 <td>{{$item->codigomate}}</td>
                 <td>{{$item->descripcionmate}}</td>
@@ -34,6 +34,7 @@ Materia
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     
+                <a href="{{ url('/grupo/'.$item->id.'/index') }}">Ver grupos</a>    
                 <a href="{{ url('/materia/'.$item->id.'/edit') }}">Modificar</a>
                     
                     

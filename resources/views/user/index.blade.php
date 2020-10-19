@@ -2,8 +2,7 @@ Inicio
 <br/>
 Usuarios
 <br/>
-<title>Administracion de Usuarios</title>
-
+<title>Administracion de usuarios</title>
 @if (Session::has('mensaje')){{
     Session::get('mensaje')
 }}
@@ -11,7 +10,7 @@ Usuarios
 @endif
 
 
-<a href="{{url('usuario/create')}}">Agregar usuario</a>
+<a href="{{url('user/create')}}">Agregar usuario</a>
 
 
 <table class="table table-light">
@@ -34,7 +33,7 @@ Usuarios
     </thead>
 
     <tbody>
-        @foreach ($usuarios as $item)
+        @foreach ($users as $item)
             
         
             <tr>
@@ -50,12 +49,12 @@ Usuarios
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     
-                <a href="{{ url('/usuario/'.$item->id.'/edit') }}">Modificar</a>
+                <a href="{{ url('/user/'.$item->id.'/edit') }}">Modificar</a>
                     
                     
                     | Archivar | Desarchivar |
 
-                <form action="{{ url('/usuario/'.$item->id) }}" method="post">
+                <form action="{{ url('/user/'.$item->id) }}" method="post">
                      {{ csrf_field() }}   
                      {{method_field('DELETE')}}
                     <button type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>

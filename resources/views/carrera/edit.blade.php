@@ -1,5 +1,5 @@
 Editar carrera
-
+<title>Editar carrera</title>
 <form action="{{url('/carrera/'.$carre->id)}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{method_field('PATCH')}}
@@ -15,6 +15,14 @@ Editar carrera
     <label for="estaactivo">{{ 'Activo' }}</label>
     <input type="text" name="estaactivo" id="estaactivo" value="{{$carre->estaactivo}}" required>
     <br/>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Facultad</label>
+        <select name="facultad_id"  value="" class="form-control" id="facultad_id">
+        @foreach ($facultades as $item)
+            <option value="{{$item->id}}">{{$item->id.' - '.$item->nombrefacu}}</option>
+        @endforeach
+    </select>
+    </div>
 
     <input type="submit" value="Guardar cambios">
     <a href="{{url('carrera')}}">Cancelar</a>

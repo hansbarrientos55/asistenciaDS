@@ -6,7 +6,7 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">#Id</th>
+            <th scope="col">Id</th>
             <th scope="col">Gestion</th>
             <th scope="col">Departamento</th>
             <th scope="col">Docente</th>

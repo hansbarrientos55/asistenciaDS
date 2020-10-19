@@ -1,5 +1,5 @@
 Crear gestion
-
+<title>Crear gestion</title>
 <form action="{{ url('/gestion') }}" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
     <label for="periodogestion">{{ 'Periodo' }}</label>

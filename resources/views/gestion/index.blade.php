@@ -2,7 +2,7 @@ Inicio
 <br/>
 Gestion
 <br/>
-
+<title>Administrar gestiones</title>
 <a href="{{url('gestion/create')}}">Agregar gestion</a>
 
 
@@ -10,9 +10,10 @@ Gestion
     <thead class="thead-light">
         <tr>
 
-            <th> # </th>
+            <th>Id </th>
             <th>Periodo</th>
             <th>Año</th>
+            <th>Gestion</th>
             <th>Activo</th>
             <th>Acciones</th>
             
@@ -24,9 +25,10 @@ Gestion
             
         
             <tr>
-                <td>{{$loop->iteration}}</td>
+                <td>{{$item->id}}</td>
                 <td>{{$item->periodogestion}}</td>
                 <td>{{$item->añogestion}}</td>
+                <td>{{$item->gestion}}</td>
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     

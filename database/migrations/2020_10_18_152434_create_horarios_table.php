@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGestionsTable extends Migration
+class CreateHorariosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateGestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('gestions', function (Blueprint $table) {
+        Schema::create('horarios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('periodogestion');
-            $table->string('añogestion');
-            $table->string('gestion');
-            $table->boolean('estaactivo')->default('1');
+            $table->string('hora');
+            $table->string('dia');
+            $table->unsignedInteger('grupo_id')->default('0'); // Relación con categorias
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateGestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gestions');
+        Schema::dropIfExists('horarios');
     }
 }

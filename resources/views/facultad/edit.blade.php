@@ -1,5 +1,5 @@
 Editar facultad
-
+<title>Editar facultad</title>
 <form action="{{url('/facultad/'.$facu->id)}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{method_field('PATCH')}}

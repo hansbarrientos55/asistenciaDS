@@ -1,7 +1,6 @@
 Editar usuario
 <title>Editar usuario</title>
-
-<form action="{{url('/usuario/'.$usu->id)}}" method="post" enctype="multipart/form-data">
+<form action="{{url('/user/'.$usu->id)}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{method_field('PATCH')}}
     <label for="nombres">{{ 'Nombres' }}</label>
@@ -14,7 +13,7 @@ Editar usuario
     <input type="text" name="cedula" id="cedula" value="{{$usu->cedula}}" required>
     <br/>
     <label for="fechanacimiento">{{ 'Fecha de nacimiento' }}</label>
-    <input type="text" name="fechanacimiento" id="fechanacimiento" value="{{$usu->fechanacimiento}}" required>
+    <input type="date" name="fechanacimiento" id="fechanacimiento" value="{{$usu->fechanacimiento}}" required>
     <br/>
     <label for="direccion">{{ 'Direccion' }}</label>
     <input type="text" name="direccion" id="direccion" value="{{$usu->direccion}}" required>
@@ -30,7 +29,7 @@ Editar usuario
     <br/>
 
     <input type="submit" value="Guardar cambios">
-    <a href="{{url('usuario')}}">Cancelar</a>
+    <a href="{{url('user')}}">Cancelar</a>
 
 
 </form>

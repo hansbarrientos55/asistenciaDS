@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Usuario;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
-
-class UsuarioController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $datos['usuarios']=Usuario::paginate(20);
-        return view('usuario.index', $datos);
+        $datos['users']=User::paginate(20);
+        return view('user.index', $datos);
     }
 
     /**
@@ -28,7 +27,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('usuario.create');
+        return view('user.create');
     }
 
     /**
@@ -43,19 +42,19 @@ class UsuarioController extends Controller
 
          $datosUsuario=request()->except('_token');
          $datosUsuario['contraseñacodificada']= Hash::make($request['contraseña']);
-         Usuario::insert($datosUsuario);
+         User::insert($datosUsuario);
  
         // return response()->json($datosDepartamento);
-        return redirect('usuario')->with('mensaje','Usuario registrado con exito');
+        return redirect('user')->with('mensaje','Usuario registrado con exito');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show(User $user)
     {
         //
     }
@@ -63,42 +62,42 @@ class UsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $usu = Usuario::findOrFail($id);
+        $usu = User::findOrFail($id);
 
-        return view('usuario.edit', compact('usu'));
+        return view('user.edit', compact('usu'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Usuario  $usuario
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $datosUsuario=request()->except(['_token','_method']);
         $datosUsuario['contraseñacodificada']= Hash::make($request['contraseña']);
-        Usuario::where('id','=',$id)->update($datosUsuario);
+        User::where('id','=',$id)->update($datosUsuario);
 
-        return redirect('usuario');
+        return redirect('user');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Usuario::destroy($id);
+        User::destroy($id);
 
-        return redirect('usuario');
+        return redirect('user');
     }
 }

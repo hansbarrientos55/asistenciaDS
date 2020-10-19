@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Departamento;
+use App\Facultad;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,8 @@ class DepartamentoController extends Controller
      */
     public function create()
     {
-        return view('departamento.create');
+        $facultades = Facultad::all();
+        return view('departamento.create', compact('facultades'));
     }
 
     /**
@@ -66,8 +68,9 @@ class DepartamentoController extends Controller
     public function edit($id)
     {
         $depa = Departamento::findOrFail($id);
+        $facultades = Facultad::all();
 
-        return view('departamento.edit', compact('depa'));
+        return view('departamento.edit', compact('depa', 'facultades'));
     }
 
     /**

@@ -1,7 +1,6 @@
 Crear usuario
 <title>Crear usuario</title>
-
-<form action="{{ url('/usuario') }}" method="post" enctype="multipart/form-data">
+<form action="{{ url('/user') }}" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
     <label for="nombres">{{ 'Nombres' }}</label>
     <input type="text" name="nombres" id="nombres" value="" required>
@@ -33,7 +32,7 @@ Crear usuario
     <br/>
     <input type="submit" value="Agregar">
     <input type="reset" value="Borrar">
-    <a href="{{url('usuario')}}">Cancelar</a>
+    <a href="{{url('user')}}">Cancelar</a>
 
 
 </form>

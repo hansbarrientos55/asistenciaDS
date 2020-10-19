@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Materia;
+use App\Departamento;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,8 @@ class MateriaController extends Controller
      */
     public function create()
     {
-        return view('materia.create');
+        $departamentos = Departamento::all();
+        return view('materia.create', compact('departamentos'));
     }
 
     /**
@@ -66,8 +68,9 @@ class MateriaController extends Controller
     public function edit($id)
     {
         $mate = Materia::findOrFail($id);
+        $departamentos = Departamento::all();
 
-        return view('materia.edit', compact('mate'));
+        return view('materia.edit', compact('mate','departamentos'));
     }
 
     /**

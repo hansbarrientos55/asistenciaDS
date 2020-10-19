@@ -2,7 +2,7 @@ Inicio
 <br/>
 Departamentos
 <br/>
-
+<title>Administrar departamentos</title>
 <a href="{{url('departamento/create')}}">Agregar departamento</a>
 
 
@@ -10,7 +10,7 @@ Departamentos
     <thead class="thead-light">
         <tr>
 
-            <th> # </th>
+            <th>Id </th>
             <th>Nombre</th>
             <th>Descripcion</th>
             <th>Activo</th>
@@ -24,7 +24,7 @@ Departamentos
             
         
             <tr>
-                <td>{{$loop->iteration}}</td>
+                <td>{{$item->id}}</td>
                 <td>{{$item->nombredepa}}</td>
                 <td>{{$item->descripciondepa}}</td>
                 <td>{{$item->estaactivo}}</td>

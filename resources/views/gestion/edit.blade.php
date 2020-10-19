@@ -1,5 +1,5 @@
 Editar gestion
-
+<title>Editar gestion</title>
 <form action="{{url('/gestion/'.$ges->id)}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{method_field('PATCH')}}

@@ -38,3 +38,21 @@ Route::post('asignacion/store', 'AsignacionController@store');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('user','UserController');
+
+Route::get('/grupo/{id}/index', 'GrupoController@vergrupos')-> name('vergrupos');
+Route::get('/grupo/create/{id}', 'GrupoController@creargrupo');
+Route::post('/grupo/store/{id}', 'GrupoController@almacenar');
+Route::get('/grupo/{id}/edit', 'GrupoController@editargrupo');
+Route::post('/grupo/update/{id}', 'GrupoController@actualizargrupo');
+Route::post('/grupo/delete/{id}', 'GrupoController@eliminargrupo');
+
+//Route::resource('horario','HorarioController');
+
+Route::get('/horario/{id}/index', 'HorarioController@verhorarios')-> name('verhorarios');
+Route::get('/horario/create/{id}', 'HorarioController@crearhorario');
+Route::post('/horario/store/{id}', 'HorarioController@almacenar');
+Route::get('/horario/{id}/edit', 'HorarioController@editarhorario');
+Route::post('/horario/update/{id}', 'HorarioController@actualizarhorario');
+Route::post('/horario/delete/{id}', 'HorarioController@eliminarhorario');

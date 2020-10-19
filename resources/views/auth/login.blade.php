@@ -12,12 +12,12 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="codigosis" class="col-md-4 col-form-label text-md-right">{{ __('CODIGO SIS') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="codigosis" type="text" class="form-control @error('codigosis') is-invalid @enderror" name="codigosis" value="{{ old('codigosis') }}" required autofocus>
 
-                                @error('email')
+                                @error('codigosis')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -26,12 +26,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="contraseñacodificada" class="col-md-4 col-form-label text-md-right">{{ __('CONTRASEÑA') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="contraseñacodificada" type="password" class="form-control @error('contraseñacodificada') is-invalid @enderror" name="contraseñacodificada" required autocomplete="current-password">
 
-                                @error('password')
+                                @error('contraseñacodificada')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

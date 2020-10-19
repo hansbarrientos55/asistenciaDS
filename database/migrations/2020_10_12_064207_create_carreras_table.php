@@ -19,6 +19,7 @@ class CreateCarrerasTable extends Migration
             $table->string('nombrecarrera');
             $table->string('descripcioncarrera');
             $table->boolean('estaactivo')->default('1');
+            $table->unsignedInteger('facultad_id')->default('0');
             $table->timestamps();
         });
     }

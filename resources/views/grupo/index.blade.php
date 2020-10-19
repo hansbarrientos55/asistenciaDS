@@ -2,15 +2,15 @@ Inicio
 <br/>
 Grupo
 <br/>
-
-<a href="{{url('grupo/create')}}">Agregar grupo</a>
+<title>Administrar grupos</title>
+<a href="{{url('grupo/create/'.$id)}}">Agregar grupo</a>
 
 
 <table class="table table-light">
     <thead class="thead-light">
         <tr>
 
-            <th> # </th>
+            <th>Id </th>
             <th>Numero</th>
             <th>Estado</th>
             <th>Acciones</th>
@@ -23,19 +23,20 @@ Grupo
             
         
             <tr>
-                <td>{{$loop->iteration}}</td>
+                <td>{{$item->id}}</td>
                 <td>{{$item->numerogrupo}}</td>
                 <td>{{$item->estaactivo}}</td>
                 <td> 
-                    
+                  
+                <a href="{{ url('/horario/'.$item->id.'/index') }}">Ver horarios</a>    
                 <a href="{{ url('/grupo/'.$item->id.'/edit') }}">Modificar</a>
                     
                     
                     | Archivar | Desarchivar |
 
-                <form action="{{ url('/grupo/'.$item->id) }}" method="post">
+                <form action="{{ url('/grupo/delete/'.$item->id) }}" method="post">
                      {{ csrf_field() }}   
-                     {{method_field('DELETE')}}
+                     
                     <button type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
                 </form>
 

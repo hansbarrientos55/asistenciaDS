@@ -1,5 +1,5 @@
 Editar materia
-
+<title>Editar asignacion</title>
 <form action="{{url('/materia/'.$mate->id)}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{method_field('PATCH')}}

@@ -2,7 +2,7 @@ Inicio
 <br/>
 Carrera
 <br/>
-
+<title>Administrar carreras</title>
 <a href="{{url('carrera/create')}}">Agregar carrera</a>
 
 
@@ -10,7 +10,7 @@ Carrera
     <thead class="thead-light">
         <tr>
 
-            <th> # </th>
+            <th>Id </th>
             <th>Nombre</th>
             <th>Codigo</th>
             <th>Descripcion</th>
@@ -25,7 +25,7 @@ Carrera
             
         
             <tr>
-                <td>{{$loop->iteration}}</td>
+                <td>{{$item->id}}</td>
                 <td>{{$item->nombrecarrera}}</td>
                 <td>{{$item->codigocarrera}}</td>
                 <td>{{$item->descripcioncarrera}}</td>

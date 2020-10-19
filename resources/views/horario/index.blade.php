@@ -1,43 +1,40 @@
 Inicio
 <br/>
-Facultad
+Horario
 <br/>
-<title>Administrar facultades</title>
-<a href="{{url('facultad/create')}}">Agregar facultad</a>
+<title>Administrar horarios</title>
+<a href="{{url('horario/create/'.$id)}}">Agregar horario</a>
 
 
 <table class="table table-light">
     <thead class="thead-light">
         <tr>
 
-            <th>Id </th>
-            <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Activo</th>
-            <th>Acciones</th>
+            <th> Id </th>
+            <th>Hora</th>
+            <th>Dia</th>
             
         </tr>
     </thead>
 
     <tbody>
-        @foreach ($facultades as $item)
+        @foreach ($horarios as $item)
             
         
             <tr>
                 <td>{{$item->id}}</td>
-                <td>{{$item->nombrefacu}}</td>
-                <td>{{$item->descripcionfacu}}</td>
-                <td>{{$item->estaactivo}}</td>
+                <td>{{$item->hora}}</td>
+                <td>{{$item->dia}}</td>
                 <td> 
                     
-                <a href="{{ url('/facultad/'.$item->id.'/edit') }}">Modificar</a>
+                <a href="{{ url('/horario/'.$item->id.'/edit') }}">Modificar</a>
                     
                     
                     | Archivar | Desarchivar |
 
-                <form action="{{ url('/facultad/'.$item->id) }}" method="post">
+                <form action="{{ url('/horario/delete/'.$item->id) }}" method="post">
                      {{ csrf_field() }}   
-                     {{method_field('DELETE')}}
+                    
                     <button type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
                 </form>
 

@@ -1,5 +1,5 @@
 Editar materia
-
+<title>Editar Materia</title>
 <form action="{{url('/materia/'.$mate->id)}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{method_field('PATCH')}}
@@ -18,6 +18,14 @@ Editar materia
     <label for="estaactivo">{{ 'Activo' }}</label>
     <input type="text" name="estaactivo" id="estaactivo" value="{{$mate->estaactivo}}" required>
     <br/>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Departamento</label>
+        <select name="departamento_id"  value="" class="form-control" id="departamento_id">
+        @foreach ($departamentos as $item)
+            <option value="{{$item->id}}">{{$item->id.' - '.$item->nombredepa}}</option>
+        @endforeach
+    </select>
+    </div>
 
     <input type="submit" value="Guardar cambios">
     <a href="{{url('materia')}}">Cancelar</a>

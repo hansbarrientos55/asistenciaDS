@@ -38,6 +38,7 @@ class GestionController extends Controller
     public function store(Request $request)
     {
         $datosGestion=request()->except('_token');
+        $datosGestion['gestion']=$datosGestion['periodogestion'].'-'.$datosGestion['añogestion'];
         Gestion::insert($datosGestion);
 
        // return response()->json($datosDepartamento);
@@ -78,6 +79,7 @@ class GestionController extends Controller
     public function update(Request $request, $id)
     {
         $datosGestion=request()->except(['_token','_method']);
+        $datosGestion['gestion']=$datosGestion['periodogestion'].'-'.$datosGestion['añogestion'];
         Gestion::where('id','=',$id)->update($datosGestion);
 
         return redirect('gestion');

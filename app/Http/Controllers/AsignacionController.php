@@ -7,6 +7,7 @@ use App\Departamento;
 use App\Docente;
 use App\Materia;
 use App\Grupo;
+use App\Horario;
 
 use App\Asignacion;
 use App\Http\Controllers\Controller;
@@ -39,7 +40,8 @@ class AsignacionController extends Controller
         $docentes = Docente::all();
         $materias = Materia::all();
         $grupos = Grupo::all();
-        return view('asignacion.create', compact('gestiones','departamentos', 'docentes', 'materias', 'grupos'));
+        $horarios = Horario::all();
+        return view('asignacion.create', compact('gestiones','departamentos', 'docentes', 'materias', 'grupos', 'horarios'));
     }
 
     /**
