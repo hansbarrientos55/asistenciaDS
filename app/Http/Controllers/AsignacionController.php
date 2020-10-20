@@ -85,9 +85,16 @@ class AsignacionController extends Controller
      * @param  \App\Asignacion  $asignacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Asignacion $asignacion)
+    public function edit($id)
     {
-        //
+        $asi = Asignacion::findOrFail($id);
+        $gestiones = Gestion::all();
+        $departamentos = Departamento::all();
+        $docentes = Docente::all();
+        $materias = Materia::all();
+        $grupos = Grupo::all();
+        $horarios = Horario::all();
+        return view('asignacion.edit', compact('asi','gestiones','departamentos', 'docentes', 'materias', 'grupos', 'horarios'));
     }
 
     /**
