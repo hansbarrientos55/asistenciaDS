@@ -30,7 +30,7 @@ Departamentos
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     
-                <a href="{{ url('/departamento/'.$item->id.'/edit') }}">Modificar</a>
+                <a href="{{ url('/departamento/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |

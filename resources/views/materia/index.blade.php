@@ -35,7 +35,7 @@ Materia
                 <td> 
                     
                 <a href="{{ url('/grupo/'.$item->id.'/index') }}">Ver grupos</a>    
-                <a href="{{ url('/materia/'.$item->id.'/edit') }}">Modificar</a>
+                <a href="{{ url('/materia/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |

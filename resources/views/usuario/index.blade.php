@@ -50,7 +50,7 @@ Usuarios
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     
-                <a href="{{ url('/usuario/'.$item->id.'/edit') }}">Modificar</a>
+                <a href="{{ url('/usuario/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |

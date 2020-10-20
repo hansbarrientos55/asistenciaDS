@@ -30,7 +30,7 @@ Facultad
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     
-                <a href="{{ url('/facultad/'.$item->id.'/edit') }}">Modificar</a>
+                <a href="{{ url('/facultad/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |

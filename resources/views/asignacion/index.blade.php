@@ -27,7 +27,7 @@
                 <td>{{$item->grupo}}</td>
                 <td>{{$item->horario}}</td>
                 <td>
-                    <a href="{{ url('/asignacion/'.$item->id.'/edit') }}">Modificar</a>
+                    <a href="{{ url('/asignacion/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |

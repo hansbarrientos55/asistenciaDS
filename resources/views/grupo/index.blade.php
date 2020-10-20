@@ -29,7 +29,7 @@ Grupo
                 <td> 
                   
                 <a href="{{ url('/horario/'.$item->id.'/index') }}">Ver horarios</a>    
-                <a href="{{ url('/grupo/'.$item->id.'/edit') }}">Modificar</a>
+                <a href="{{ url('/grupo/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |

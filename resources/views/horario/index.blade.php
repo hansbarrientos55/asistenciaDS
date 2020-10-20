@@ -27,7 +27,7 @@ Horario
                 <td>{{$item->dia}}</td>
                 <td> 
                     
-                <a href="{{ url('/horario/'.$item->id.'/edit') }}">Modificar</a>
+                <a href="{{ url('/horario/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |

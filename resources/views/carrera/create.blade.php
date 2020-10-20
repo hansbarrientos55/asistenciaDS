@@ -23,7 +23,7 @@ Crear carrera
 
 
     <br/>
-    <input type="submit" value="Agregar">
+    <input type="submit" value="Guardar">
     <input type="reset" value="Borrar">
     <a href="{{url('carrera')}}">Cancelar</a>
 
