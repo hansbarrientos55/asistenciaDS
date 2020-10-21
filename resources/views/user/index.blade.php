@@ -44,7 +44,7 @@ Usuarios
                 <td>{{$item->fechanacimiento}}</td>
                 <td>{{$item->direccion}}</td>
                 <td>{{$item->profesion}}</td>
-                <td>{{$item->codigosis}}</td>
+                <td>{{$item->username}}</td>
                 <td>{{$item->contraseña}}</td>
                 <td>{{$item->estaactivo}}</td>
                 <td> 

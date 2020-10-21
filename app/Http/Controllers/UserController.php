@@ -41,7 +41,7 @@ class UserController extends Controller
          //$datosDepartamento=request()->all();
 
          $datosUsuario=request()->except('_token');
-         $datosUsuario['contraseñacodificada']= Hash::make($request['contraseña']);
+         $datosUsuario['password']= Hash::make($request['contraseña']);
          User::insert($datosUsuario);
  
         // return response()->json($datosDepartamento);
@@ -82,7 +82,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $datosUsuario=request()->except(['_token','_method']);
-        $datosUsuario['contraseñacodificada']= Hash::make($request['contraseña']);
+        $datosUsuario['password']= Hash::make($request['contraseña']);
         User::where('id','=',$id)->update($datosUsuario);
 
         return redirect('user');

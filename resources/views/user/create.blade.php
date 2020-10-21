@@ -20,8 +20,8 @@ Crear usuario
     <label for="profesion">{{ 'Profesion' }}</label>
     <input type="text" name="profesion" id="profesion" value="" required>
     <br/>
-    <label for="codigosis">{{ 'Codigo SIS' }}</label>
-    <input type="number" name="codigosis" id="codigosis" value="" min="200000000" min="2000000000" required>
+    <label for="username">{{ 'Codigo SIS' }}</label>
+    <input type="string" name="username" id="username" value="" min="200000000" min="2000000000" required>
     <br/>
     <label for="contraseña">{{ 'Contraseña' }}</label>
     <input type="password" name="contraseña" id="contraseña" value="" required>

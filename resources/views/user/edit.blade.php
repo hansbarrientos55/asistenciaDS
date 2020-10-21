@@ -21,8 +21,8 @@ Editar usuario
     <label for="profesion">{{ 'Profesion' }}</label>
     <input type="text" name="profesion" id="profesion" value="{{$usu->profesion}}" required>
     <br/>
-    <label for="codigosis">{{ 'Codigo SIS' }}</label>
-    <input type="number" name="codigosis" id="codigosis" value="{{$usu->codigosis}}" required>
+    <label for="username">{{ 'Codigo SIS' }}</label>
+    <input type="string" name="username" id="username" value="{{$usu->username}}" required>
     <br/>
     <label for="contraseña">{{ 'Contraseña' }}</label>
     <input type="password" name="contraseña" id="contraseña" value="{{$usu->contraseña}}" required>

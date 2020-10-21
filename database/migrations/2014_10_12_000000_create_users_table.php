@@ -21,9 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('fechanacimiento');
             $table->string('direccion');
             $table->string('profesion');
-            $table->string('codigosis')->unique();
+            $table->string('username')->unique();
             $table->string('contraseña');
-            $table->string('contraseñacodificada');
+            $table->string('password');
             $table->boolean('estaactivo')->default('1');
             $table->timestamps();
         });

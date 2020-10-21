@@ -56,3 +56,6 @@ Route::post('/horario/store/{id}', 'HorarioController@almacenar');
 Route::get('/horario/{id}/edit', 'HorarioController@editarhorario');
 Route::post('/horario/update/{id}', 'HorarioController@actualizarhorario');
 Route::post('/horario/delete/{id}', 'HorarioController@eliminarhorario');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
