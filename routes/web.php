@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 
 Route::resource('departamento','DepartamentoController');
@@ -35,9 +33,6 @@ Route::resource('asignacion','AsignacionController');
 Route::post('asignacion/store', 'AsignacionController@store');
 
 //Route::get('asignacion/store', 'AsignacionController@store');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('user','UserController');
 
@@ -56,6 +51,10 @@ Route::post('/horario/store/{id}', 'HorarioController@almacenar');
 Route::get('/horario/{id}/edit', 'HorarioController@editarhorario');
 Route::post('/horario/update/{id}', 'HorarioController@actualizarhorario');
 Route::post('/horario/delete/{id}', 'HorarioController@eliminarhorario');
-Auth::routes();
+Auth::routes(['register'=>false,'reset'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', function () {
+    return view('auth.login');
+});

@@ -1,8 +1,11 @@
-Inicio
-<br/>
-Usuarios
-<br/>
-<title>Administracion de usuarios</title>
+@extends('layouts.app')
+
+@section('content')
+
+<div class="container">
+
+<title>Administrar usuarios</title>
+
 @if (Session::has('mensaje')){{
     Session::get('mensaje')
 }}
@@ -10,18 +13,18 @@ Usuarios
 @endif
 
 
-<a href="{{url('user/create')}}">Agregar usuario</a>
+<a href="{{url('user/create')}}" class="btn btn-success">Agregar usuario</a>
+<br>
+<br>
 
-
-<table class="table table-light">
+<table class="table table-light table-hover">
     <thead class="thead-light">
         <tr>
 
             <th> Id </th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
+            <th>Usuario</th>
             <th>Cedula de identidad</th>
-            <th>Fecha de nacimiento</th>
+            <th>Fecha de nacimiento (Mes - Dia - Año)</th>
             <th>Direccion</th>
             <th>Profesion</th>
             <th>Codigo SIS</th>
@@ -38,8 +41,7 @@ Usuarios
         
             <tr>
                 <td>{{$item->id}}</td>
-                <td>{{$item->nombres}}</td>
-                <td>{{$item->apellidos}}</td>
+                <td>{{$item->nombres}} {{$item->apellidos}}</td>
                 <td>{{$item->cedula}}</td>
                 <td>{{$item->fechanacimiento}}</td>
                 <td>{{$item->direccion}}</td>
@@ -49,15 +51,15 @@ Usuarios
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     
-                <a href="{{ url('/user/'.$item->id.'/edit') }}">Editar</a>
+                <a class="btn btn-warning" href="{{ url('/user/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |
 
-                <form action="{{ url('/user/'.$item->id) }}" method="post">
+                <form action="{{ url('/user/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   
                      {{method_field('DELETE')}}
-                    <button type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Eliminar registro de usuario? El cambio no se puede deshacer');" >Eliminar</button>
                 </form>
 
 
@@ -69,4 +71,7 @@ Usuarios
         
     </tbody>
 </table>
+
+</div>
+@endsection
 

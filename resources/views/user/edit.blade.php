@@ -1,35 +1,58 @@
-Editar usuario
+@extends('layouts.app')
+
+@section('content')
+
+<div class="container">
+
 <title>Editar usuario</title>
-<form action="{{url('/user/'.$usu->id)}}" method="post" enctype="multipart/form-data">
+<form action="{{url('/user/'.$usu->id)}}" class= "form-horizontal" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{method_field('PATCH')}}
-    <label for="nombres">{{ 'Nombres' }}</label>
-    <input type="text" name="nombres" id="nombres" value="{{$usu->nombres}}" required>
-    <br/>
-    <label for="apellidos">{{ 'Apellidos' }}</label>
-    <input type="text" name="apellidos" id="codigomate" value="{{$usu->apellidos}}" required>
-    <br/>
-    <label for="cedula">{{ 'Cedula de identidad' }}</label>
-    <input type="text" name="cedula" id="cedula" value="{{$usu->cedula}}" required>
-    <br/>
-    <label for="fechanacimiento">{{ 'Fecha de nacimiento' }}</label>
-    <input type="date" name="fechanacimiento" id="fechanacimiento" value="{{$usu->fechanacimiento}}" required>
-    <br/>
-    <label for="direccion">{{ 'Direccion' }}</label>
-    <input type="text" name="direccion" id="direccion" value="{{$usu->direccion}}" required>
-    <br/>
-    <label for="profesion">{{ 'Profesion' }}</label>
-    <input type="text" name="profesion" id="profesion" value="{{$usu->profesion}}" required>
-    <br/>
-    <label for="username">{{ 'Codigo SIS' }}</label>
-    <input type="string" name="username" id="username" value="{{$usu->username}}" required>
-    <br/>
-    <label for="contraseña">{{ 'Contraseña' }}</label>
-    <input type="password" name="contraseña" id="contraseña" value="{{$usu->contraseña}}" required>
-    <br/>
+    <div class="form-group">
+    <label for="nombres" class="control-label">{{ 'Nombres' }}</label>
+    <input class="form-control" type="text" name="nombres" id="nombres" value="{{$usu->nombres}}" required>
+    </div>
 
-    <input type="submit" value="Guardar cambios">
-    <a href="{{url('user')}}">Cancelar</a>
+    <div class="form-group">
+    <label for="apellidos" class="control-label">{{ 'Apellidos' }}</label>
+    <input class="form-control" type="text" name="apellidos" id="codigomate" value="{{$usu->apellidos}}" required>
+    </div>
+
+    <div class="form-group">
+    <label for="cedula" class="control-label">{{ 'Cedula de identidad' }}</label>
+    <input class="form-control" type="text" name="cedula" id="cedula" value="{{$usu->cedula}}" required>
+    </div>
+
+    <div class="form-group">
+    <label for="fechanacimiento" class="control-label">{{ 'Fecha de nacimiento  (Mes - Dia - Año)' }}</label>
+    <input class="form-control" type="date" name="fechanacimiento" id="fechanacimiento" value="{{$usu->fechanacimiento}}" required>
+    </div>
+
+    <div class="form-group">
+    <label for="direccion" class="control-label">{{ 'Direccion' }}</label>
+    <input class="form-control" type="text" name="direccion" id="direccion" value="{{$usu->direccion}}" required>
+    </div>
+
+    <div class="form-group">
+    <label for="profesion" class="control-label">{{ 'Profesion' }}</label>
+    <input class="form-control" type="text" name="profesion" id="profesion" value="{{$usu->profesion}}" required>
+    </div>
+
+    <div class="form-group">
+    <label for="username" class="control-label">{{ 'Codigo SIS' }}</label>
+    <input class="form-control" type="string" name="username" id="username" value="{{$usu->username}}" required>
+    </div>
+
+    <div class="form-group">
+    <label for="contraseña" class="control-label">{{ 'Contraseña' }}</label>
+    <input class="form-control" type="password" name="contraseña" id="contraseña" value="{{$usu->contraseña}}" required>
+    </div>
+
+    <input type="submit" class="btn btn-success" value="Guardar cambios">
+    <a class="btn btn-danger" href="{{url('user')}}">Cancelar</a>
 
 
 </form>
+
+</div>
+@endsection

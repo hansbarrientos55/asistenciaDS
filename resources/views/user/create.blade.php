@@ -1,38 +1,62 @@
-Crear usuario
-<title>Crear usuario</title>
-<form action="{{ url('/user') }}" method="post" enctype="multipart/form-data">
+@extends('layouts.app')
+
+@section('content')
+
+<div class="container">
+
+    <title>Crear usuario</title>
+<form action="{{ url('/user') }}" class= "form-horizontal" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
-    <label for="nombres">{{ 'Nombres' }}</label>
-    <input type="text" name="nombres" id="nombres" value="" required>
-    <br/>
-    <label for="apellidos">{{ 'Apellidos' }}</label>
-    <input type="text" name="apellidos" id="apellidos" value="" required>
-    <br/>
-    <label for="cedula">{{ 'Cedula de identidad' }}</label>
-    <input type="text" name="cedula" id="cedula" value="" required>
-    <br/>
-    <label for="fechanacimiento">{{ 'Fecha de nacimiento (Mes - Dia - Año)' }}</label>
-    <input type="date" name="fechanacimiento" id="fechanacimiento" value="" required>
-    <br/>
-    <label for="direccion">{{ 'Direccion' }}</label>
-    <input type="text" name="direccion" id="direccion" value="" required>
-    <br/>
-    <label for="profesion">{{ 'Profesion' }}</label>
-    <input type="text" name="profesion" id="profesion" value="" required>
-    <br/>
-    <label for="username">{{ 'Codigo SIS' }}</label>
-    <input type="string" name="username" id="username" value="" min="200000000" min="2000000000" required>
-    <br/>
-    <label for="contraseña">{{ 'Contraseña' }}</label>
-    <input type="password" name="contraseña" id="contraseña" value="" required>
-    <br/>
+    <div class="form-group">
+        <label for="nombres" class="control-label">{{ 'Nombres' }}</label>
+        <input class="form-control" type="text" name="nombres" id="nombres" value="" required>
+        
+    </div>
+
+    <div class="form-group">
+    <label for="apellidos" class="control-label">{{ 'Apellidos' }}</label>
+    <input class="form-control" type="text" name="apellidos" id="apellidos" value="" required>
+    </div>
+
+    <div class="form-group">
+    <label for="cedula" class="control-label">{{ 'Cedula de identidad' }}</label>
+    <input class="form-control" type="text" name="cedula" id="cedula" value="" required>
+    </div>
+
+    <div class="form-group">
+    <label for="fechanacimiento" class="control-label">{{ 'Fecha de nacimiento (Mes - Dia - Año)' }}</label>
+    <input class="form-control" type="date" name="fechanacimiento" id="fechanacimiento" value="" required>
+    </div>
+
+    <div class="form-group">
+    <label for="direccion" class="control-label">{{ 'Direccion' }}</label>
+    <input class="form-control" type="text" name="direccion" id="direccion" value="" required>
+    </div>
+
+    <div class="form-group">
+    <label for="profesion" class="control-label">{{ 'Profesion' }}</label>
+    <input class="form-control" type="text" name="profesion" id="profesion" value="" required>
+    </div>
+
+    <div class="form-group">
+    <label for="username" class="control-label">{{ 'Codigo SIS' }}</label>
+    <input class="form-control" type="string" name="username" id="username" value="" min="200000000" min="2000000000" required>
+    </div>
+    
+    <div class="form-group">
+    <label for="contraseña" class="control-label">{{ 'Contraseña' }}</label>
+    <input class="form-control" type="password" name="contraseña" id="contraseña" value="" required>
+    </div>
 
 
 
-    <br/>
-    <input type="submit" value="Guardar">
-    <input type="reset" value="Borrar">
-    <a href="{{url('user')}}">Cancelar</a>
+  
+    <input type="submit" class="btn btn-success" value="Guardar">
+    <input type="reset" class="btn btn-primary" value="Limpiar campos">
+    <a class="btn btn-danger" href="{{url('user')}}">Cancelar</a>
 
 
 </form>
+
+</div>
+@endsection
