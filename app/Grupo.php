@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Grupo extends Model
 {
-    public function materia(){ //$libro->categoria->nombre
+    public function sumateria(){ //$libro->categoria->nombre
         return $this->belongsTo(Materia::class); //Pertenece a una categoría.
     }
 }

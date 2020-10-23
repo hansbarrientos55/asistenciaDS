@@ -1,10 +1,15 @@
+@extends('layouts.funcion')
 
-    <h1 class="text-center">Lista de Asignaciones de Docentes</h1>
+@section('content')
 
-    <a href="{{url('asignacion/create')}}">Asignar materia a docente</a>
+<div class="container">
 
-    <table class="table">
-        <thead>
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Administracion de Asignaciones de Materias - Grupos - Horarios</h1>
+
+    <a href="{{url('asignacion/create')}}" class="btn btn-success">Asignar materia a docente</a>
+
+    <table class="table table-light table-hover">
+        <thead class="thead-light">
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Gestion</th>
@@ -16,7 +21,7 @@
             <th scope="col">Acciones</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody style="background-color: #adafb1;">
             @foreach ($asignaciones as $item)
             <tr>
                 <th scope="row">{{$item->id}}</th>
@@ -27,18 +32,21 @@
                 <td>{{$item->grupo}}</td>
                 <td>{{$item->horario}}</td>
                 <td>
-                    <a href="{{ url('/asignacion/'.$item->id.'/edit') }}">Editar</a>
+                    <a class="btn btn-warning" href="{{ url('/asignacion/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |
 
-                <form action="{{ url('/asignacion/'.$item->id) }}" method="post">
+                <form action="{{ url('/asignacion/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   
                      {{method_field('DELETE')}}
-                    <button type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
                 </form>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
+
+</div>
+@endsection

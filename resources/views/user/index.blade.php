@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.principal')
 
 @section('content')
 
 <div class="container">
 
-<title>Administrar usuarios</title>
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Administracion de Usuarios</h1>
 
 @if (Session::has('mensaje')){{
     Session::get('mensaje')
@@ -29,13 +29,15 @@
             <th>Profesion</th>
             <th>Codigo SIS</th>
             <th>Contraseña</th>
+            <th>Rol primario</th>
+            <th>Rol secundario</th>
             <th>Estado</th>
             <th>Acciones</th>
             
         </tr>
     </thead>
 
-    <tbody>
+    <tbody style="background-color: #adafb1;">
         @foreach ($users as $item)
             
         
@@ -48,6 +50,8 @@
                 <td>{{$item->profesion}}</td>
                 <td>{{$item->username}}</td>
                 <td>{{$item->contraseña}}</td>
+                <td>{{$item->rolprimariotexto}}</td>
+                <td>{{$item->rolsecundariotexto}}</td>
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     

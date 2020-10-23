@@ -1,11 +1,11 @@
-@extends('layouts.principal')
+@extends('layouts.app')
 
 @section('content')
 
 <div class="container">
 
-    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Editar usuario</h1>
-<form action="{{url('/user/'.$usu->id)}}" class= "form-horizontal" style="font-family: Arial;color: rgb(233,237,241);" method="post" enctype="multipart/form-data">
+<title>Editar usuario</title>
+<form action="{{url('/user/'.$usu->id)}}" class= "form-horizontal" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{method_field('PATCH')}}
     <div class="form-group">

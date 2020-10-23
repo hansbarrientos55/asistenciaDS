@@ -15,7 +15,8 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        //
+        $datos['docentes']=Docente::paginate(20);
+        return view('docente.index', $datos);
     }
 
     /**
@@ -25,7 +26,7 @@ class DocenteController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

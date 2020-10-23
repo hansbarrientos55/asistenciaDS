@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Usuario;
+use App\Role;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
-
-class UsuarioController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +15,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $datos['usuarios']=Usuario::paginate(20);
-        return view('usuario.index', $datos);
+        $datos['roles']=Role::paginate(20);
+        return view('role.index', $datos);
     }
 
     /**
@@ -28,7 +26,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('usuario.create');
+        return view('role.create');
     }
 
     /**
@@ -39,23 +37,20 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-         //$datosDepartamento=request()->all();
+        $datosRol=request()->except('_token');
+        Role::insert($datosRol);
 
-         $datosUsuario=request()->except('_token');
-         $datosUsuario['contraseñacodificada']= Hash::make($request['contraseña']);
-         Usuario::insert($datosUsuario);
- 
-        // return response()->json($datosDepartamento);
-        return redirect('usuario')->with('mensaje','Usuario registrado con exito');
+       // return response()->json($datosDepartamento);
+       return redirect('role');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show(Role $role)
     {
         //
     }
@@ -63,42 +58,41 @@ class UsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $usu = Usuario::findOrFail($id);
+        $ro = Role::findOrFail($id);
 
-        return view('usuario.edit', compact('usu'));
+        return view('role.edit', compact('ro'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Usuario  $usuario
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $datosUsuario=request()->except(['_token','_method']);
-        $datosUsuario['contraseñacodificada']= Hash::make($request['contraseña']);
-        Usuario::where('id','=',$id)->update($datosUsuario);
+        $datosRol=request()->except(['_token','_method']);
+        Role::where('id','=',$id)->update($datosRol);
 
-        return redirect('usuario');
+        return redirect('role');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Usuario::destroy($id);
+        Role::destroy($id);
 
-        return redirect('usuario');
+        return redirect('role');
     }
 }

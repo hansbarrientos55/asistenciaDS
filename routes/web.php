@@ -22,8 +22,6 @@ Route::resource('materia','MateriaController');
 
 Route::resource('carrera','CarreraController');
 
-Route::resource('usuario','UsuarioController');
-
 Route::resource('grupo','GrupoController');
 
 Route::resource('gestion','GestionController');
@@ -57,4 +55,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', function () {
     return view('auth.login');
+});
+
+Route::resource('role','RoleController');
+Route::resource('docente','DocenteController');
+
+Route::get('/administrador', function () {
+    return view('auth.administrador');
 });

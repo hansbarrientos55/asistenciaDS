@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        $roles = Role::all();
+        return view('user.create', compact('roles'));
     }
 
     /**
@@ -42,10 +44,16 @@ class UserController extends Controller
 
          $datosUsuario=request()->except('_token');
          $datosUsuario['password']= Hash::make($request['contraseña']);
+
+         $auxRolPrimario = Role::findOrFail($request['rolprimario']); 
+         $datosUsuario['rolprimariotexto']= $auxRolPrimario['titulo'];
+         $auxRolSecundario = Role::findOrFail($request['rolsecundario']);
+         $datosUsuario['rolsecundariotexto']= $auxRolSecundario['titulo'];
+
          User::insert($datosUsuario);
  
         // return response()->json($datosDepartamento);
-        return redirect('user')->with('mensaje','Usuario registrado con exito');
+        return redirect('user');
     }
 
     /**
@@ -68,8 +76,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $usu = User::findOrFail($id);
+        $roles = Role::all();
 
-        return view('user.edit', compact('usu'));
+        return view('user.edit', compact('usu','roles'));
     }
 
     /**
@@ -83,6 +92,12 @@ class UserController extends Controller
     {
         $datosUsuario=request()->except(['_token','_method']);
         $datosUsuario['password']= Hash::make($request['contraseña']);
+
+        $auxRolPrimario = Role::findOrFail($request['rolprimario']); 
+        $datosUsuario['rolprimariotexto']= $auxRolPrimario['titulo'];
+        $auxRolSecundario = Role::findOrFail($request['rolsecundario']);
+        $datosUsuario['rolsecundariotexto']= $auxRolSecundario['titulo'];
+
         User::where('id','=',$id)->update($datosUsuario);
 
         return redirect('user');

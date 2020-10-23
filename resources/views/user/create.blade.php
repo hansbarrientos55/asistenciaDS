@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.principal')
 
 @section('content')
 
 <div class="container">
 
-    <title>Crear usuario</title>
-<form action="{{ url('/user') }}" class= "form-horizontal" method="post" enctype="multipart/form-data">
+    <h2 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Nuevo usuario</h2>
+<form action="{{ url('/user') }}" class= "form-horizontal" style="font-family: Arial;color: rgb(233,237,241);" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
     <div class="form-group">
         <label for="nombres" class="control-label">{{ 'Nombres' }}</label>
@@ -46,6 +46,24 @@
     <div class="form-group">
     <label for="contraseña" class="control-label">{{ 'Contraseña' }}</label>
     <input class="form-control" type="password" name="contraseña" id="contraseña" value="" required>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1" class="control-label">Rol primario</label>
+        <select name="rolprimario"  value="" class="form-control" id="rolprimario">
+        @foreach ($roles as $item)
+            <option value="{{$item->id}}">{{$item->id.' - '.$item->titulo}}</option>
+        @endforeach
+    </select>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1" class="control-label">Rol secundario</label>
+        <select name="rolsecundario"  value="" class="form-control" id="rolsecundario">
+        @foreach ($roles as $item)
+            <option value="{{$item->id}}">{{$item->id.' - '.$item->titulo}}</option>
+        @endforeach
+    </select>
     </div>
 
 
