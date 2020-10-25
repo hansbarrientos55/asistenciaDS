@@ -34,7 +34,7 @@
 
         <div class="container">
             <div class="row">
-            <div class="col-xl-1"><a href="{{url('administrador')}}" style="color: rgb(228,231,235);">INICIO</a></div>
+            <div class="col-xl-1"><a href="{{url('principal')}}" style="color: rgb(228,231,235);">INICIO</a></div>
             <div class="col-xl-1"><a href="{{ url()->previous() }}" style="color: rgb(255,255,255);">ATRAS</a></div>
             <div class="col"><input class="form-control-plaintext" type="text" readonly=""></div>
             <!--div class="col-xl-2"><input class="form-control-plaintext" type="text" value="{{ Auth::user()->nombres }} {{ Auth::user()->apellidos }}" readonly="" style="color: rgb(255,255,255);">  <-->

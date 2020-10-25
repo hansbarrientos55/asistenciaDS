@@ -57,6 +57,4 @@ Route::get('/', function () {
 Route::resource('role','RoleController');
 Route::resource('docente','DocenteController');
 
-Route::get('/administrador', function () {
-    return view('auth.administrador');
-});
+Route::get('/principal', 'PrincipalController@index')->name('principal');
