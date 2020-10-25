@@ -17,8 +17,8 @@ class GrupoController extends Controller
     public function index()
     {
         
-        $datos['grupos']=Grupo::paginate(20);
-        return view('grupo.index', $grupos);
+        //$datos['grupos']=Grupo::paginate(20);
+        //return view('grupo.index', $grupos);
     }
 
     public function vergrupos($id){
@@ -34,7 +34,7 @@ class GrupoController extends Controller
      */
     public function create()
     {
-        return view('grupo.create');
+        //return view('grupo.create');
     }
 
     public function creargrupo($id)
@@ -50,12 +50,13 @@ class GrupoController extends Controller
      */
     public function store(Request $request)
     {
-        $datosGrupo=request()->except('_token');
-        Grupo::insert($datosGrupo);
+        //$datosGrupo=request()->except('_token');
+        //Grupo::insert($datosGrupo);
 
        // return response()->json($datosDepartamento);
        //return redirect('grupo');
-       return view('grupo.vergrupos');
+
+       //return view('grupo.vergrupos');
     }
 
     public function almacenar(Request $request,$id)
@@ -89,8 +90,7 @@ class GrupoController extends Controller
     public function edit($id)
     {
         $gru = Grupo::findOrFail($id);
-        $materias = Materia::all();
-        return view('grupo.edit', compact('gru','materias'));
+        return view('grupo.edit', compact('gru',"id"));
     }
 
     public function editargrupo($id)
@@ -118,8 +118,10 @@ class GrupoController extends Controller
     {
         $datosGrupo=request()->except(['_token','_method']);
         Grupo::where('id','=',$id)->update($datosGrupo);
+        $aux = Grupo::findOrFail($id);
+        $mat = $aux['materia_id'];
 
-        return redirect('/grupo/'.$id.'/index');
+        return redirect('/grupo/'.$mat.'/index');
     }
 
     /**
@@ -138,9 +140,12 @@ class GrupoController extends Controller
     public function eliminargrupo($id)
     {
         //$materia=Grupo::where("id","=",$id)->select("materia_id")->toString();
-        Grupo::destroy($id);
+        $aux = Grupo::findOrFail($id);
+        $mat = $aux['materia_id'];
 
+        Grupo::destroy($id);
+        return redirect('/grupo/'.$mat.'/index');
         //return redirect('/grupo/'.$materia.'/index');
-        return redirect('materia');
+       // return redirect('materia');
     }
 }

@@ -1,10 +1,12 @@
-@extends('layouts.funcion')
+@extends('layouts.principal')
 
 @section('content')
 
 <div class="container">
 
-<title>Administrar roles</title>
+
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Administracion de Roles</h1>
+
 
 @if (Session::has('mensaje')){{
     Session::get('mensaje')
@@ -28,7 +30,7 @@
         </tr>
     </thead>
 
-    <tbody>
+    <tbody style="background-color: #adafb1;">
         @foreach ($roles as $item)
             
         

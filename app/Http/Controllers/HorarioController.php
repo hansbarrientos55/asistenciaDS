@@ -114,9 +114,11 @@ class HorarioController extends Controller
     {
         $datosHorario=request()->except(['_token','_method']);
         Horario::where('id','=',$id)->update($datosHorario);
+        $ox = Horario::findOrFail($id);
+        $gro = $ox['grupo_id'];
 
         //return redirect('/horario/'.$id.'/index');
-        return redirect('/grupo/'.$id.'/index');
+        return redirect('/horario/'.$gro.'/index');
     }
 
     /**
@@ -133,9 +135,13 @@ class HorarioController extends Controller
     public function eliminarhorario($id)
     {
         //$materia=Grupo::where("id","=",$id)->select("materia_id")->toString();
+        $ox = Horario::findOrFail($id);
+        $gro = $ox['grupo_id'];
+        
         Horario::destroy($id);
 
+        return redirect('/horario/'.$gro.'/index');
         //return redirect('/grupo/'.$materia.'/index');
-        return redirect('materia');
+        //return redirect('materia');
     }
 }

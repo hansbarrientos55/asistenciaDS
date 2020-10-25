@@ -1,12 +1,15 @@
-Inicio
-<br/>
-Departamentos
-<br/>
-<title>Administrar departamentos</title>
-<a href="{{url('departamento/create')}}">Agregar departamento</a>
+@extends('layouts.principal')
+
+@section('content')
+
+<div class="container">
+
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Administracion de Departamentos</h1>
+
+<a href="{{url('departamento/create')}}" class="btn btn-success">Agregar departamento</a>
 
 
-<table class="table table-light">
+<table class="table table-light table-hover" >
     <thead class="thead-light">
         <tr>
 
@@ -19,7 +22,7 @@ Departamentos
         </tr>
     </thead>
 
-    <tbody>
+    <tbody style="background-color: #adafb1;">
         @foreach ($departamentos as $item)
             
         
@@ -30,15 +33,15 @@ Departamentos
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     
-                <a href="{{ url('/departamento/'.$item->id.'/edit') }}">Editar</a>
+                <a class="btn btn-warning" href="{{ url('/departamento/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |
 
-                <form action="{{ url('/departamento/'.$item->id) }}" method="post">
+                <form action="{{ url('/departamento/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   
                      {{method_field('DELETE')}}
-                    <button type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
                 </form>
 
 
@@ -51,3 +54,5 @@ Departamentos
     </tbody>
 </table>
 
+</div>
+@endsection

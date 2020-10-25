@@ -1,12 +1,15 @@
-Inicio
-<br/>
-Gestion
-<br/>
-<title>Administrar gestiones</title>
-<a href="{{url('gestion/create')}}">Agregar gestion</a>
+@extends('layouts.principal')
+
+@section('content')
+
+<div class="container">
+
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Administracion de Gestiones</h1>
+
+<a href="{{url('gestion/create')}}" class="btn btn-success">Agregar gestion</a>
 
 
-<table class="table table-light">
+<table class="table table-light table-hover">
     <thead class="thead-light">
         <tr>
 
@@ -20,7 +23,7 @@ Gestion
         </tr>
     </thead>
 
-    <tbody>
+    <tbody style="background-color: #adafb1;">
         @foreach ($gestiones as $item)
             
         
@@ -32,15 +35,15 @@ Gestion
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     
-                <a href="{{ url('/gestion/'.$item->id.'/edit') }}">Editar</a>
+                <a class="btn btn-warning" href="{{ url('/gestion/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |
 
-                <form action="{{ url('/gestion/'.$item->id) }}" method="post">
+                <form action="{{ url('/gestion/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   
                      {{method_field('DELETE')}}
-                    <button type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
                 </form>
 
 
@@ -53,3 +56,5 @@ Gestion
     </tbody>
 </table>
 
+</div>
+@endsection

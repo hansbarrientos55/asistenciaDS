@@ -1,12 +1,15 @@
-Inicio
-<br/>
-Grupo
-<br/>
-<title>Administrar grupos</title>
-<a href="{{url('grupo/create/'.$id)}}">Agregar grupo</a>
+@extends('layouts.principal')
+
+@section('content')
+
+<div class="container">
+
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Administracion de Grupos</h1>
+
+<a href="{{url('grupo/create/'.$id)}}" class="btn btn-success">Agregar grupo</a>
 
 
-<table class="table table-light">
+<table class="table table-light table-hover">
     <thead class="thead-light">
         <tr>
 
@@ -18,7 +21,7 @@ Grupo
         </tr>
     </thead>
 
-    <tbody>
+    <tbody style="background-color: #adafb1;">
         @foreach ($grupos as $item)
             
         
@@ -28,16 +31,16 @@ Grupo
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                   
-                <a href="{{ url('/horario/'.$item->id.'/index') }}">Ver horarios</a>    
-                <a href="{{ url('/grupo/'.$item->id.'/edit') }}">Editar</a>
+                <a class="btn btn-primary" href="{{ url('/horario/'.$item->id.'/index') }}">Ver horarios</a>    
+                <a class="btn btn-warning" href="{{ url('/grupo/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |
 
-                <form action="{{ url('/grupo/delete/'.$item->id) }}" method="post">
+                <form action="{{ url('/grupo/delete/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   
                      
-                    <button type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
                 </form>
 
 
@@ -49,4 +52,7 @@ Grupo
         
     </tbody>
 </table>
+<a class="btn btn-dark" href="{{ url()->previous() }}">Volver a materia</a>
 
+</div>
+@endsection

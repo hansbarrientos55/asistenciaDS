@@ -12,9 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -36,17 +34,29 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-xl-1"><a href="#" style="color: rgb(228,231,235);">INICIO</a></div>
-                <div class="col-xl-1"><a href="#" style="color: rgb(255,255,255);">ATRAS</a></div>
-                <div class="col"><input class="form-control-plaintext" type="text" readonly=""></div>
-                <div class="col"><input class="form-control-plaintext" type="text" value="Nombre usuario" readonly=""></div>
-                <div class="col-xl-2"><a href="#" style="color: rgb(255,255,255);">CERRAR SESION</a></div>
+            <div class="col-xl-1"><a href="{{url('administrador')}}" style="color: rgb(228,231,235);">INICIO</a></div>
+            <div class="col-xl-1"><a href="{{ url()->previous() }}" style="color: rgb(255,255,255);">ATRAS</a></div>
+            <div class="col"><input class="form-control-plaintext" type="text" readonly=""></div>
+            <!--div class="col-xl-2"><input class="form-control-plaintext" type="text" value="{{ Auth::user()->nombres }} {{ Auth::user()->apellidos }}" readonly="" style="color: rgb(255,255,255);">  <-->
+            <div class="col-xl-2"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: rgb(255,255,255);">CERRAR SESION</a>
+                   
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
+            
             </div>
+                
+            </div>  
+            
+                
+
+            
         </div>
 
         <div class="container">
             <div class="row">
-                <div class="col"><input class="form-control-plaintext" type="text" value="ADMINISTRADOR" readonly="" style="color: #ffffff;font-size: 20px;"></div>
+                <div class="col"><input class="form-control-plaintext" type="text" value="ADMINISTRADOR - {{ Auth::user()->nombres }} {{ Auth::user()->apellidos }}" readonly="" style="color: #ffffff;font-size: 20px;"></div>
             </div>
         </div>
         <div class="container">

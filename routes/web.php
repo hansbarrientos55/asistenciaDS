@@ -11,9 +11,6 @@
 |
 */
 
-
-
-
 Route::resource('departamento','DepartamentoController');
 
 Route::resource('facultad','FacultadController');

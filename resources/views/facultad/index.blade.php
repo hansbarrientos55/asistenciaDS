@@ -1,12 +1,16 @@
-Inicio
-<br/>
-Facultad
-<br/>
-<title>Administrar facultades</title>
-<a href="{{url('facultad/create')}}">Agregar facultad</a>
+@extends('layouts.principal')
+
+@section('content')
+
+<div class="container">
+
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Administracion de Facultades</h1>
 
 
-<table class="table table-light">
+<a href="{{url('facultad/create')}}" class="btn btn-success">Agregar facultad</a>
+
+
+<table class="table table-light table-hover">
     <thead class="thead-light">
         <tr>
 
@@ -19,7 +23,7 @@ Facultad
         </tr>
     </thead>
 
-    <tbody>
+    <tbody style="background-color: #adafb1;">
         @foreach ($facultades as $item)
             
         
@@ -30,15 +34,15 @@ Facultad
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     
-                <a href="{{ url('/facultad/'.$item->id.'/edit') }}">Editar</a>
+                <a class="btn btn-warning" href="{{ url('/facultad/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |
 
-                <form action="{{ url('/facultad/'.$item->id) }}" method="post">
+                <form action="{{ url('/facultad/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   
                      {{method_field('DELETE')}}
-                    <button type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
                 </form>
 
 
@@ -51,3 +55,5 @@ Facultad
     </tbody>
 </table>
 
+</div>
+@endsection

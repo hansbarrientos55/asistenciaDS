@@ -9,7 +9,7 @@
 
                 <div class="card-body" style="font-family: Arial;font-size: 18px;color: rgb(233,237,241);background-color: #006699;">
                     <form method="POST" action="{{ route('login') }}">
-                        @csrf
+                        {{csrf_field()}}
 
                         <div class="form-group row">
                             <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Codigo SIS') }}</label>

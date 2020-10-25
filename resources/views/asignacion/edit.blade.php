@@ -1,31 +1,46 @@
-Editar asignacion
-<title>Editar asignacion</title>
-<form action="{{url('/asignacion/'.$asi->id)}}" method="post" enctype="multipart/form-data">
+@extends('layouts.principal')
+
+@section('content')
+
+<div class="container">
+
+    <div class="container" >
+        <div class="row justify-content-center" >
+            <div class="col-md-8">
+                <div class="card" style="width: 24rem; background-color: #006699;">
+
+
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Editar asignacion</h1>
+
+<form action="{{url('/asignacion/'.$asi->id)}}"  class= "form-horizontal" style="font-family: Arial;color: rgb(233,237,241);" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{method_field('PATCH')}}
+
+    <label for="">Actual</label>
+    <br/>
     <label >{{ 'Gestion : ' }}</label>
     <label>{{$asi->gestion}}</label>
     <br/>
     <label >{{ 'Departamento : ' }}</label>
-    <label >{{$asi->departamento}}">
+    <label >{{$asi->departamento}}</label>
     <br/>
     <label >{{ 'Docente : ' }}</label>
     <label >{{$asi->docente}}</label>
     <br/>
     <label>{{ 'Materia : ' }}</label>
-    <label >{{$asi->materia}}"</label>
+    <label >{{$asi->materia}}</label>
     <br/>
     <label>{{ 'Grupos : ' }}</label>
-    <label >{{$asi->grupo}}"</label>
+    <label >{{$asi->grupo}}</label>
     <br/>
     <label>{{ 'Horario : ' }}</label>
-    <label >{{$asi->horario}}"</label>
+    <label >{{$asi->horario}}</label>
     <br/>
     
     <br/>
     <br/>
 
-    Actualizar datos
+    <label for="">Modificar datos</label>
     <br/>
     <div class="form-group">
         <label for="exampleFormControlSelect1">Gestión</label>
@@ -81,8 +96,16 @@ Editar asignacion
         </select>
     </div>
 
-    <input type="submit" value="Guardar cambios">
-    <a href="{{url('asignacion')}}">Cancelar</a>
+    <input type="submit" class="btn btn-success" value="Guardar cambios">
+    <a class="btn btn-danger" href="{{url('asignacion')}}">Cancelar</a>
 
 
 </form>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+@endsection

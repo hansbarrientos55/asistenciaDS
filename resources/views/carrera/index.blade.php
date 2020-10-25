@@ -1,12 +1,15 @@
-Inicio
-<br/>
-Carrera
-<br/>
-<title>Administrar carreras</title>
-<a href="{{url('carrera/create')}}">Agregar carrera</a>
+@extends('layouts.principal')
+
+@section('content')
+
+<div class="container">
+
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Administracion de Carreras</h1>
+
+<a href="{{url('carrera/create')}}" class="btn btn-success">Agregar carrera</a>
 
 
-<table class="table table-light">
+<table class="table table-light table-hover">
     <thead class="thead-light">
         <tr>
 
@@ -20,7 +23,7 @@ Carrera
         </tr>
     </thead>
 
-    <tbody>
+    <tbody style="background-color: #adafb1;">
         @foreach ($carreras as $item)
             
         
@@ -32,15 +35,15 @@ Carrera
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     
-                <a href="{{ url('/carrera/'.$item->id.'/edit') }}">Editar</a>
+                <a class="btn btn-warning" href="{{ url('/carrera/'.$item->id.'/edit') }}">Editar</a>
                     
                     
                     | Archivar | Desarchivar |
 
-                <form action="{{ url('/carrera/'.$item->id) }}" method="post">
+                <form action="{{ url('/carrera/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   
                      {{method_field('DELETE')}}
-                    <button type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
                 </form>
 
 
@@ -52,4 +55,7 @@ Carrera
         
     </tbody>
 </table>
+
+</div>
+@endsection
 

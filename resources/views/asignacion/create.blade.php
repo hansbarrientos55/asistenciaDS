@@ -1,6 +1,18 @@
-<title>Asignacion de Materia-Grupo-Horario</title>
-    <h1 class="text-center">Asignacion Grupo Materia</h1>
-    <form action="{{url('asignacion/store')}}" method="POST">
+@extends('layouts.principal')
+
+@section('content')
+
+<div class="container">
+
+    <div class="container" >
+        <div class="row justify-content-center" >
+            <div class="col-md-8">
+                <div class="card" style="width: 24rem; background-color: #006699;">
+
+
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Nueva asignacion</h1>
+
+    <form action="{{url('asignacion/store')}}" class= "form-horizontal" style="font-family: Arial;color: rgb(233,237,241);" method="post"  enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="exampleFormControlSelect1">Gestión</label>
@@ -56,6 +68,14 @@
             </select>
         </div>
 
-        <button class="btn btn-primary btn-block" type="submit">Guardar</button>
-        <a href="{{url('asignacion')}}">Cancelar</a>
+        <button class="btn btn-primary" type="submit">Guardar</button>
+        <a class="btn btn-danger" href="{{url('asignacion')}}">Cancelar</a>
+
     </form>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+@endsection
