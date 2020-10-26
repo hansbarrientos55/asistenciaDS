@@ -18,6 +18,7 @@ class CreateHorasTable extends Migration
             $table->string('hora');
             $table->timestamps();
         });
+
     }
 
     /**

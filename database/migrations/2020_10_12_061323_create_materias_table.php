@@ -23,6 +23,7 @@ class CreateMateriasTable extends Migration
             $table->unsignedInteger('departamento_id')->default('0'); // Relación con categorias
             $table->timestamps();
         });
+
     }
 
     /**

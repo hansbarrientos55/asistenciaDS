@@ -21,6 +21,7 @@ class CreateGestionsTable extends Migration
             $table->boolean('estaactivo')->default('1');
             $table->timestamps();
         });
+
     }
 
     /**

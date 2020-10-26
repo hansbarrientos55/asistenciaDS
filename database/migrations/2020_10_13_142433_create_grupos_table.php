@@ -20,6 +20,7 @@ class CreateGruposTable extends Migration
             $table->unsignedInteger('materia_id')->default('0'); // Relación con categorias
             $table->timestamps();
         });
+
     }
 
     /**

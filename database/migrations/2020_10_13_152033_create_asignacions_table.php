@@ -23,6 +23,7 @@ class CreateAsignacionsTable extends Migration
             $table->string('horario');
             $table->timestamps();
         });
+
     }
 
     /**

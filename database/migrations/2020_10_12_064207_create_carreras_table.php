@@ -22,6 +22,7 @@ class CreateCarrerasTable extends Migration
             $table->unsignedInteger('facultad_id')->default('0');
             $table->timestamps();
         });
+
     }
 
     /**

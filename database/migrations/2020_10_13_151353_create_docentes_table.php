@@ -19,6 +19,7 @@ class CreateDocentesTable extends Migration
             $table->string('user_id');
             $table->timestamps();
         });
+
     }
 
     /**

@@ -18,6 +18,7 @@ class CreateDiasTable extends Migration
             $table->string('dia');
             $table->timestamps();
         });
+
     }
 
     /**
