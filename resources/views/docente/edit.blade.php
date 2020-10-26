@@ -44,8 +44,8 @@
     </div>
 
     <div class="form-group">
-    <label for="contraseña" class="control-label">{{ 'Contraseña' }}</label>
-    <input class="form-control" type="password" name="contraseña" id="contraseña" value="{{$usu->contraseña}}" required>
+    <label for="contrasenia" class="control-label">{{ 'Contraseña' }}</label>
+    <input class="form-control" type="password" name="contrasenia" id="contrasenia" value="{{$usu->contrasenia}}" required>
     </div>
 
     <div class="form-group">

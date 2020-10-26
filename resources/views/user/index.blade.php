@@ -14,6 +14,7 @@
 
 
 <a href="{{url('user/create')}}" class="btn btn-success">Agregar usuario</a>
+<a href="{{url('importar')}}" class="btn btn-primary">Agregar usuarios de archivo</a>
 <br>
 <br>
 
@@ -49,7 +50,7 @@
                 <td>{{$item->direccion}}</td>
                 <td>{{$item->profesion}}</td>
                 <td>{{$item->username}}</td>
-                <td>{{$item->contraseña}}</td>
+                <td>{{$item->contrasenia}}</td>
                 <td>{{$item->rolprimariotexto}}</td>
                 <td>{{$item->rolsecundariotexto}}</td>
                 <td>{{$item->estaactivo}}</td>

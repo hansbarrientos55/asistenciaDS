@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('direccion');
             $table->string('profesion');
             $table->string('username')->unique();
-            $table->string('contraseña');
+            $table->string('contrasenia');
             $table->string('password');
             $table->boolean('estaactivo')->default('1');
             $table->string('rolprimario');

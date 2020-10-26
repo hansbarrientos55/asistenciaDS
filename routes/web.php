@@ -58,3 +58,6 @@ Route::resource('role','RoleController');
 Route::resource('docente','DocenteController');
 
 Route::get('/principal', 'PrincipalController@index')->name('principal');
+
+Route::get('/importar','UserController@importar');
+Route::post('/importar','UserController@guardar')->name('guardar');

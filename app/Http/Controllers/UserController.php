@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Role;
+use App\Imports\UserImport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -43,7 +45,7 @@ class UserController extends Controller
          //$datosDepartamento=request()->all();
 
          $datosUsuario=request()->except('_token');
-         $datosUsuario['password']= Hash::make($request['contraseña']);
+         $datosUsuario['password']= Hash::make($request['contrasenia']);
 
          $auxRolPrimario = Role::findOrFail($request['rolprimario']); 
          $datosUsuario['rolprimariotexto']= $auxRolPrimario['titulo'];
@@ -91,7 +93,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $datosUsuario=request()->except(['_token','_method']);
-        $datosUsuario['password']= Hash::make($request['contraseña']);
+        $datosUsuario['password']= Hash::make($request['contrasenia']);
 
         $auxRolPrimario = Role::findOrFail($request['rolprimario']); 
         $datosUsuario['rolprimariotexto']= $auxRolPrimario['titulo'];
@@ -114,5 +116,18 @@ class UserController extends Controller
         User::destroy($id);
 
         return redirect('user');
+    }
+
+    public function importar(){
+
+        return view('user/import');
+    }
+
+    public function guardar(Request $request){
+
+        $import = new UserImport();
+        Excel::import($import, request()->file('users'));
+        return view('user/import', ['numRows'=>$import->getRowCount()]);
+    
     }
 }
