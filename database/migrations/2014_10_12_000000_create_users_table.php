@@ -24,6 +24,10 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('contrasenia');
             $table->string('password');
+            $table->string('emailprincipal');
+            $table->string('emailsecundario');
+            $table->string('telefonoprincipal');
+            $table->string('telefonosecundario');
             $table->boolean('estaactivo')->default(1);
             $table->string('rolprimario');
             $table->string('rolsecundario');

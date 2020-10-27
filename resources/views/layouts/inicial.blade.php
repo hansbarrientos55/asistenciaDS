@@ -23,7 +23,7 @@
     <div id="app" style="background-color: #006699;" >
         <div class="container">
             <div class="row">
-                <div class="col-lg-2" style="background-color: #006699;"><img src="escudoumss.png"></div>
+                <div class="col-lg-2" style="background-color: #006699;"><img src="{{ asset('umss.png') }}"></div>
                 <div class="col offset-lg-0" style="background-color: #006699;"><input class="form-control-plaintext" type="text" value="UNIVERSIDAD MAYOR DE SAN SIMON" readonly="" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);background-color: #006699;padding: 20px;"></div>
             </div>
         </div>

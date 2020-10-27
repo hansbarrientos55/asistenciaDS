@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $datos['users']=User::paginate(20);
+        $datos['users']=User::paginate(60);
         return view('user.index', $datos);
     }
 

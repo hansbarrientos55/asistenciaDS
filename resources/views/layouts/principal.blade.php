@@ -21,7 +21,7 @@
     <div id="app" style="background-color: #006699;" >
         <div class="container">
             <div class="row">
-                <div class="col-lg-2" style="background-color: #006699;"><img src="escudoumss.png"></div>
+                <div class="col-lg-2" style="background-color: #006699;"><{{ asset('umss.png') }}"></div>
                 <div class="col offset-lg-0" style="background-color: #006699;"><input class="form-control-plaintext" type="text" value="UNIVERSIDAD MAYOR DE SAN SIMON" readonly="" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);background-color: #006699;padding: 20px;"></div>
             </div>
         </div>
@@ -70,7 +70,8 @@
                 <div class="col"><a href="{{url('carrera')}}" style="color: #ffffff;">CARRERAS</a></div>
                 <div class="col"><a href="{{url('gestion')}}" style="color: #ffffff;">GESTIONES</a></div>
             </div>
-        </div>
+
+            </div>
         
 
         <main class="py-4">

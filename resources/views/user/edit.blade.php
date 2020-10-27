@@ -57,6 +57,26 @@
     </div>
 
     <div class="form-group">
+        <label for="emailprincipal" class="control-label">{{ 'Email principal' }}</label>
+        <input class="form-control" type="email" name="emailprincipal" id="emailprincipal" value="{{$usu->emailprincipal}}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="emailsecundario" class="control-label">{{ 'Email secundario' }}</label>
+        <input class="form-control" type="email" name="emailsecundario" id="emailsecundario" value="{{$usu->emailsecundario}}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="telefonoprincipal" class="control-label">{{ 'Telefono principal' }}</label>
+        <input class="form-control" type="number" name="telefonoprincipal" id="telefonoprincipal" value="{{$usu->telefonoprincipal}}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="telefonosecundario" class="control-label">{{ 'Telefono secundario' }}</label>
+        <input class="form-control" type="number" name="telefonosecundario" id="telefonosecundario" value="{{$usu->telefonosecundario}}" required>
+    </div>
+
+    <div class="form-group">
         <label for="exampleFormControlSelect1" class="control-label">Rol primario</label>
         <select name="rolprimario"  value="" class="form-control" id="rolprimario">
         @foreach ($roles as $item)
