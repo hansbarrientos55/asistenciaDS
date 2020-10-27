@@ -37,8 +37,7 @@
                     
                 <a class="btn btn-warning" href="{{ url('/gestion/'.$item->id.'/edit') }}">Editar</a>
                     
-                    
-                    | Archivar | Desarchivar |
+
 
                 <form action="{{ url('/gestion/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   

@@ -14,12 +14,11 @@ class CreateDocentesTable extends Migration
     public function up()
     {
         Schema::create('docentes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id')->generatedAs('start with 50 increment by 1');
             $table->string('nombre');
             $table->string('user_id');
             $table->timestamps();
         });
-
     }
 
     /**

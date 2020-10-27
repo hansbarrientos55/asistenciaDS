@@ -14,7 +14,7 @@ class CreateHorariosTable extends Migration
     public function up()
     {
         Schema::create('horarios', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id')->generatedAs('start with 50 increment by 1');
             $table->string('hora');
             $table->string('dia');
             $table->unsignedInteger('grupo_id')->default('0'); // Relación con categorias

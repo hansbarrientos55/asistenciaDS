@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container" style="background-color: #262d31;">
             <div class="row">
             <div class="col-xl-1"><a href="{{url('principal')}}" style="color: rgb(228,231,235);">INICIO</a></div>
             <div class="col-xl-1"><a href="{{ url()->previous() }}" style="color: rgb(255,255,255);">ATRAS</a></div>
@@ -47,7 +47,7 @@
             
             </div>
                 
-            </div>  
+        </div>  
             
                 
 
@@ -79,12 +79,12 @@
         
     </div>
     <div id="derechos" style="background-color: #006699;" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-2" style="background-color: #006699;"></div>
-            <div class="col offset-lg-0" style="background-color: #006699;"><input class="form-control-plaintext" type="text" value="© 2020  - DIGITAL STRATEGIES " readonly="" style="font-family: Arial;font-size: 20px;color: rgb(233,237,241);background-color: #006699;padding: 20px;"></div>
-            </div>
-    </div>
+        <div class="container" style="background-color: #262d31;">
+            <div class="row">
+                <div class="col-lg-2" style="background-color: #262d31;"></div>
+                <div class="col offset-lg-0" style="background-color: #262d31;"><input class="form-control-plaintext" type="text" value="© 2020  - DIGITAL STRATEGIES " readonly="" style="font-family: Arial;font-size: 20px;color: rgb(233,237,241);background-color: #262d31;padding: 20px;"></div>
+                </div>
+        </div>
     </div>
     
 </body>

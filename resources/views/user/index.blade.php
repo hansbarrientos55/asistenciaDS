@@ -58,8 +58,6 @@
                     
                 <a class="btn btn-warning" href="{{ url('/user/'.$item->id.'/edit') }}">Editar</a>
                     
-                    
-                    | Archivar | Desarchivar |
 
                 <form action="{{ url('/user/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   

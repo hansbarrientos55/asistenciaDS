@@ -14,14 +14,13 @@ class CreateGestionsTable extends Migration
     public function up()
     {
         Schema::create('gestions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id')->generatedAs('start with 50 increment by 1');
             $table->string('periodogestion');
             $table->string('añogestion');
             $table->string('gestion');
-            $table->boolean('estaactivo')->default('1');
+            $table->boolean('estaactivo');
             $table->timestamps();
         });
-
     }
 
     /**

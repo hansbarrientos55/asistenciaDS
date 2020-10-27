@@ -34,8 +34,6 @@
                 <a class="btn btn-primary" href="{{ url('/horario/'.$item->id.'/index') }}">Ver horarios</a>    
                 <a class="btn btn-warning" href="{{ url('/grupo/'.$item->id.'/edit') }}">Editar</a>
                     
-                    
-                    | Archivar | Desarchivar |
 
                 <form action="{{ url('/grupo/delete/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   
@@ -52,7 +50,7 @@
         
     </tbody>
 </table>
-<a class="btn btn-dark" href="{{ url()->previous() }}">Volver a materia</a>
+<a class="btn btn-dark" href="{{ url('materia') }}">Volver a materia</a>
 
 </div>
 @endsection

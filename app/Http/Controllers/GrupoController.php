@@ -24,7 +24,7 @@ class GrupoController extends Controller
     public function vergrupos($id){
 
         $grupos = Grupo::where('materia_id','=',$id)->get();
-        return view('grupo.index',compact('grupos',"id"));
+        return view('grupo.index',compact('grupos','id'));
     }
 
     /**

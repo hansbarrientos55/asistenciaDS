@@ -23,8 +23,11 @@ class HorarioController extends Controller
 
     public function verhorarios($id){
 
+        $aux = Grupo::findOrFail($id);
+        $mat = $aux['materia_id'];
+
         $horarios = Horario::where('grupo_id','=',$id)->get();
-        return view('horario.index',compact('horarios',"id"));
+        return view('horario.index',compact('horarios','id','mat'));
     }
 
     /**

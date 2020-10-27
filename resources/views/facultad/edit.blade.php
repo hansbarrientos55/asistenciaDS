@@ -24,6 +24,15 @@
     <input class="form-control" type="text" name="estaactivo" id="estaactivo" value="{{$facu->estaactivo}}" required>
     <br/>
 
+    <div class="form-group">
+        <label for="exampleFormControlSelect1" class="control-label">Estado</label>
+        <select name="estaactivo"  value="" class="form-control" id="estaactivo">
+            <option value="1">Activo</option>
+            <option value="0">Archivado</option>
+
+    </select>
+    </div>
+
     <input type="submit" class="btn btn-success" value="Guardar cambios">
     <a class="btn btn-danger" href="{{url('facultad')}}">Cancelar</a>
 

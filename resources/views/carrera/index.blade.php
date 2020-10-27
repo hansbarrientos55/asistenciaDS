@@ -37,8 +37,7 @@
                     
                 <a class="btn btn-warning" href="{{ url('/carrera/'.$item->id.'/edit') }}">Editar</a>
                     
-                    
-                    | Archivar | Desarchivar |
+                
 
                 <form action="{{ url('/carrera/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   

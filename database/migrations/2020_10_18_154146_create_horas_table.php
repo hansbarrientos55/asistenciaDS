@@ -14,11 +14,10 @@ class CreateHorasTable extends Migration
     public function up()
     {
         Schema::create('horas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id')->generatedAs('start with 50 increment by 1');
             $table->string('hora');
             $table->timestamps();
         });
-
     }
 
     /**

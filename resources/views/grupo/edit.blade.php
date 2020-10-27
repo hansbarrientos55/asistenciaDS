@@ -18,6 +18,15 @@
     <input class="form-control" type="text" name="numerogrupo" id="numerogrupo" value="{{$gru->numerogrupo}}" required>
     <br/>
 
+    <div class="form-group">
+        <label for="exampleFormControlSelect1" class="control-label">Estado</label>
+        <select name="estaactivo"  value="" class="form-control" id="estaactivo">
+            <option value="1">Activo</option>
+            <option value="0">Archivado</option>
+
+    </select>
+    </div>
+
 
     <input class="btn btn-success" type="submit" value="Guardar cambios">
     <a class="btn btn-danger" href="{{ url()->previous() }}">Cancelar</a>

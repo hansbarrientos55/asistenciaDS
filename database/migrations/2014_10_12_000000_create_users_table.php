@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id')->generatedAs('start with 50 increment by 1');
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('cedula');
@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('contrasenia');
             $table->string('password');
-            $table->boolean('estaactivo')->default('1');
+            $table->boolean('estaactivo')->default(1);
             $table->string('rolprimario');
             $table->string('rolsecundario');
             $table->string('rolprimariotexto');

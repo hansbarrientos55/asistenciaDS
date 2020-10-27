@@ -35,9 +35,6 @@
                 <td> 
                     
                 <a class="btn btn-warning" href="{{ url('/facultad/'.$item->id.'/edit') }}">Editar</a>
-                    
-                    
-                    | Archivar | Desarchivar |
 
                 <form action="{{ url('/facultad/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   

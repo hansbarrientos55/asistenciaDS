@@ -40,8 +40,6 @@
                 <a class="btn btn-primary" href="{{ url('/grupo/'.$item->id.'/index') }}">Ver grupos</a>    
                 <a class="btn btn-warning" href="{{ url('/materia/'.$item->id.'/edit') }}">Editar</a>
                     
-                    
-                    | Archivar | Desarchivar |
 
                 <form action="{{ url('/materia/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   

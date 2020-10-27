@@ -14,7 +14,7 @@ class CreateAsignacionsTable extends Migration
     public function up()
     {
         Schema::create('asignacions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id')->generatedAs('start with 50 increment by 1');
             $table->string('gestion');
             $table->string('departamento');
             $table->string('docente');
@@ -23,7 +23,6 @@ class CreateAsignacionsTable extends Migration
             $table->string('horario');
             $table->timestamps();
         });
-
     }
 
     /**
