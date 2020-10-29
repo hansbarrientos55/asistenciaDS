@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header" style="font-family: Arial;font-size: 20px;color: rgb(233,237,241);background-color: #006699;">{{ __('Ingresar al sistema') }}</div>
+                <div class="card-header" style="font-family: Arial;font-size: 20px;color: rgb(255, 255, 255);background-color: #006699;">{{ __('Ingresar al sistema') }}</div>
 
-                <div class="card-body" style="font-family: Arial;font-size: 18px;color: rgb(233,237,241);background-color: #006699;">
+                <div class="card-body" style="font-family: Arial;font-size: 18px;color: rgb(255, 255, 255);background-color: #274453;">
                     <form method="POST" action="{{ route('login') }}">
                         {{csrf_field()}}
 

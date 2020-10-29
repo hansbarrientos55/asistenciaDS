@@ -7,12 +7,12 @@
     <div class="container" >
         <div class="row justify-content-center" >
             <div class="col-md-8">
-                <div class="card" style="width: 24rem; background-color: #006699;">
+                <div class="card" style="width: 24rem; background-color: #a3bcc9;">
 
 
-    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Nueva asignacion</h1>
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Nueva asignacion</h1>
 
-    <form action="{{url('asignacion/store')}}" class= "form-horizontal" style="font-family: Arial;color: rgb(233,237,241);" method="post"  enctype="multipart/form-data">
+    <form action="{{url('asignacion/store')}}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post"  enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="exampleFormControlSelect1">Gestión</label>

@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app" style="background-color: #006699;" >
+    <div id="app" style="background-color: #a3bcc9;" >
         <div class="container">
             <div class="row">
                 <div class="col-lg-2" style="background-color: #006699;"><img src="{{ asset('umss.png') }}"></div>

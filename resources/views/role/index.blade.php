@@ -5,7 +5,7 @@
 <div class="container">
 
 
-    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Administracion de Roles</h1>
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Administracion de Roles</h1>
 
 
 @if (Session::has('mensaje')){{

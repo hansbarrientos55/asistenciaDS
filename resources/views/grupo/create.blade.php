@@ -6,11 +6,11 @@
     <div class="container" >
         <div class="row justify-content-center" >
             <div class="col-md-8">
-                <div class="card" style="width: 24rem; background-color: #006699;">
+                <div class="card" style="width: 24rem; background-color: #a3bcc9;">
 
-    <h2 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Nuevo grupo</h2>
+    <h2 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Nuevo grupo</h2>
 
-<form action="{{ url('/grupo/store/'.$id) }}" class= "form-horizontal" style="font-family: Arial;color: rgb(233,237,241);" method="post" enctype="multipart/form-data">
+<form action="{{ url('/grupo/store/'.$id) }}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
     <label for="numerogrupo" class="control-label">{{ 'Numero' }}</label>
     <input class="form-control" type="text" name="numerogrupo" id="numerogrupo" value="" required>

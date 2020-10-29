@@ -6,9 +6,9 @@
     <div class="container" >
         <div class="row justify-content-center" >
             <div class="col-md-8">
-                <div class="card" style="width: 20rem; background-color: #006699;">
+                <div class="card" style="width: 20rem; background-color: #a3bcc9;">
 
-                    <h2 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Importar usuarios de archivo externo</h2>
+                    <h2 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Importar usuarios de archivo externo</h2>
 
     
 

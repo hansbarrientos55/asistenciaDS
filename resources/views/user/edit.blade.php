@@ -7,13 +7,13 @@
     <div class="container" >
         <div class="row justify-content-center" >
             <div class="col-md-8">
-                <div class="card" style="width: 24rem; background-color: #006699;">
+                <div class="card" style="width: 24rem; background-color: #a3bcc9;">
                     
-    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Editar usuario</h1>
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Editar usuario</h1>
 
     
 
-    <form action="{{url('/user/'.$usu->id)}}" class= "form-horizontal" style="font-family: Arial;color: rgb(233,237,241);" method="post" enctype="multipart/form-data">
+    <form action="{{url('/user/'.$usu->id)}}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{method_field('PATCH')}}
     <div class="form-group">

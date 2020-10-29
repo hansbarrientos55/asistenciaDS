@@ -7,12 +7,12 @@
     <div class="container" >
         <div class="row justify-content-center" >
             <div class="col-md-8">
-                <div class="card" style="width: 24rem; background-color: #006699;">
+                <div class="card" style="width: 24rem; background-color: #a3bcc9;">
 
 
-    <h2 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Nueva carrera</h2>
+    <h2 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Nueva carrera</h2>
 
-<form action="{{ url('/carrera') }}" class= "form-horizontal" style="font-family: Arial;color: rgb(233,237,241);" method="post" enctype="multipart/form-data">
+<form action="{{ url('/carrera') }}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
     <label for="nombrecarrera" class="control-label">{{ 'Nombre' }}</label>
     <input class="form-control" type="text" name="nombrecarrera" id="nombrecarrera" value="" required>

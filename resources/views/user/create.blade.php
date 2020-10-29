@@ -6,13 +6,13 @@
     <div class="container" >
         <div class="row justify-content-center" >
             <div class="col-md-8">
-                <div class="card" style="width: 24rem; background-color: #006699;">
+                <div class="card" style="width: 24rem; background-color: #a3bcc9;">
 
-    <h2 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(233,237,241);" >Nuevo usuario</h2>
+    <h2 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Nuevo usuario</h2>
 
     
 
-    <form action="{{ url('/user') }}" class= "form-horizontal" style="font-family: Arial;color: rgb(233,237,241);" method="post" enctype="multipart/form-data">
+    <form action="{{ url('/user') }}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="form-group">
         <label for="nombres" class="control-label">{{ 'Nombres' }}</label>
