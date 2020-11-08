@@ -20,9 +20,7 @@
     <label for="descripcionfacu" class="control-label">{{ 'Descripcion' }}</label>
     <input class="form-control" type="text" name="descripcionfacu" id="descripcionfacu" value="{{$facu->descripcionfacu}}" required>
     <br/>
-    <label for="estaactivo" class="control-label">{{ 'Activo' }}</label>
-    <input class="form-control" type="text" name="estaactivo" id="estaactivo" value="{{$facu->estaactivo}}" required>
-    <br/>
+    
 
     <div class="form-group">
         <label for="exampleFormControlSelect1" class="control-label">Estado</label>

@@ -26,9 +26,6 @@
     <label for="nivelmate" class="control-label">{{ 'Nivel' }}</label>
     <input class="form-control" type="text" name="nivelmate" id="nivelmate" value="{{$mate->nivelmate}}" required>
     <br/>
-    <label for="estaactivo" class="control-label">{{ 'Activo' }}</label>
-    <input class="form-control" type="text" name="estaactivo" id="estaactivo" value="{{$mate->estaactivo}}" required>
-    <br/>
     <div class="form-group">
         <label for="exampleFormControlSelect1" class="control-label">Departamento</label>
         <select name="departamento_id"  value="" class="form-control" id="departamento_id">

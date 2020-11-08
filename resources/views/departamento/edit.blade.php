@@ -21,9 +21,6 @@
     <label for="descripciondepa">{{ 'Descripcion' }}</label>
     <input class="form-control" type="text" name="descripciondepa" id="descripciondepa" value="{{$depa->descripciondepa}}" required>
     <br/>
-    <label for="estaactivo">{{ 'Activo' }}</label>
-    <input class="form-control" type="text" name="estaactivo" id="estaactivo" value="{{$depa->estaactivo}}" required>
-    <br/>
     <div class="form-group">
         <label for="exampleFormControlSelect1">Facultad</label>
         <select name="facultad_id"  value="" class="form-control" id="facultad_id">
