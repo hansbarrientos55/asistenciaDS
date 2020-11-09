@@ -79,8 +79,8 @@
     <div class="form-group">
         <label for="exampleFormControlSelect1" class="control-label">Rol primario</label>
         <select name="rolprimario"  value="" class="form-control" id="rolprimario">
-        @foreach ($roles as $item)
-            <option value="{{$item->id}}">{{$item->id.' - '.$item->titulo}}</option>
+        @foreach ($roles as $key=>$value)
+                <option value="{{$value}}" >{{$value}}</option>
         @endforeach
     </select>
     </div>
@@ -88,8 +88,8 @@
     <div class="form-group">
         <label for="exampleFormControlSelect1" class="control-label">Rol secundario</label>
         <select name="rolsecundario"  value="" class="form-control" id="rolsecundario">
-        @foreach ($roles as $item)
-            <option value="{{$item->id}}">{{$item->id.' - '.$item->titulo}}</option>
+        @foreach ($roles as $key=>$value)
+                <option value="{{$value}}" >{{$value}}</option>
         @endforeach
     </select>
     </div>

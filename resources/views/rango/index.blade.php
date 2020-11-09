@@ -15,7 +15,7 @@
 @endif
 
 
-<a href="{{url('role/create')}}" class="btn btn-success">Agregar rol</a>
+<a href="{{url('rango/create')}}" class="btn btn-success">Agregar rol</a>
 <br>
 <br>
 
@@ -25,25 +25,26 @@
 
             <th> Id </th>
             <th>Titulo</th>
+            <th>Permisos</th>
             <th>Acciones</th>
             
         </tr>
     </thead>
 
     <tbody style="background-color: #adafb1;">
-        @foreach ($roles as $item)
+        @foreach ($rangos as $item)
             
         
             <tr>
                 <td>{{$item->id}}</td>
-                <td>{{$item->titulo}}</td>
+                <td>{{$item->name}}</td>
+                <td>{{$item->permissions->implode('name',' , ')}}</td>
                 <td> 
                     
-                <a class="btn btn-warning" href="{{ url('/role/'.$item->id.'/edit') }}">Editar</a>
+                <a class="btn btn-warning" href="{{ url('/rango/'.$item->id.'/edit') }}">Editar</a>
                     
-                
 
-                <form action="{{ url('/role/'.$item->id) }}" style="display:inline" method="post">
+                <form action="{{ url('/rango/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   
                      {{method_field('DELETE')}}
                     <button class="btn btn-danger" type="submit" onclick="return confirm('Eliminar registro de rol? El cambio no se puede deshacer');" >Eliminar</button>

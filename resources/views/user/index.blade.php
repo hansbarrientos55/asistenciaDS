@@ -51,8 +51,8 @@
                 <td>{{$item->profesion}}</td>
                 <td>{{$item->username}}</td>
                 <td>{{$item->contrasenia}}</td>
-                <td>{{$item->rolprimariotexto}}</td>
-                <td>{{$item->rolsecundariotexto}}</td>
+                <td>{{$item->rolprimario}}</td>
+                <td>{{$item->rolsecundario}}</td>
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     

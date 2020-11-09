@@ -11,42 +11,7 @@
 |
 */
 
-Route::resource('departamento','DepartamentoController');
 
-Route::resource('facultad','FacultadController');
-
-Route::resource('materia','MateriaController');
-
-Route::resource('carrera','CarreraController');
-
-Route::resource('grupo','GrupoController');
-
-Route::resource('gestion','GestionController');
-
-Route::resource('asignacion','AsignacionController');
-
-Route::post('asignacion/store', 'AsignacionController@store');
-
-//Route::get('asignacion/store', 'AsignacionController@store');
-
-Route::resource('user','UserController');
-
-Route::get('/grupo/{id}/index', 'GrupoController@vergrupos')-> name('vergrupos');
-Route::get('/grupo/create/{id}', 'GrupoController@creargrupo');
-Route::post('/grupo/store/{id}', 'GrupoController@almacenar');
-Route::get('/grupo/{id}/edit', 'GrupoController@editargrupo');
-Route::post('/grupo/update/{id}', 'GrupoController@actualizargrupo');
-Route::post('/grupo/delete/{id}', 'GrupoController@eliminargrupo');
-
-//Route::resource('horario','HorarioController');
-
-Route::get('/horario/{id}/index', 'HorarioController@verhorarios')-> name('verhorarios');
-Route::get('/horario/create/{id}', 'HorarioController@crearhorario');
-Route::post('/horario/store/{id}', 'HorarioController@almacenar');
-Route::get('/horario/{id}/edit', 'HorarioController@editarhorario');
-Route::post('/horario/update/{id}', 'HorarioController@actualizarhorario');
-Route::post('/horario/delete/{id}', 'HorarioController@eliminarhorario');
-Auth::routes(['register'=>false,'reset'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -54,10 +19,58 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::resource('role','RoleController');
-Route::resource('docente','DocenteController');
+Auth::routes(['register'=>false,'reset'=>false]);
 
-Route::get('/principal', 'PrincipalController@index')->name('principal');
+Route::group(['middleware'=>['role:Administrador|Jefe de Departamento|Docente']],function(){
+    
+    Route::resource('departamento','DepartamentoController');
 
-Route::get('/importar','UserController@importar');
-Route::post('/importar','UserController@guardar')->name('guardar');
+    Route::resource('facultad','FacultadController');
+
+    Route::resource('materia','MateriaController');
+
+    Route::resource('carrera','CarreraController');
+
+    Route::resource('grupo','GrupoController');
+
+    Route::resource('gestion','GestionController');
+
+    Route::resource('asignacion','AsignacionController');
+
+    Route::post('asignacion/store', 'AsignacionController@store');
+
+    //Route::get('asignacion/store', 'AsignacionController@store');
+
+    Route::resource('user','UserController');
+
+    Route::get('/grupo/{id}/index', 'GrupoController@vergrupos')-> name('vergrupos');
+    Route::get('/grupo/create/{id}', 'GrupoController@creargrupo');
+    Route::post('/grupo/store/{id}', 'GrupoController@almacenar');
+    Route::get('/grupo/{id}/edit', 'GrupoController@editargrupo');
+    Route::post('/grupo/update/{id}', 'GrupoController@actualizargrupo');
+    Route::post('/grupo/delete/{id}', 'GrupoController@eliminargrupo');
+
+    //Route::resource('horario','HorarioController');
+
+    Route::get('/horario/{id}/index', 'HorarioController@verhorarios')-> name('verhorarios');
+    Route::get('/horario/create/{id}', 'HorarioController@crearhorario');
+    Route::post('/horario/store/{id}', 'HorarioController@almacenar');
+    Route::get('/horario/{id}/edit', 'HorarioController@editarhorario');
+    Route::post('/horario/update/{id}', 'HorarioController@actualizarhorario');
+    Route::post('/horario/delete/{id}', 'HorarioController@eliminarhorario');
+    
+
+
+    Route::resource('rango','RangoController');
+    Route::resource('docente','DocenteController');
+
+    Route::get('/principal', 'PrincipalController@index')->name('principal');
+
+    Route::get('/importar','UserController@importar');
+    Route::post('/importar','UserController@guardar')->name('guardar');
+
+    Route::get('/configuracion','ControlConfiguracionController@index');
+    Route::get('/permisos','ControlConfiguracionController@crearPermisos');
+    Route::get('/horasydias','ControlConfiguracionController@crearHorasyDias');
+
+});

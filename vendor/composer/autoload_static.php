@@ -85,6 +85,7 @@ class ComposerStaticInit42b1f650d0181e035154113a78d5ebd9
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'b6ec61354e97f32c0ae683041c78392a' => __DIR__ . '/..' . '/scrivo/highlight.php/HighlightUtilities/functions.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
+        '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -138,6 +139,7 @@ class ComposerStaticInit42b1f650d0181e035154113a78d5ebd9
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Spatie\\Permission\\' => 18,
         ),
         'R' => 
         array (
@@ -354,6 +356,10 @@ class ComposerStaticInit42b1f650d0181e035154113a78d5ebd9
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Spatie\\Permission\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-permission/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -572,7 +578,6 @@ class ComposerStaticInit42b1f650d0181e035154113a78d5ebd9
         'App\\Http\\Controllers\\HorarioController' => __DIR__ . '/../..' . '/app/Http/Controllers/HorarioController.php',
         'App\\Http\\Controllers\\MateriaController' => __DIR__ . '/../..' . '/app/Http/Controllers/MateriaController.php',
         'App\\Http\\Controllers\\PrincipalController' => __DIR__ . '/../..' . '/app/Http/Controllers/PrincipalController.php',
-        'App\\Http\\Controllers\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/RoleController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -4348,6 +4353,32 @@ class ComposerStaticInit42b1f650d0181e035154113a78d5ebd9
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'SessionUpdateTimestampHandlerInterface' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/SessionUpdateTimestampHandlerInterface.php',
+        'Spatie\\Permission\\Commands\\CacheReset' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CacheReset.php',
+        'Spatie\\Permission\\Commands\\CreatePermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreatePermission.php',
+        'Spatie\\Permission\\Commands\\CreateRole' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreateRole.php',
+        'Spatie\\Permission\\Commands\\Show' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/Show.php',
+        'Spatie\\Permission\\Contracts\\Permission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Permission.php',
+        'Spatie\\Permission\\Contracts\\Role' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Role.php',
+        'Spatie\\Permission\\Exceptions\\GuardDoesNotMatch' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/GuardDoesNotMatch.php',
+        'Spatie\\Permission\\Exceptions\\PermissionAlreadyExists' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/PermissionAlreadyExists.php',
+        'Spatie\\Permission\\Exceptions\\PermissionDoesNotExist' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/PermissionDoesNotExist.php',
+        'Spatie\\Permission\\Exceptions\\RoleAlreadyExists' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/RoleAlreadyExists.php',
+        'Spatie\\Permission\\Exceptions\\RoleDoesNotExist' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/RoleDoesNotExist.php',
+        'Spatie\\Permission\\Exceptions\\UnauthorizedException' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/UnauthorizedException.php',
+        'Spatie\\Permission\\Exceptions\\WildcardPermissionInvalidArgument' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/WildcardPermissionInvalidArgument.php',
+        'Spatie\\Permission\\Exceptions\\WildcardPermissionNotProperlyFormatted' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/WildcardPermissionNotProperlyFormatted.php',
+        'Spatie\\Permission\\Guard' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Guard.php',
+        'Spatie\\Permission\\Middlewares\\PermissionMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middlewares/PermissionMiddleware.php',
+        'Spatie\\Permission\\Middlewares\\RoleMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middlewares/RoleMiddleware.php',
+        'Spatie\\Permission\\Middlewares\\RoleOrPermissionMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middlewares/RoleOrPermissionMiddleware.php',
+        'Spatie\\Permission\\Models\\Permission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Models/Permission.php',
+        'Spatie\\Permission\\Models\\Role' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Models/Role.php',
+        'Spatie\\Permission\\PermissionRegistrar' => __DIR__ . '/..' . '/spatie/laravel-permission/src/PermissionRegistrar.php',
+        'Spatie\\Permission\\PermissionServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-permission/src/PermissionServiceProvider.php',
+        'Spatie\\Permission\\Traits\\HasPermissions' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasPermissions.php',
+        'Spatie\\Permission\\Traits\\HasRoles' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasRoles.php',
+        'Spatie\\Permission\\Traits\\RefreshesPermissionCache' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/RefreshesPermissionCache.php',
+        'Spatie\\Permission\\WildcardPermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/WildcardPermission.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => __DIR__ . '/..' . '/symfony/console/CommandLoader/CommandLoaderInterface.php',

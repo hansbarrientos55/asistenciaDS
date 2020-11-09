@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Role;
+use App\Rango;
 use App\Imports\UserImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -30,7 +31,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        //$rangos = Rango::all();
+        $roles = Role::all()->pluck('name', 'id');
         return view('user.create', compact('roles'));
     }
 
@@ -44,15 +46,39 @@ class UserController extends Controller
     {
          //$datosDepartamento=request()->all();
 
-         $datosUsuario=request()->except('_token');
-         $datosUsuario['password']= Hash::make($request['contrasenia']);
+         //$datosUsuario=request()->except('_token');
+         //$datosUsuario['password']= Hash::make($request['contrasenia']);
 
-         $auxRolPrimario = Role::findOrFail($request['rolprimario']); 
-         $datosUsuario['rolprimariotexto']= $auxRolPrimario['titulo'];
-         $auxRolSecundario = Role::findOrFail($request['rolsecundario']);
-         $datosUsuario['rolsecundariotexto']= $auxRolSecundario['titulo'];
+         //$auxRolPrimario = Rango::findOrFail($request['rolprimario']); 
+         //$datosUsuario['rolprimariotexto']= $auxRolPrimario['titulo'];
+         //$auxRolSecundario = Rango::findOrFail($request['rolsecundario']);
+         //$datosUsuario['rolsecundariotexto']= $auxRolSecundario['titulo'];
 
-         User::insert($datosUsuario);
+         //User::insert($datosUsuario);
+
+         $usuario = new User;
+         $usuario->nombres = $request->nombres;
+         $usuario->apellidos = $request->apellidos;
+         $usuario->cedula = $request->cedula;
+         $usuario->fechanacimiento = $request->fechanacimiento;
+         $usuario->direccion = $request->direccion;
+         $usuario->profesion = $request->profesion;
+         $usuario->username = $request->username;
+         $usuario->contrasenia = $request->contrasenia;
+         $usuario->password = Hash::make($request->contrasenia);
+         $usuario->emailprincipal = $request->emailprincipal;
+         $usuario->emailsecundario = $request->emailsecundario;
+         $usuario->telefonoprincipal = $request->telefonoprincipal;
+         $usuario->telefonosecundario = $request->telefonosecundario;
+         $usuario->estaactivo = $request->estaactivo;
+         $usuario->rolprimario = $request->rolprimario;
+         $usuario->rolsecundario = $request->rolsecundario;
+         if($usuario->save()){
+            $usuario->assignRole($request->rolprimario);
+            $usuario->assignRole($request->rolsecundario);
+         }
+
+         
  
         // return response()->json($datosDepartamento);
         return redirect('user');
@@ -78,7 +104,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $usu = User::findOrFail($id);
-        $roles = Role::all();
+        $roles = Role::all()->pluck('name', 'id');
 
         return view('user.edit', compact('usu','roles'));
     }
@@ -92,15 +118,42 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datosUsuario=request()->except(['_token','_method']);
-        $datosUsuario['password']= Hash::make($request['contrasenia']);
+        //$datosUsuario=request()->except(['_token','_method']);
+        //$datosUsuario['password']= Hash::make($request['contrasenia']);
 
-        $auxRolPrimario = Role::findOrFail($request['rolprimario']); 
-        $datosUsuario['rolprimariotexto']= $auxRolPrimario['titulo'];
-        $auxRolSecundario = Role::findOrFail($request['rolsecundario']);
-        $datosUsuario['rolsecundariotexto']= $auxRolSecundario['titulo'];
+        //$auxRolPrimario = Rango::findOrFail($request['rolprimario']); 
+        //$datosUsuario['rolprimariotexto']= $auxRolPrimario['titulo'];
+        //$auxRolSecundario = Rango::findOrFail($request['rolsecundario']);
+        //$datosUsuario['rolsecundariotexto']= $auxRolSecundario['titulo'];
 
-        User::where('id','=',$id)->update($datosUsuario);
+        //User::where('id','=',$id)->update($datosUsuario);
+        $usuario = User::findOrFail($id);
+        $rolprimarioantiguo = $usuario->rolprimario;
+        $rolsecundarioantiguo = $usuario->rolsecundario;
+
+         $usuario->nombres = $request->nombres;
+         $usuario->apellidos = $request->apellidos;
+         $usuario->cedula = $request->cedula;
+         $usuario->fechanacimiento = $request->fechanacimiento;
+         $usuario->direccion = $request->direccion;
+         $usuario->profesion = $request->profesion;
+         $usuario->username = $request->username;
+         $usuario->contrasenia = $request->contrasenia;
+         $usuario->password = Hash::make($request->contrasenia);
+         $usuario->emailprincipal = $request->emailprincipal;
+         $usuario->emailsecundario = $request->emailsecundario;
+         $usuario->telefonoprincipal = $request->telefonoprincipal;
+         $usuario->telefonosecundario = $request->telefonosecundario;
+         $usuario->estaactivo = $request->estaactivo;
+         $usuario->rolprimario = $request->rolprimario;
+         $usuario->rolsecundario = $request->rolsecundario;
+
+            $usuario->removeRole($rolprimarioantiguo);
+            $usuario->removeRole($rolsecundarioantiguo);
+            $usuario->assignRole($request->rolprimario);
+            $usuario->assignRole($request->rolsecundario);
+
+            $usuario->save();
 
         return redirect('user');
     }

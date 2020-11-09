@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
+use App\Rango;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
-class RoleController extends Controller
+class RangoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +17,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $datos['roles']=Role::paginate(20);
-        return view('role.index', $datos);
+        $datos['rangos']=Role::paginate(20);
+        return view('rango.index', $datos);
     }
 
     /**
@@ -26,7 +28,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('role.create');
+        $permisos = Permission::all();
+        return view('rango.create', compact('permisos'));
     }
 
     /**
@@ -38,10 +41,21 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $datosRol=request()->except('_token');
-        Role::insert($datosRol);
+       
+        $role = Role::create(['name' => $datosRol['name']]);
+
+        foreach($datosRol as $key=>$val){
+
+            if($key != 'name'){
+                
+                $role->givePermissionTo($key);
+                
+            } 
+        }
+        //Role::insert($datosRol);
 
        // return response()->json($datosDepartamento);
-       return redirect('role');
+       return redirect('rango');
     }
 
     /**
@@ -50,7 +64,7 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(Rango $rango)
     {
         //
     }
@@ -64,8 +78,10 @@ class RoleController extends Controller
     public function edit($id)
     {
         $ro = Role::findOrFail($id);
+        //$antigua= $ro->getAllPermissions();
+        $permisos = Permission::all();
 
-        return view('role.edit', compact('ro'));
+        return view('rango.edit', compact('ro','permisos'));
     }
 
     /**
@@ -77,10 +93,33 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datosRol=request()->except(['_token','_method']);
-        Role::where('id','=',$id)->update($datosRol);
+        $role = Role::findOrFail($id);
+        $antigua= $role->getAllPermissions();
 
-        return redirect('role');
+        $datosRol=request()->except(['_token','_method']);
+        //Role::where('id','=',$id)->update($datosRol);
+        $role->name = $datosRol['name'];
+        
+        
+        foreach($antigua as $item){
+
+            $role->revokePermissionTo($item);
+
+        }
+
+        foreach($datosRol as $key=>$val){
+
+            if($key != 'name'){
+                
+                $role->givePermissionTo($key);
+                
+            } 
+        }
+
+        $role->save();
+
+
+        return redirect('rango');
     }
 
     /**
@@ -93,6 +132,6 @@ class RoleController extends Controller
     {
         Role::destroy($id);
 
-        return redirect('role');
+        return redirect('rango');
     }
 }

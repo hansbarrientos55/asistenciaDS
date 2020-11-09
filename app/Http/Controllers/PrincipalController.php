@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PrincipalController extends Controller
 {
@@ -13,6 +14,8 @@ class PrincipalController extends Controller
     }
     
     function index(){
+
+        $user = Auth::user();
 
         return view('auth.principal');
     }
