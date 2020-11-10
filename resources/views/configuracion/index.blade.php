@@ -16,10 +16,7 @@
 @endif
 
 
-<a href="{{url('/permisos')}}" class="btn btn-success">Actualizar permisos</a>
-<br>
-<a href="{{url('/horasydias')}}" class="btn btn-primary">Generar horas y dias</a>
-<br>
+
 
 
 

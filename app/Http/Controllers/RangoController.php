@@ -28,7 +28,7 @@ class RangoController extends Controller
      */
     public function create()
     {
-        $permisos = Permission::all();
+        $permisos = Permission::where('name','!=', 'acceso-al-sistema')->get();
         return view('rango.create', compact('permisos'));
     }
 
@@ -43,6 +43,8 @@ class RangoController extends Controller
         $datosRol=request()->except('_token');
        
         $role = Role::create(['name' => $datosRol['name']]);
+
+        $role->givePermissionTo('acceso-al-sistema');
 
         foreach($datosRol as $key=>$val){
 

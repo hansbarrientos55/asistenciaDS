@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Gestion;
 use App\Departamento;
-use App\Docente;
+use App\User;
 use App\Materia;
 use App\Grupo;
 use App\Horario;
@@ -24,8 +24,9 @@ class AsignacionController extends Controller
      */
     public function index()
     {
+        $docentes = User::where('rolprimario','Docente')->orWhere('rolsecundario','Docente')->get();
         $asignaciones = Asignacion::all();
-        return view('asignacion.index',compact('asignaciones'));
+        return view('asignacion.index',compact('asignaciones','docentes'));
     }
 
     /**
@@ -37,7 +38,7 @@ class AsignacionController extends Controller
     {
         $gestiones = Gestion::all();
         $departamentos = Departamento::all();
-        $docentes = Docente::all();
+        $docentes = User::where('rolprimario','Docente')->orWhere('rolsecundario','Docente')->get();
         $materias = Materia::all();
         $grupos = Grupo::all();
         $horarios = Horario::all();
@@ -90,7 +91,7 @@ class AsignacionController extends Controller
         $asi = Asignacion::findOrFail($id);
         $gestiones = Gestion::all();
         $departamentos = Departamento::all();
-        $docentes = Docente::all();
+        $docentes = User::where('rolprimario','Docente')->orWhere('rolsecundario','Docente')->get();
         $materias = Materia::all();
         $grupos = Grupo::all();
         $horarios = Horario::all();

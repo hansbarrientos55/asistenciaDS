@@ -17,11 +17,14 @@ class CreateAsignacionsTable extends Migration
             $table->increments('id')->generatedAs('start with 50 increment by 1');
             $table->string('gestion');
             $table->string('departamento');
-            $table->string('docente');
+            $table->integer('docente')->unsigned();
             $table->string('materia');
             $table->string('grupo');
             $table->string('horario');
             $table->timestamps();
+
+            $table->foreign('docente')->references('id')->on('users')
+            ->onDelete('set null')->onUpdate('cascade');
         });
     }
 

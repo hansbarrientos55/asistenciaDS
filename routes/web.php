@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Auth::routes(['register'=>false,'reset'=>false]);
 
-Route::group(['middleware'=>['role:Administrador|Jefe de Departamento|Docente']],function(){
+Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
     
     Route::resource('departamento','DepartamentoController');
 
@@ -72,5 +72,9 @@ Route::group(['middleware'=>['role:Administrador|Jefe de Departamento|Docente']]
     Route::get('/configuracion','ControlConfiguracionController@index');
     Route::get('/permisos','ControlConfiguracionController@crearPermisos');
     Route::get('/horasydias','ControlConfiguracionController@crearHorasyDias');
+
+
+    Route::resource('asistencia','AsistenciaController');//asistencia
+    Route::post('asistencia/store', 'AsistenciaController@store');
 
 });

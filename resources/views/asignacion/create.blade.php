@@ -36,7 +36,7 @@
             <label for="exampleFormControlSelect1">Docente</label>
             <select name="docente" class="form-control" id="docente">
                 @foreach ($docentes as $item)
-                    <option value="{{$item->nombre}}">{{$item->nombre}}</option>
+                    <option value="{{$item->id}}">{{$item->nombres}} {{$item->apellidos}}</option>
                 @endforeach
             </select>
         </div>
