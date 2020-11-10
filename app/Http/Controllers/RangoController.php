@@ -81,7 +81,7 @@ class RangoController extends Controller
     {
         $ro = Role::findOrFail($id);
         //$antigua= $ro->getAllPermissions();
-        $permisos = Permission::all();
+        $permisos = Permission::where('name','!=', 'acceso-al-sistema')->get();
 
         return view('rango.edit', compact('ro','permisos'));
     }
