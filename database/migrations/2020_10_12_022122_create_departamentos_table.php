@@ -17,7 +17,7 @@ class CreateDepartamentosTable extends Migration
             $table->increments('id')->generatedAs('start with 50 increment by 1');
             $table->string('nombredepa');
             $table->string('descripciondepa');
-            $table->boolean('estaactivo');
+            $table->string('estaactivo')->default('Activo');
             $table->unsignedInteger('facultad_id')->default('0');
             $table->timestamps();
         });

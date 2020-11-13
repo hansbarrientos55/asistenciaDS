@@ -17,7 +17,7 @@ class CreateFacultadsTable extends Migration
             $table->increments('id')->generatedAs('start with 50 increment by 1');
             $table->string('nombrefacu');
             $table->string('descripcionfacu');
-            $table->boolean('estaactivo');
+            $table->string('estaactivo')->default('Activo');
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->generatedAs('start with 25 increment by 1');
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('cedula')->unique();
@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('emailsecundario');
             $table->string('telefonoprincipal')->unique();
             $table->string('telefonosecundario');
-            $table->boolean('estaactivo')->default(1);
+            $table->string('estaactivo')->default('Activo');
             $table->string('rolprimario');
             $table->string('rolsecundario');
             $table->timestamps();

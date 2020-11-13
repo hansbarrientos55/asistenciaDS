@@ -15,16 +15,40 @@
 <form action="{{url('/asistencia/'.$asi->id)}}"  class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{method_field('PATCH')}}
-    <label for="">Modificar datos</label>
     <div class="form-group">
-        <label for="fecha" class="control-label">{{ 'Fecha' }}</label>
+        <label for="fecha" class="control-label">Fecha</label>
         <input class="form-control" type="text" name="fecha" id="fecha" value="{{$asi->fecha}}" required readonly>
     </div>  
 
     <div class="form-group">
-        <label for="hora" class="control-label">{{ 'Hora' }}</label>
+        <label for="hora" class="control-label">Hora</label>
         <input class="form-control" type="text" name="hora" id="hora" value="{{$asi->hora}}" required readonly>
     </div>  
+
+    <div class="form-group">
+        <label for="mes" class="control-label">Mes</label>
+        <input class="form-control" type="string" name="mes" id="mes" value="{{ $asi->mes }}" required readonly>
+    </div> 
+
+    <div class="form-group">
+        <label for="iniciosemana" class="control-label">Inicio semana</label>
+        <input class="form-control" type="string" name="iniciosemana" id="iniciosemanas" value="{{ $asi->iniciosemana }}" required readonly>
+    </div> 
+
+    <div class="form-group">
+        <label for="finsemana" class="control-label">Fin semana</label>
+        <input class="form-control" type="string" name="finsemana" id="finsemana" value="{{ $asi->finsemana }}" required readonly>
+    </div>
+
+    <div class="form-group">
+        <label for="tipo" class="control-label">Tipo de clase</label>
+    <select name="tipo"  value="{{$asi->tipo}}" class="form-control" id="tipo">
+            <option value="Normal">Normal</option>
+            <option value="Reposicion">Reposicion</option>
+    
+    </select>
+    </div>
+
     <div class="form-group">
         <label for="exampleFormControlSelect1">Grupo</label>
         <select name="grupo" class="form-control" id="grupo">
@@ -44,21 +68,21 @@
     </div>
       
     <div class="form-group">
-        <label for="contenido" class="control-label">{{ 'Contenido' }}</label>
+        <label for="contenido" class="control-label">Contenido de la clase</label>
         <input class="form-control" type="text" name="contenido" id="contenido" value="{{$asi->contenido}}" required>
     </div>  
 
     <div class="form-group">
-        <label for="plataforma" class="control-label">{{ 'Plataforma' }}</label>
+        <label for="plataforma" class="control-label">Plataforma o medio utilizado</label>
         <input class="form-control" type="text" name="plataforma" id="plataforma" value="{{$asi->plataforma}}" required>
     </div>  
     <div class="form-group">
-        <label for="obervaciones" class="control-label">{{ 'Observaciones' }}</label>
+        <label for="obervaciones" class="control-label">Observaciones</label>
         <input class="form-control" type="text" name="observaciones" id="observaciones" value="{{$asi->observaciones}}" required>
     </div>  
 
     <div class="form-group">
-        <label for="firma" class="control-label">{{ 'Firma' }}</label>
+        <label for="firma" class="control-label">Firma</label>
         <input class="form-control" type="text" name="firma" id="firma" value="{{$asi->firma}}" required>
     </div>  
     <input type="submit" class="btn btn-success" value="Guardar">

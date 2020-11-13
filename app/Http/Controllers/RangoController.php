@@ -109,6 +109,8 @@ class RangoController extends Controller
 
         }
 
+        $role->givePermissionTo('acceso-al-sistema');
+
         foreach($datosRol as $key=>$val){
 
             if($key != 'name'){

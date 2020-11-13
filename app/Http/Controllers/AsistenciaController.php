@@ -32,9 +32,15 @@ class AsistenciaController extends Controller
     {
         $fecha = Carbon::now()->toDateString();
         $hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $mes = Carbon::now()->format('F');
+        $month = Carbon::now()->startOfWeek()->format('m');
+        $ini = Carbon::now()->startOfWeek()->format('d');
+        $fin = Carbon::now()->endOfWeek()->format('d');
+        $iniciosemana = $month.'/'.$ini;
+        $finsemana = $month.'/'.$fin;
         $materias = Materia::all();
         $grupos = Grupo::all();
-        return view('asistencia.create', compact('fecha', 'hora', 'materias', 'grupos'));
+        return view('asistencia.create', compact('fecha', 'hora', 'mes','iniciosemana','finsemana', 'materias', 'grupos'));
     }
 
     /**

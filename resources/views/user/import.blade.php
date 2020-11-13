@@ -20,8 +20,8 @@
                                         <label class="custom-file-label" for="users">Elegir archivo</label>
                                     </div>
                                     
-
-                                    @if ( $errors->any() )
+                                    <div>
+                                        @if ( $errors->any() )
                                         <div class="alert alert-danger">
                                             @foreach( $errors->all() as $error )<li>{{ $error }}</li>@endforeach
                                         </div>
@@ -32,6 +32,9 @@
                                             Se importaron {{$numRows}} registros.
                                         </div>
                                     @endif
+
+                                    </div>
+                                   
                             </div>
                             <div class="row ml-0">        
                                         <button type="submit" class="btn btn-primary">Registrar usuarios</button>

@@ -18,7 +18,7 @@ class CreateGestionsTable extends Migration
             $table->string('periodogestion');
             $table->string('añogestion');
             $table->string('gestion');
-            $table->boolean('estaactivo');
+            $table->string('estaactivo')->default('Activo');
             $table->timestamps();
         });
     }

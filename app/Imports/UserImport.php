@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserImport implements ToModel, WithHeadingRow, WithValidation
 {
@@ -16,25 +17,28 @@ class UserImport implements ToModel, WithHeadingRow, WithValidation
      public function model(array $row)
      {
              ++$this->numRows;
-             return new User([
-                 'nombres' => $row['nombres'],
-                 'apellidos' => $row['apellidos'],
-                 'cedula' => $row['cedula'],
-                 'fechanacimiento' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fechanacimiento']),
-                 //'fechanacimiento' => $row['fechanacimiento'],
-                 'direccion' => $row['direccion'],
-                 'profesion' => $row['profesion'],
-                 'username' => $row['username'],
-                 'contrasenia' => $row['contrasenia'],
-                 'password' => $row['password'],
-                 'emailprincipal' => $row['emailprincipal'],
-                 'emailsecundario' => $row['emailsecundario'],
-                 'telefonoprincipal' => $row['telefonoprincipal'],
-                 'telefonosecundario' => $row['telefonosecundario'],
-                 'estaactivo' => $row['estaactivo'],
-                 'rolprimario' => $row['rolprimario'],
-                 'rolsecundario' => $row['rolsecundario']
-             ]);
+             
+         $usuario = new User;
+         $usuario->nombres = $row['nombres'];
+         $usuario->apellidos = $row['apellidos'];
+         $usuario->cedula = $row['cedula'];
+         $usuario->fechanacimiento = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fechanacimiento']);
+         $usuario->direccion = $row['direccion'];
+         $usuario->profesion = $row['profesion'];
+         $usuario->username = $row['username'];
+         $usuario->contrasenia = $row['contrasenia'];
+         $usuario->password = Hash::make($row['password']);
+         $usuario->emailprincipal = $row['emailprincipal'];
+         $usuario->emailsecundario = $row['emailsecundario'];
+         $usuario->telefonoprincipal = $row['telefonoprincipal'];
+         $usuario->telefonosecundario = $row['telefonosecundario'];
+         $usuario->estaactivo = $row['estaactivo'];
+         $usuario->rolprimario = $row['rolprimario'];
+         $usuario->rolsecundario = $row['rolsecundario'];
+         if($usuario->save()){
+            $usuario->assignRole($row['rolprimario']);
+            $usuario->assignRole($row['rolsecundario']);
+         }
   
      }
   

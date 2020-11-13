@@ -77,4 +77,8 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
     Route::resource('asistencia','AsistenciaController');//asistencia
     Route::post('asistencia/store', 'AsistenciaController@store');
 
+    Route::resource('ausencia','AusenciaController');
+    Route::post('ausencia/store', 'AusenciaController@store');
+    Route::resource('reposicion','ReposicionController');
+
 });

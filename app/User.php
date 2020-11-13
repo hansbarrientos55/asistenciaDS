@@ -42,4 +42,8 @@ class User extends Authenticatable
     public function asignacions(){
         return $this->hasMany(Asignacion::class);
     }
+
+    public function ausencias() {
+        return $this->belongsToMany(Ausencia::class);
+    }
 }

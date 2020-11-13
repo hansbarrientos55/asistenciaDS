@@ -14,9 +14,13 @@ class CreateAsistenciasTable extends Migration
     public function up()
     {
         Schema::create('asistencias', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->generatedAs('start with 50 increment by 1');
+            $table->string('tipo')->nullable();
             $table->string('fecha')->nullable();
             $table->string('hora')->nullable();
+            $table->string('mes')->nullable();
+            $table->string('iniciosemana')->nullable();
+            $table->string('finsemana')->nullable();
             $table->string('grupo')->nullable();
             $table->string('materia')->nullable();
             $table->string('contenido')->nullable();

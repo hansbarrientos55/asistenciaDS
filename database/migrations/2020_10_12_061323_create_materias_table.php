@@ -19,7 +19,7 @@ class CreateMateriasTable extends Migration
             $table->string('nombremate');
             $table->string('descripcionmate');
             $table->string('nivelmate');
-            $table->boolean('estaactivo');
+            $table->string('estaactivo')->default('Activo');
             $table->unsignedInteger('departamento_id')->default('0'); // Relación con categorias
             $table->timestamps();
         });

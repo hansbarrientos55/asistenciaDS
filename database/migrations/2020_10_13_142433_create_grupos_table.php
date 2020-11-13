@@ -16,7 +16,7 @@ class CreateGruposTable extends Migration
         Schema::create('grupos', function (Blueprint $table) {
             $table->increments('id')->generatedAs('start with 50 increment by 1');
             $table->string('numerogrupo');
-            $table->boolean('estaactivo');
+            $table->string('estaactivo')->default('Activo');
             $table->unsignedInteger('materia_id')->default('0'); // Relación con categorias
             $table->timestamps();
         });
