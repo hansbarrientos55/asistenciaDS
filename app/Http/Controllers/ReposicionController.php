@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Reposicion;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Materia;
+use App\Grupo;
+use App\Hora;
+use Auth;
 
 class ReposicionController extends Controller
 {
@@ -15,7 +20,13 @@ class ReposicionController extends Controller
      */
     public function index()
     {
-        //
+            //
+    }
+
+    public function ver($id)
+    {
+        $reposicion = Reposicion::where('ausencia_id','=',$id)->get();
+        return view('reposicion.index',compact('reposicion','id'));
     }
 
     /**
@@ -26,6 +37,16 @@ class ReposicionController extends Controller
     public function create()
     {
         //
+    }
+
+    public function crear($id)
+    {
+        $fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $materias = Materia::all();
+        $grupos = Grupo::all();
+        $horarios = Hora::all();
+        return view('reposicion.create', compact('id', 'fecha', 'hora', 'materias', 'grupos', 'horarios'));
     }
 
     /**
@@ -39,6 +60,17 @@ class ReposicionController extends Controller
         //
     }
 
+    public function almacenar(Request $request,$id)
+    {
+        $datosRepo=request()->except('_token');
+        $datosRepo['ausencia_id'] = $id;
+        reposicion::insert($datosRepo);
+
+       // return response()->json($datosDepartamento);
+       //return redirect('grupo');
+       return redirect('/reposicion/'.$id.'/index');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -47,7 +79,7 @@ class ReposicionController extends Controller
      */
     public function show(Reposicion $reposicion)
     {
-        //
+        //  
     }
 
     /**
@@ -59,6 +91,15 @@ class ReposicionController extends Controller
     public function edit(Reposicion $reposicion)
     {
         //
+    }
+
+    public function editar($id)
+    {
+        $repo = Reposicion::findOrFail($id);
+        $materias = Materia::all();
+        $grupos = Grupo::all();
+        $horarios = Hora::all();
+        return view('reposicion.edit', compact('repo','id','materias','grupos','horarios'));
     }
 
     /**
@@ -73,6 +114,16 @@ class ReposicionController extends Controller
         //
     }
 
+    public function actualizar(Request $request, $id)
+    {
+        $datosRepo=request()->except(['_token','_method']);
+        Reposicion::where('id','=',$id)->update($datosRepo);
+        $aux = Reposicion::findOrFail($id);
+        $mat = $aux['ausencia_id'];
+
+        return redirect('/reposicion/'.$mat.'/index');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -82,5 +133,40 @@ class ReposicionController extends Controller
     public function destroy(Reposicion $reposicion)
     {
         //
+    }
+
+    public function eliminar($id)
+    {
+        //$materia=Grupo::where("id","=",$id)->select("materia_id")->toString();
+        $aux = Reposicion::findOrFail($id);
+        $mat = $aux['ausencia_id'];
+
+        Reposicion::destroy($id);
+        return redirect('/reposicion/'.$mat.'/index');
+        //return redirect('/grupo/'.$materia.'/index');
+       // return redirect('materia');
+    }
+
+    public function list()
+    {
+        $reposiciones = Reposicion::all();
+        return view('reposicion.list',compact('reposiciones'));
+    }
+
+    public function editarlista($id)
+    {
+        $repos = Reposicion::findOrFail($id);
+        return view('reposicion.listedit', compact('repos'));
+    }
+
+    public function actualizarlista(Request $request, $id)
+    {
+        $datosReposicion=request()->except(['_token','_method']);
+        Reposicion::where('id','=',$id)->update($datosReposicion);
+
+        $reposiciones = Reposicion::all();
+        //return view('ausencia.list',compact('ausencias'));
+        return redirect('/reposicionlista/');
+
     }
 }

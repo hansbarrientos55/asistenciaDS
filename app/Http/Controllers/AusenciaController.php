@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Hora;
 use Carbon\Carbon;
+use Auth;
 
 class AusenciaController extends Controller
 {
@@ -17,7 +18,8 @@ class AusenciaController extends Controller
      */
     public function index()
     {
-        $ausencias = Ausencia::all();
+        //$ausencias = Ausencia::all();
+        $ausencias = Ausencia::where('user_id',Auth::id())->get();
         return view('ausencia.index',compact('ausencias'));
     }
 
@@ -43,14 +45,15 @@ class AusenciaController extends Controller
      */
     public function store(Request $request)
     {
-        $asignacion = new Ausencia;
-        $asignacion->fecha = $request->fecha;
-        $asignacion->hora = $request->hora;
-        $asignacion->motivo = $request->motivo;
-        $asignacion->fechaausencia = $request->fechaausencia;
-        $asignacion->horaausencia = $request->horaausencia;
+        $ausencia = new Ausencia;
+        $ausencia->user_id = Auth::id();
+        $ausencia->fecha = $request->fecha;
+        $ausencia->hora = $request->hora;
+        $ausencia->motivo = $request->motivo;
+        $ausencia->fechaausencia = $request->fechaausencia;
+        $ausencia->horaausencia = $request->horaausencia;
 
-        $asignacion->save();
+        $ausencia->save();
         return redirect('ausencia');
     }
 
@@ -104,5 +107,29 @@ class AusenciaController extends Controller
         Ausencia::destroy($id);
 
         return redirect('ausencia');
+    }
+
+    public function list()
+    {
+        $ausencias = Ausencia::all();
+        return view('ausencia.list',compact('ausencias'));
+    }
+
+    public function editarlista($id)
+    {
+        $ause = Ausencia::findOrFail($id);
+        $horas = Hora::all();
+        return view('ausencia.listedit', compact('ause','horas'));
+    }
+
+    public function actualizarlista(Request $request, $id)
+    {
+        $datosAusencia=request()->except(['_token','_method']);
+        Ausencia::where('id','=',$id)->update($datosAusencia);
+
+        $ausencias = Ausencia::all();
+        //return view('ausencia.list',compact('ausencias'));
+        return redirect('/ausencialista/');
+
     }
 }

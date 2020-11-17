@@ -12,9 +12,9 @@
 
     <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" ></h1>
 
-<form action="{{url('/ausencia/'.$ause->id)}}"  class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
+<form action="{{url('/ausencialista/update/'.$ause->id)}}"  class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
-    {{method_field('PATCH')}}
+    
 
     <label for="">Editar permiso</label>
     <br/>
@@ -77,9 +77,20 @@
     </div>
     @endrole
 
+    @role('Jefe de Departamento')
+        <div class="form-group">
+            <label for="exampleFormControlSelect1" class="control-label">Estado del permiso</label>
+            <select name="estaaceptada"  value="" class="form-control" id="estaceptada">
+                <option value="Esperando confirmacion">Esperando confirmacion</option>
+                <option value="Aceptado">Aceptado</option>
+                <option value="Rechazado">Rechazado</option>
+    
+        </select>
+        </div>
+        @endrole
 
     <input type="submit" class="btn btn-success" value="Guardar cambios">
-    <a class="btn btn-danger" href="{{url('ausencia')}}">Cancelar</a>
+    <a class="btn btn-danger" href="{{url('ausencialista')}}">Cancelar</a>
 
 
 </form>

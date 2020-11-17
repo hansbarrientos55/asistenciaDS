@@ -15,14 +15,14 @@ class CreateReposicionsTable extends Migration
     {
         Schema::create('reposicions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('ausencia_id')->unsigned();
             $table->string('fecha');
             $table->string('hora');
-            $table->integer('ausencia_id')->unsigned();
+            $table->string('nuevafecha');
+            $table->string('horario');
             $table->string('grupo');
             $table->string('materia');
-            $table->string('contenido');
-            $table->string('plataforma');
-            $table->string('observaciones');
+            $table->string('estado');
             $table->string('label')->nullable();
             $table->timestamps();
 

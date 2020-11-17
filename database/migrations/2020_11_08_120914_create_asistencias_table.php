@@ -14,13 +14,15 @@ class CreateAsistenciasTable extends Migration
     public function up()
     {
         Schema::create('asistencias', function (Blueprint $table) {
-            $table->increments('id')->generatedAs('start with 50 increment by 1');
+            $table->increments('id')->generatedAs('start with 25 increment by 1');
+            $table->integer('user_id')->unsigned();
             $table->string('tipo')->nullable();
             $table->string('fecha')->nullable();
             $table->string('hora')->nullable();
             $table->string('mes')->nullable();
             $table->string('iniciosemana')->nullable();
             $table->string('finsemana')->nullable();
+            $table->string('horario')->nullable();
             $table->string('grupo')->nullable();
             $table->string('materia')->nullable();
             $table->string('contenido')->nullable();
@@ -29,6 +31,12 @@ class CreateAsistenciasTable extends Migration
             $table->string('firma')->nullable();
             //$table->file('archivo')->nullable();//Archivo
             $table->timestamps();
+
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 

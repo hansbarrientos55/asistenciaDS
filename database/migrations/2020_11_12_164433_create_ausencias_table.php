@@ -15,6 +15,7 @@ class CreateAusenciasTable extends Migration
     {
         Schema::create('ausencias', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id')->unsigned();
             $table->string('fecha');
             $table->string('hora');
             $table->string('motivo');
@@ -23,25 +24,14 @@ class CreateAusenciasTable extends Migration
             $table->string('estaaceptada')->default('Esperando confirmacion');
             $table->string('label')->nullable();
             $table->timestamps();
-        });
-
-        Schema::create('ausencias_users', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('ausencia_id');
-            $table->timestamps();
 
             $table->foreign('user_id')
             ->references('id')
             ->on('users')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-
-            $table->foreign('ausencia_id')
-            ->references('id')
-            ->on('ausencias')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
         });
+
     }
 
     /**

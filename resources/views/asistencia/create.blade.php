@@ -47,6 +47,15 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="exampleFormControlSelect1">Horario</label>
+                        <select name="horario" class="form-control" id="horario">
+                            @foreach ($horarios as $item)
+                                <option value="{{$item->hora}}">{{$item->hora}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="exampleFormControlSelect1">Grupo</label>
                         <select name="grupo" class="form-control" id="grupo">
                             @foreach ($grupos as $item)

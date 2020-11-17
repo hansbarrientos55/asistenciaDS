@@ -5,11 +5,8 @@
 
 <div class="container">
 
-    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Registro de asistencia y avance</h1>
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Administracion de Asistencias y Avances semanales</h1>
 
-    @can('crear-asistencia-avance')
-    <a href="{{url('asistencia/create')}}" class="btn btn-success">Agregar asistencia</a>
-    @endcan
 
     <table class="table table-light table-hover">
         <thead class="thead-light">
@@ -20,8 +17,8 @@
             <th scope="col">Mes</th>
             <th scope="col">Inicio semana</th>
             <th scope="col">Fin semana</th>
+            <th scope="col">Usuario</th>
             <th scope="col">Tipo</th>
-            <th scope="col">Horario</th>
             <th scope="col">Grupo</th>
             <th scope="col">Materia</th>
             <th scope="col">Contenido de clase</th>
@@ -40,8 +37,8 @@
                 <td>{{$item->mes}}</td>
                 <td>{{$item->iniciosemana}}</td>
                 <td>{{$item->finsemana}}</td>
+                <td>{{$item->user_id}}</td>
                 <td>{{$item->tipo}}</td>
-                <td>{{$item->horario}}</td>
                 <td>{{$item->grupo}}</td>
                 <td>{{$item->materia}}</td>
                 <td>{{$item->contenido}}</td>
@@ -50,17 +47,7 @@
                 <td>{{$item->firma}}</td>
                 <td>
 
-                    @can('editar-asistencia-avance')
-                    <a class="btn btn-warning" href="{{ url('/asistencia/'.$item->id.'/edit') }}">Editar</a>
-                    @endcan
-
-                    @can('eliminar-asistencia-avance')
-                    <form action="{{ url('/asistencia/'.$item->id) }}" style="display:inline" method="post">
-                        {{ csrf_field() }}   
-                        {{method_field('DELETE')}}
-                        <button class="btn btn-danger" type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
-                    </form>
-                    @endcan
+                   
 
                 </td>
             </tr>

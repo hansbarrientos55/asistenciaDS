@@ -4,11 +4,12 @@
 
 <div class="container">
 
-    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Permisos y Reposiciones de Clases</h1>
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Administracion de Permisos</h1>
 
-    @can('crear-ausencia-reposicion')
-    <a href="{{url('ausencia/create')}}" class="btn btn-success">Nuevo permiso</a>
+    @can('editar-ausencia-control')
+    <a href="{{url('reposicionlista')}}" class="btn btn-success">Ver reposiciones</a>
     @endcan
+
 
     <table class="table table-light table-hover">
         <thead class="thead-light">
@@ -34,26 +35,14 @@
                 <td>{{$item->horaausencia}}</td>
                 <td>{{$item->estaaceptada}}</td>
                 <td>
-                    @can('editar-ausencia-reposicion')
-                    <a class="btn btn-primary" href="{{ url('/reposicion/'.$item->id.'/index') }}">Ver reposicion</a> 
+                    @can('editar-ausencia-control')
+                    <a class="btn btn-warning" href="{{ url('/ausencialista/'.$item->id.'/edit') }}">Editar</a>
                     @endcan
-
-                    @can('editar-ausencia-reposicion')
-                    <a class="btn btn-warning" href="{{ url('/ausencia/'.$item->id.'/edit') }}">Editar</a>
-                    @endcan
-
-                @can('eliminar-ausencia-reposicion')
-                <form action="{{ url('/ausencia/'.$item->id) }}" style="display:inline" method="post">
-                     {{ csrf_field() }}   
-                     {{method_field('DELETE')}}
-                    <button class="btn btn-danger" type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
-                </form>
-                @endcan
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-
+    
 </div>
 @endsection

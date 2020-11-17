@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Materia;
 use App\Grupo;
+use App\Hora;
+use Auth;
 
 class AsistenciaController extends Controller
 {
@@ -19,7 +21,8 @@ class AsistenciaController extends Controller
      */
     public function index()
     {
-        $asistencias = Asistencia::all();
+        //$asistencias = Asistencia::all();
+        $asistencias = Asistencia::where('user_id',Auth::id())->get();
         return view('asistencia.index',compact('asistencias'));
     }
 
@@ -30,9 +33,37 @@ class AsistenciaController extends Controller
      */
     public function create()
     {
-        $fecha = Carbon::now()->toDateString();
+        $fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
         $hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
         $mes = Carbon::now()->format('F');
+
+        switch($mes){
+            case 'January' : $mes = "Enero";
+            break;
+            case 'February' : $mes = "Febrero";
+            break;
+            case 'March' : $mes = "Marzo";
+            break;
+            case 'April' : $mes = "Abril";
+            break;
+            case 'May' : $mes = "Mayo";
+            break;
+            case 'June' : $mes = "Junio";
+            break;
+            case 'July' : $mes = "Julio";
+            break;
+            case 'August' : $mes = "Agosto";
+            break;
+            case 'September' : $mes = "Septiembre";
+            break;
+            case 'October' : $mes = "Octubre";
+            break;
+            case 'November' : $mes = "Noviembre";
+            break;
+            case 'December' : $mes = "Diciembre";
+            break;
+        }
+
         $month = Carbon::now()->startOfWeek()->format('m');
         $ini = Carbon::now()->startOfWeek()->format('d');
         $fin = Carbon::now()->endOfWeek()->format('d');
@@ -40,7 +71,8 @@ class AsistenciaController extends Controller
         $finsemana = $month.'/'.$fin;
         $materias = Materia::all();
         $grupos = Grupo::all();
-        return view('asistencia.create', compact('fecha', 'hora', 'mes','iniciosemana','finsemana', 'materias', 'grupos'));
+        $horarios = Hora::all();
+        return view('asistencia.create', compact('fecha', 'hora', 'mes','iniciosemana','finsemana', 'materias', 'grupos', 'horarios'));
     }
 
     /**
@@ -51,8 +83,27 @@ class AsistenciaController extends Controller
      */
     public function store(Request $request)
     {
-        $datosAsistencia=request()->except('_token');
-        Asistencia::insert($datosAsistencia);
+        //$datosAsistencia=request()->except('_token');
+        //$usuario = Auth::id();
+        //Asistencia::insert($datosAsistencia);
+
+        $asistencia = new Asistencia;
+        $asistencia->user_id = Auth::id();;
+        $asistencia->tipo = $request->tipo;
+        $asistencia->fecha = $request->fecha;
+        $asistencia->hora = $request->hora;
+        $asistencia->mes = $request->mes;
+        $asistencia->iniciosemana = $request->iniciosemana;
+        $asistencia->finsemana = $request->finsemana;
+        $asistencia->horario = $request->horario;
+        $asistencia->grupo = $request->grupo;
+        $asistencia->materia = $request->materia;
+        $asistencia->contenido = $request->contenido;
+        $asistencia->plataforma = $request->plataforma;
+        $asistencia->observaciones = $request->observaciones;
+        $asistencia->firma = $request->firma;
+
+        $asistencia->save();
 
        // return response()->json($datosDepartamento);
        return redirect('asistencia');
@@ -80,7 +131,8 @@ class AsistenciaController extends Controller
         $asi = Asistencia::findOrFail($id);
         $materias = Materia::all();
         $grupos = Grupo::all();
-        return view('asistencia.edit', compact('asi','materias','grupos'));
+        $horarios = Hora::all();
+        return view('asistencia.edit', compact('asi','materias','grupos', 'horarios'));
     }
 
     /**
@@ -109,5 +161,11 @@ class AsistenciaController extends Controller
         asistencia::destroy($id);
 
         return redirect('asistencia');
+    }
+
+    public function list()
+    {
+        $asistencias = Asistencia::all();
+        return view('asistencia.list',compact('asistencias'));
     }
 }

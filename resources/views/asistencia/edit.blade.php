@@ -40,13 +40,19 @@
         <input class="form-control" type="string" name="finsemana" id="finsemana" value="{{ $asi->finsemana }}" required readonly>
     </div>
 
+
     <div class="form-group">
         <label for="tipo" class="control-label">Tipo de clase</label>
-    <select name="tipo"  value="{{$asi->tipo}}" class="form-control" id="tipo">
-            <option value="Normal">Normal</option>
-            <option value="Reposicion">Reposicion</option>
-    
-    </select>
+        <input class="form-control" type="string" name="tipo" id="tipo" value="{{ $asi->tipo }}" required readonly>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Horario</label>
+        <select name="horario" class="form-control" id="horario">
+            @foreach ($horarios as $item)
+                <option value="{{$item->hora}}">{{$item->hora}}</option>
+            @endforeach
+        </select>
     </div>
 
     <div class="form-group">

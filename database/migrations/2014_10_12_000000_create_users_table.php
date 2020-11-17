@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('rolprimario');
             $table->string('rolsecundario');
             $table->timestamps();
-        });
+        });   
     }
 
     /**

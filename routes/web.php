@@ -76,9 +76,28 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
 
     Route::resource('asistencia','AsistenciaController');//asistencia
     Route::post('asistencia/store', 'AsistenciaController@store');
+    Route::get('asistencialista','AsistenciaController@list')->name('asistencialista');
 
     Route::resource('ausencia','AusenciaController');
     Route::post('ausencia/store', 'AusenciaController@store');
     Route::resource('reposicion','ReposicionController');
+    Route::get('ausencialista','AusenciaController@list')->name('ausencialista');
+    Route::get('/ausencialista/{id}/edit', 'AusenciaController@editarlista');
+    Route::post('/ausencialista/update/{id}', 'AusenciaController@actualizarlista');
+
+    Route::resource('asistenciacontrol','AsistenciaControlController');//asistencia
+    Route::post('asistenciacontrol/store', 'AsistenciaControlController@store');
+
+    Route::resource('reposicion','ReposicionController');
+    Route::get('/reposicion/{id}/index', 'ReposicionController@ver')-> name('ver');
+    Route::get('/reposicion/create/{id}', 'ReposicionController@crear');
+    Route::post('/reposicion/store/{id}', 'ReposicionController@almacenar');
+    Route::get('/reposicion/edit/{id}', 'ReposicionController@editar');
+    Route::post('/reposicion/update/{id}', 'ReposicionController@actualizar');
+    Route::post('/reposicion/delete/{id}', 'ReposicionController@eliminar');
+
+    Route::get('reposicionlista','ReposicionController@list')->name('reposicionlista');
+    Route::get('/reposicionlista/{id}/edit', 'ReposicionController@editarlista');
+    Route::post('/reposicionlista/update/{id}', 'ReposicionController@actualizarlista');
 
 });
