@@ -27,7 +27,7 @@ class UserImport implements ToModel, WithHeadingRow, WithValidation
          $usuario->profesion = $row['profesion'];
          $usuario->username = $row['username'];
          $usuario->contrasenia = $row['contrasenia'];
-         $usuario->password = Hash::make($row['password']);
+         $usuario->password = Hash::make($row['contrasenia']);
          $usuario->emailprincipal = $row['emailprincipal'];
          $usuario->emailsecundario = $row['emailsecundario'];
          $usuario->telefonoprincipal = $row['telefonoprincipal'];
