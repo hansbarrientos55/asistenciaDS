@@ -50,6 +50,11 @@
         </div> 
         @endrole
 
+        <div class="form-group">
+            <label for="archivo" class="control-label">Archivo</label>
+            <input class="form-control" type="file" name="archivo" id="archivo" value="">
+        </div> 
+
 
         <button class="btn btn-primary" type="submit">Guardar</button>
         <a class="btn btn-danger" href="{{url('ausencia')}}">Cancelar</a>

@@ -47,7 +47,7 @@
 </div>
 </div>
 
-<a class="btn btn-dark" href="{{ url()->previous() }}">Volver a materias</a>
+
 
 </div>
 @endsection

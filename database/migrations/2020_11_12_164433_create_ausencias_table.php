@@ -14,7 +14,7 @@ class CreateAusenciasTable extends Migration
     public function up()
     {
         Schema::create('ausencias', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->generatedAs('start with 100 increment by 1');
             $table->integer('user_id')->unsigned();
             $table->string('fecha');
             $table->string('hora');
@@ -22,6 +22,7 @@ class CreateAusenciasTable extends Migration
             $table->string('fechaausencia');
             $table->string('horaausencia');
             $table->string('estaaceptada')->default('Esperando confirmacion');
+            $table->string('archivo')->nullable();
             $table->string('label')->nullable();
             $table->timestamps();
 

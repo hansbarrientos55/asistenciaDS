@@ -14,7 +14,7 @@ class CreateAsistenciasTable extends Migration
     public function up()
     {
         Schema::create('asistencias', function (Blueprint $table) {
-            $table->increments('id')->generatedAs('start with 25 increment by 1');
+            $table->increments('id')->generatedAs('start with 100 increment by 1');
             $table->integer('user_id')->unsigned();
             $table->string('tipo')->nullable();
             $table->string('fecha')->nullable();
@@ -26,10 +26,12 @@ class CreateAsistenciasTable extends Migration
             $table->string('grupo')->nullable();
             $table->string('materia')->nullable();
             $table->string('contenido')->nullable();
-            $table->string('plataforma')->nullable();
+            $table->string('repositorio')->nullable();
+            $table->string('notificacion')->nullable();
+            $table->string('claseonline')->nullable();
             $table->string('observaciones')->nullable();
             $table->string('firma')->nullable();
-            //$table->file('archivo')->nullable();//Archivo
+            $table->string('archivo')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

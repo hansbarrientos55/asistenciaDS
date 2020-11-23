@@ -60,13 +60,20 @@ class HorarioController extends Controller
 
     public function almacenar(Request $request,$id)
     {
-        $datosHorario=request()->except('_token');
-        $datosHorario['grupo_id'] = $id;
-        Horario::insert($datosHorario);
+        
+        $horario = new Horario;
+        $horario->hora = $request->hora;
+        $horario->dia = $request->dia;
+        $horario->titulo = $request->dia." ".$request->hora;
+        $horario->grupo_id = $id; 
+        
+        $horario->save();
+        
+        //$datosHorario=request()->except('_token');
+        //$datosHorario['grupo_id'] = $id;
+        //Horario::insert($datosHorario);
 
-       // return response()->json($datosDepartamento);
-       //return redirect('grupo');
-       return redirect('/horario/'.$id.'/index');
+        return redirect('/horario/'.$id.'/index');
     }
 
     /**
@@ -116,6 +123,7 @@ class HorarioController extends Controller
     public function actualizarhorario(Request $request, $id)
     {
         $datosHorario=request()->except(['_token','_method']);
+        $datosHorario['titulo'] = $datosHorario['dia']." ".$datosHorario['hora'];
         Horario::where('id','=',$id)->update($datosHorario);
         $ox = Horario::findOrFail($id);
         $gro = $ox['grupo_id'];

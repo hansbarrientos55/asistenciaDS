@@ -78,10 +78,24 @@
         <input class="form-control" type="text" name="contenido" id="contenido" value="{{$asi->contenido}}" required>
     </div>  
 
-    <div class="form-group">
-        <label for="plataforma" class="control-label">Plataforma o medio utilizado</label>
-        <input class="form-control" type="text" name="plataforma" id="plataforma" value="{{$asi->plataforma}}" required>
-    </div>  
+    <label for="plataforma" class="control-label">Plataforma o medio utilizado</label>
+
+                    <div class="form-group">
+                        <label for="repositorio" class="control-label">Repositorio</label>
+                        <input class="form-control" type="text" name="repositorio" id="repositorio" value="{{$asi->repositorio}}" required>
+                    </div>  
+
+                    <div class="form-group">
+                        <label for="notificacion" class="control-label">Notificacion</label>
+                        <input class="form-control" type="text" name="notificacion" id="notificacion" value="{{$asi->notificacion}}" required>
+                    </div> 
+
+                    <div class="form-group">
+                        <label for="claseonline" class="control-label">Clase online</label>
+                        <input class="form-control" type="text" name="claseonline" id="claseonline" value="{{$asi->claseonline}}" required>
+                    </div> 
+    
+
     <div class="form-group">
         <label for="obervaciones" class="control-label">Observaciones</label>
         <input class="form-control" type="text" name="observaciones" id="observaciones" value="{{$asi->observaciones}}" required>

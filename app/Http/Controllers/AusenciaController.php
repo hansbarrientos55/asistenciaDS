@@ -45,6 +45,12 @@ class AusenciaController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->file('archivo') == null) {
+            $real = "";
+        }else{
+           $real = $request->file('archivo')->store('public');  
+        }
+        
         $ausencia = new Ausencia;
         $ausencia->user_id = Auth::id();
         $ausencia->fecha = $request->fecha;
@@ -52,6 +58,7 @@ class AusenciaController extends Controller
         $ausencia->motivo = $request->motivo;
         $ausencia->fechaausencia = $request->fechaausencia;
         $ausencia->horaausencia = $request->horaausencia;
+        $ausencia->archivo =$real;
 
         $ausencia->save();
         return redirect('ausencia');

@@ -15,9 +15,9 @@
                         <form action="{{route('guardar')}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="input-group mb-3 mt-3">
-                                    <div class="custom-file">
-                                        <input type="file" name="users" class="custom-file-input" id="users">
-                                        <label class="custom-file-label" for="users">Elegir archivo</label>
+                                    <div class="form-group">
+                                        <label for="users" class="control-label">Archivo</label>
+                                        <input class="form-control" type="file" name="users" id="users" value="">
                                     </div>
                                     
                                     <div>

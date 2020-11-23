@@ -39,10 +39,19 @@ class AsignacionController extends Controller
         $gestiones = Gestion::all();
         $departamentos = Departamento::all();
         $docentes = User::where('rolprimario','Docente')->orWhere('rolsecundario','Docente')->get();
-        $materias = Materia::all();
-        $grupos = Grupo::all();
-        $horarios = Horario::all();
-        return view('asignacion.create', compact('gestiones','departamentos', 'docentes', 'materias', 'grupos', 'horarios'));
+        $materias = Materia::all()->pluck("nombremate","id");
+        return view('asignacion.create', compact('gestiones','departamentos', 'docentes', 'materias'));
+    }
+
+    public function getgroups($id) 
+    {        
+        $grupos = Grupo::where("materia_id",$id)->pluck("numerogrupo","id");
+        return json_encode($grupos);
+    }
+
+    public function gethorarios($id){
+        $horarios = Horario::where("grupo_id",$id)->pluck("titulo","id");
+        return json_encode($horarios);
     }
 
     /**
@@ -61,7 +70,6 @@ class AsignacionController extends Controller
         $asignacion->docente = $request->docente;
         $asignacion->materia = $request->materia;
         $asignacion->grupo = $request->grupo;
-        $asignacion->horario = $request->horario;
 
         $asignacion->save();
         //$asignaciones = Asignacion::all();
@@ -92,10 +100,9 @@ class AsignacionController extends Controller
         $gestiones = Gestion::all();
         $departamentos = Departamento::all();
         $docentes = User::where('rolprimario','Docente')->orWhere('rolsecundario','Docente')->get();
-        $materias = Materia::all();
-        $grupos = Grupo::all();
-        $horarios = Horario::all();
-        return view('asignacion.edit', compact('asi','gestiones','departamentos', 'docentes', 'materias', 'grupos', 'horarios'));
+        $materias = Materia::all()->pluck("nombremate","id");
+
+        return view('asignacion.edit', compact('asi','gestiones','departamentos', 'docentes', 'materias'));
     }
 
     /**

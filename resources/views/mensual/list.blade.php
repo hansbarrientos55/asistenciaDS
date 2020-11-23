@@ -1,15 +1,22 @@
 @extends('layouts.principal')
 
 @section('content')
+    
 
 <div class="container">
 
-    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Administracion de Permisos</h1>
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Asistencias y Avances Mensuales</h1>
 
-    @can('editar-ausencia-control')
-    <a href="{{url('reposicionlista')}}" class="btn btn-success">Ver reposiciones</a>
-    @endcan
+    <div>
+    <br>
+    </div>
+    
+    <div>
 
+    <br>    
+    </div>
+
+    
 
     <table class="table table-light table-hover">
         <thead class="thead-light">
@@ -18,25 +25,39 @@
             <th scope="col">Usuario</th>
             <th scope="col">Fecha</th>
             <th scope="col">Hora</th>
-            <th scope="col">Motivo</th>
-            <th scope="col">Fecha de ausencia</th>
-            <th scope="col">Hora de ausencia</th>
-            <th scope="col">Estado del permiso</th>
+            <th scope="col">Mes</th>
+            <th scope="col">Inicio semana</th>
+            <th scope="col">Fin semana</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Grupo</th>
+            <th scope="col">Materia</th>
+            <th scope="col">Contenido de clase</th>
+            <th scope="col">Plataforma</th>
+            <th scope="col">Observaciones</th>
+            <th scope="col">Firma</th>
             <th scope="col">Archivo</th>
             <th scope="col">Acciones</th>
         </tr>
         </thead>
         <tbody style="background-color: #adafb1;">
-            @foreach ($ausencias as $item)
+            @foreach ($asistencias as $item)
             <tr>
                 <th scope="row">{{$item->id}}</th>
                 <td>{{$item->user_id}}</td>
                 <td>{{$item->fecha}}</td>
                 <td>{{$item->hora}}</td>
-                <td>{{$item->motivo}}</td>
-                <td>{{$item->fechaausencia}}</td>
-                <td>{{$item->horaausencia}}</td>
-                <td>{{$item->estaaceptada}}</td>
+                <td>{{$item->mes}}</td>
+                <td>{{$item->iniciosemana}}</td>
+                <td>{{$item->finsemana}}</td>
+                <td>{{$item->user_id}}</td>
+                <td>{{$item->tipo}}</td>
+                <td>{{$item->grupo}}</td>
+                <td>{{$item->materia}}</td>
+                <td>{{$item->contenido}}</td>
+                <td>{{$item->plataforma}}</td>
+                <td>{{$item->observaciones}}</td>
+                <td>{{$item->firma}}</td>
                 @if($item->archivo != "")
                 <div>
                     <td><a href="{{Storage::url($item->archivo)}}"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-file-earmark-check-fill" fill="#274453" xmlns="http://www.w3.org/2000/svg">
@@ -47,14 +68,14 @@
                 <td>{{$item->archivo}}</td>
                 @endif
                 <td>
-                    @can('editar-ausencia-control')
-                    <a class="btn btn-warning" href="{{ url('/ausencialista/'.$item->id.'/edit') }}">Editar</a>
-                    @endcan
+
+                   
+
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    
+
 </div>
 @endsection
