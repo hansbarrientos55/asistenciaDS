@@ -76,6 +76,7 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
 
     Route::resource('asistencia','AsistenciaController');//asistencia
     Route::post('asistencia/store', 'AsistenciaController@store');
+    Route::get('asistenciamenu','AsistenciaController@menu');
     Route::get('asistencialista','AsistenciaController@list')->name('asistencialista');
 
     Route::resource('ausencia','AusenciaController');
@@ -99,5 +100,14 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
     Route::get('reposicionlista','ReposicionController@list')->name('reposicionlista');
     Route::get('/reposicionlista/{id}/edit', 'ReposicionController@editarlista');
     Route::post('/reposicionlista/update/{id}', 'ReposicionController@actualizarlista');
+
+
+    Route::resource('mensual','MensualController');//asistencia
+    Route::post('mensual/store', 'MensualController@store');
+    Route::get('/mensual/{id}/edit', 'MensualController@editar');
+    Route::post('/mensual/update/{id}', 'MensualController@actualizar');
+
+    Route::get('asignacion/getgroups/{id}','AsignacionController@getgroups');
+    Route::get('asignacion/gethorarios/{id}','AsignacionController@gethorarios');
 
 });
