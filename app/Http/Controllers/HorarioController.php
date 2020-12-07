@@ -8,6 +8,10 @@ use App\Hora;
 use App\Dia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Bitacora;
+use Auth;
+use Carbon\Carbon;
+use App\User;
 
 class HorarioController extends Controller
 {
@@ -68,6 +72,24 @@ class HorarioController extends Controller
         $horario->grupo_id = $id; 
         
         $horario->save();
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Registrado horario";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
         
         //$datosHorario=request()->except('_token');
         //$datosHorario['grupo_id'] = $id;
@@ -128,6 +150,24 @@ class HorarioController extends Controller
         $ox = Horario::findOrFail($id);
         $gro = $ox['grupo_id'];
 
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Editado horario";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
         //return redirect('/horario/'.$id.'/index');
         return redirect('/horario/'.$gro.'/index');
     }
@@ -150,6 +190,24 @@ class HorarioController extends Controller
         $gro = $ox['grupo_id'];
         
         Horario::destroy($id);
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Eliminado horario";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
 
         return redirect('/horario/'.$gro.'/index');
         //return redirect('/grupo/'.$materia.'/index');

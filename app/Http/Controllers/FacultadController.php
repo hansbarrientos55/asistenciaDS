@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Facultad;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Bitacora;
+use Auth;
+use Carbon\Carbon;
+use App\User;
 
 class FacultadController extends Controller
 {
@@ -43,6 +47,24 @@ class FacultadController extends Controller
         Facultad::insert($datosFacultad);
 
        // return response()->json($datosDepartamento);
+       $bitacora = new Bitacora;
+       $bitacora->user_id = Auth::id();
+       $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+       $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+       $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+       $bitacora->accion = "Registrada facultad";
+       $bitacora->direccion_ip = $request->getClientIp();
+       $bitacora->save();
+
        return redirect('facultad');
     }
 
@@ -82,6 +104,24 @@ class FacultadController extends Controller
         $datosFacultad=request()->except(['_token','_method']);
         Facultad::where('id','=',$id)->update($datosFacultad);
 
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Editada facultad";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
         return redirect('facultad');
     }
 
@@ -94,6 +134,24 @@ class FacultadController extends Controller
     public function destroy($id)
     {
         Facultad::destroy($id);
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Eliminada facultad";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
 
         return redirect('facultad');
     }

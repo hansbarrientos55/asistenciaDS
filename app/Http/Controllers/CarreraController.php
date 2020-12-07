@@ -6,6 +6,10 @@ use App\Carrera;
 use App\Facultad;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Bitacora;
+use Auth;
+use Carbon\Carbon;
+use App\User;
 
 class CarreraController extends Controller
 {
@@ -43,6 +47,25 @@ class CarreraController extends Controller
         Carrera::insert($datosCarrera);
 
        // return response()->json($datosDepartamento);
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Registrada carrera";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+       
        return redirect('carrera');
     }
 
@@ -83,6 +106,24 @@ class CarreraController extends Controller
         $datosCarrera=request()->except(['_token','_method']);
         Carrera::where('id','=',$id)->update($datosCarrera);
 
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Editada carrera";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
         return redirect('carrera');
     }
 
@@ -95,6 +136,24 @@ class CarreraController extends Controller
     public function destroy($id)
     {
         Carrera::destroy($id);
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Eliminada carrera";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
 
         return redirect('carrera');
     }

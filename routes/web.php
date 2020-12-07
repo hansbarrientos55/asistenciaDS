@@ -110,4 +110,21 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
     Route::get('asignacion/getgroups/{id}','AsignacionController@getgroups');
     Route::get('asignacion/gethorarios/{id}','AsignacionController@gethorarios');
 
+    Route::resource('calendario','CalendarioController');
+
+    Route::resource('bitacora','BitacoraController');
+
+    Route::get('/calendar','FullCalendarController@index');
+    Route::post('/calendar/create','FullCalendarController@create');
+    Route::post('/calendar/update','FullCalendarController@update');
+    Route::post('/calendar/delete','FullCalendarController@destroy');
+
+    Route::get('migracion', 'MigracionController@index' );
+    Route::get('migracionpostgre', 'MigracionController@generarPostgre' );
+    Route::get('migracionmy', 'MigracionController@generarMy' );
+
+    Route::get('/respaldo','RespaldoController@index');
+    Route::get('/respaldo/crear','RespaldoController@create');
+    Route::get('/backupdb','RespaldoController@respaldoporcomando');
+
 });

@@ -23,14 +23,14 @@ class CreatePermissionTables extends Migration
         }
 
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
-            $table->bigIncrements('id')->generatedAs('start with 100 increment by 1');
+            $table->bigIncrements('id')->generatedAs('start with 125 increment by 1');
             $table->string('name');
             $table->string('guard_name');
             $table->timestamps();
         });
 
         Schema::create($tableNames['roles'], function (Blueprint $table) {
-            $table->bigIncrements('id')->generatedAs('start with 100 increment by 1');
+            $table->bigIncrements('id')->generatedAs('start with 125 increment by 1');
             $table->string('name');
             $table->string('guard_name');
             $table->timestamps();

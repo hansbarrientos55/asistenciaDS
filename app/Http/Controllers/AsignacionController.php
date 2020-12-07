@@ -12,6 +12,9 @@ use App\Horario;
 use App\Asignacion;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Bitacora;
+use Auth;
+use Carbon\Carbon;
 
 class AsignacionController extends Controller
 {
@@ -74,6 +77,25 @@ class AsignacionController extends Controller
         $asignacion->save();
         //$asignaciones = Asignacion::all();
         //return view('asignacion.index',compact('asignaciones'));
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Registrada asignacion de materia-grupo-horario";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
         return redirect('asignacion');
     }
 
@@ -117,6 +139,24 @@ class AsignacionController extends Controller
         $datosAsignacion=request()->except(['_token','_method']);
         Asignacion::where('id','=',$id)->update($datosAsignacion);
 
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Editada asignacion de materia-grupo-horario";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
         return redirect('asignacion');
     }
 
@@ -129,6 +169,24 @@ class AsignacionController extends Controller
     public function destroy($id)
     {
         Asignacion::destroy($id);
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Eliminada asignacion de materia-grupo-horario";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
 
         return redirect('asignacion');
     }

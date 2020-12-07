@@ -10,6 +10,8 @@ use App\Materia;
 use App\Grupo;
 use App\Hora;
 use Auth;
+use App\Bitacora;
+use App\User;
 
 class ReposicionController extends Controller
 {
@@ -66,6 +68,24 @@ class ReposicionController extends Controller
         $datosRepo['ausencia_id'] = $id;
         reposicion::insert($datosRepo);
 
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Registrada reposicion";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
        // return response()->json($datosDepartamento);
        //return redirect('grupo');
        return redirect('/reposicion/'.$id.'/index');
@@ -121,6 +141,24 @@ class ReposicionController extends Controller
         $aux = Reposicion::findOrFail($id);
         $mat = $aux['ausencia_id'];
 
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Editada reposicion";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
         return redirect('/reposicion/'.$mat.'/index');
     }
 
@@ -142,6 +180,26 @@ class ReposicionController extends Controller
         $mat = $aux['ausencia_id'];
 
         Reposicion::destroy($id);
+
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Eliminada reposicion";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
         return redirect('/reposicion/'.$mat.'/index');
         //return redirect('/grupo/'.$materia.'/index');
        // return redirect('materia');
@@ -165,6 +223,25 @@ class ReposicionController extends Controller
         Reposicion::where('id','=',$id)->update($datosReposicion);
 
         $reposiciones = Reposicion::all();
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Editada lista de reposiciones";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
         //return view('ausencia.list',compact('ausencias'));
         return redirect('/reposicionlista/');
 
