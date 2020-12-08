@@ -188,7 +188,7 @@ class GrupoController extends Controller
      * @param  \App\Grupo  $grupo
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         Grupo::destroy($id);
 
@@ -213,7 +213,7 @@ class GrupoController extends Controller
         return redirect('grupo');
     }
 
-    public function eliminargrupo($id)
+    public function eliminargrupo(Request $request, $id)
     {
         //$materia=Grupo::where("id","=",$id)->select("materia_id")->toString();
         $aux = Grupo::findOrFail($id);

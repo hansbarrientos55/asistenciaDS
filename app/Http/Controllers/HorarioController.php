@@ -183,7 +183,7 @@ class HorarioController extends Controller
         //
     }
 
-    public function eliminarhorario($id)
+    public function eliminarhorario(Request $request, $id)
     {
         //$materia=Grupo::where("id","=",$id)->select("materia_id")->toString();
         $ox = Horario::findOrFail($id);

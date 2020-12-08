@@ -182,7 +182,7 @@ class MensualController extends Controller
      * @param  \App\AsistenciaMensual  $asistenciaMensual
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         mensual::destroy($id);
 

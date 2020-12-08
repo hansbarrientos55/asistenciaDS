@@ -173,7 +173,7 @@ class ReposicionController extends Controller
         //
     }
 
-    public function eliminar($id)
+    public function eliminar(Request $request, $id)
     {
         //$materia=Grupo::where("id","=",$id)->select("materia_id")->toString();
         $aux = Reposicion::findOrFail($id);
