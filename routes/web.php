@@ -122,9 +122,6 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
     Route::get('migracion', 'MigracionController@index' );
     Route::get('migracionpostgre', 'MigracionController@generarPostgre' );
     Route::get('migracionmy', 'MigracionController@generarMy' );
-
-    Route::get('/respaldo','RespaldoController@index');
-    Route::get('/respaldo/crear','RespaldoController@create');
-    Route::get('/backupdb','RespaldoController@respaldoporcomando');
+    Route::get('respaldar','MigracionController@respaldaraplicacion');
 
 });

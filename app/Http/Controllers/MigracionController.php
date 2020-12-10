@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Exports\MigracionCSV;
 use Maatwebsite\Excel\Facades\Excel;
@@ -27,6 +28,12 @@ use Illuminate\Support\Facades\DB;
 use App\Event;
 use Illuminate\Support\Facades\Storage;
 use Response;
+
+use Artisan;
+use Carbon\Carbon;
+use Log;
+use Spatie\Backup\Helpers\Format;
+
 
 
 
@@ -522,5 +529,24 @@ class MigracionController extends Controller
 
 
 
+    }
+
+    public function respaldaraplicacion()
+    {
+        try {
+            // start the backup process
+            Artisan::call('backup:run', ['--only-files' => 'true']);
+            //Artisan::call('backup:run');
+            $output = Artisan::output();
+            //dd($output);
+            // log the results
+            Log::info("Backpack\BackupManager -- new backup started from admin interface \r\n" . $output);
+            // return the results as a response to the ajax call
+            //Alert::success('New backup created');
+            return redirect()->back();
+        } catch (Exception $e) {
+            Flash::error($e->getMessage());
+            return redirect()->back();
+        }
     }
 }

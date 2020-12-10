@@ -13,7 +13,7 @@
 @endif
 
 
-<a href="{{url('backupdb')}}" class="btn btn-success">Crear respaldo</a>
+<a href="{{url('/respaldo/crear')}}" class="btn btn-success">Crear respaldo</a>
 <br>
 <br>
 
