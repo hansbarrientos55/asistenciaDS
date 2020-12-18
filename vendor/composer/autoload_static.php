@@ -81,6 +81,7 @@ class ComposerStaticInit42b1f650d0181e035154113a78d5ebd9
         '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        '17d016dc52a631c1e74d2eb8fdd57342' => __DIR__ . '/..' . '/laravel/helpers/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'b6ec61354e97f32c0ae683041c78392a' => __DIR__ . '/..' . '/scrivo/highlight.php/HighlightUtilities/functions.php',
@@ -184,6 +185,7 @@ class ComposerStaticInit42b1f650d0181e035154113a78d5ebd9
             'League\\CommonMark\\' => 18,
             'Laravel\\Ui\\' => 11,
             'Laravel\\Tinker\\' => 15,
+            'LaravelFullCalendar\\' => 20,
         ),
         'J' => 
         array (
@@ -466,6 +468,10 @@ class ComposerStaticInit42b1f650d0181e035154113a78d5ebd9
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
         ),
+        'LaravelFullCalendar\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/qlick/laravel-full-calendar/src',
+        ),
         'JakubOnderka\\PhpConsoleHighlighter\\' => 
         array (
             0 => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src',
@@ -537,6 +543,7 @@ class ComposerStaticInit42b1f650d0181e035154113a78d5ebd9
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
+            1 => __DIR__ . '/..' . '/qlick/laravel-full-calendar/app',
         ),
     );
 
@@ -2389,6 +2396,13 @@ class ComposerStaticInit42b1f650d0181e035154113a78d5ebd9
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/Highlighter.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+        'LaravelFullCalendar\\Calendar' => __DIR__ . '/..' . '/qlick/laravel-full-calendar/src/Calendar.php',
+        'LaravelFullCalendar\\Event' => __DIR__ . '/..' . '/qlick/laravel-full-calendar/src/Event.php',
+        'LaravelFullCalendar\\EventCollection' => __DIR__ . '/..' . '/qlick/laravel-full-calendar/src/EventCollection.php',
+        'LaravelFullCalendar\\Facades\\Calendar' => __DIR__ . '/..' . '/qlick/laravel-full-calendar/src/Facades/Calendar.php',
+        'LaravelFullCalendar\\FullCalendarServiceProvider' => __DIR__ . '/..' . '/qlick/laravel-full-calendar/src/FullCalendarServiceProvider.php',
+        'LaravelFullCalendar\\IdentifiableEvent' => __DIR__ . '/..' . '/qlick/laravel-full-calendar/src/IdentifiableEvent.php',
+        'LaravelFullCalendar\\SimpleEvent' => __DIR__ . '/..' . '/qlick/laravel-full-calendar/src/SimpleEvent.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',

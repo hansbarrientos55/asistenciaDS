@@ -114,14 +114,16 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
 
     Route::resource('bitacora','BitacoraController');
 
-    Route::get('/calendar','FullCalendarController@index');
-    Route::post('/calendar/create','FullCalendarController@create');
-    Route::post('/calendar/update','FullCalendarController@update');
-    Route::post('/calendar/delete','FullCalendarController@destroy');
-
     Route::get('migracion', 'MigracionController@index' );
     Route::get('migracionpostgre', 'MigracionController@generarPostgre' );
     Route::get('migracionmy', 'MigracionController@generarMy' );
     Route::get('respaldar','MigracionController@respaldaraplicacion');
+
+    Route::get('event/add','EventController@createEvent');
+    Route::post('event/add','EventController@store');
+    Route::get('event','EventController@calendar'); 
+    Route::get('event/list','EventController@list');
+    Route::get('event/edit/{id}','EventController@createEvent');
+    Route::post('event/edit/{id}','EventController@store');
 
 });
