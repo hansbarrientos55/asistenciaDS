@@ -263,9 +263,9 @@ class MigracionController extends Controller
         //Eventos
         //Materias
         $eventos = Event::all();
-        $salida .= "\n INSERT INTO \"events\" (\"id\", \"title\", \"start\", \"end\",\"created_at\", \"updated_at\") VALUES \n";
+        $salida .= "\n INSERT INTO \"events\" (\"id\", \"title\", \"start\", \"end\", \"creator\", \"type\",\"created_at\", \"updated_at\") VALUES \n";
         foreach($eventos as $list){
-            $salida .= "(".$list->id.", '".$list->title."', '".$list->start."', '".$list->end."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->title."', '".$list->start."', '".$list->end."', '".$list->creator."', '".$list->type."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);

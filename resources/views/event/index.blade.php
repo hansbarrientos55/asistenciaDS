@@ -198,10 +198,10 @@
       </div><br />
      @endif
      <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Calendario</h1>
-      @can('agregar-evento')
+      
           <a href="{{url('event/add')}}" class="btn btn-success">Agregar evento</a>
           <a href="{{url('event/list')}}" class="btn btn-dark">Listado de eventos</a>
-      @endcan
+
 
    <div class="panel panel-default">
          

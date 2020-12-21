@@ -17,6 +17,7 @@
                   <th>Titulo</th>
                   <th>Fecha de inicio</th>
                   <th>Fecha de finalizacion</th>
+                  <th>Tipo</th>
                   <th>Acciones</th>
                   
               </tr>
@@ -29,10 +30,23 @@
                   <tr>
                       <td>{{$item->id}}</td>
                       <td>{{$item->title}}</td>
-                      <td>{{$item->start_date}}</td>
-                      <td>{{$item->end_date}}</td>
+                      <td>{{$item->start}}</td>
+                      <td>{{$item->end}}</td>
+                      <td>{{$item->type}}</td>
                       <td> 
-                          
+                    
+                    @if($item->creator == Auth::id())
+
+                    <a class="btn btn-warning" href="{{ url('/event/edit/'.$item->id.'') }}">Editar</a>
+                    <form action="{{ url('/event/delete/'.$item->id) }}" style="display:inline" method="post">
+                        {{ csrf_field() }}   
+                       <button class="btn btn-danger" type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
+                   </form>  
+
+
+                    @endif
+
+                        
                       
       
                       </td>

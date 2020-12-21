@@ -21,17 +21,33 @@
           <div class="row">
             <div class="col-md-4"></div>
             <div class="form-group col-md-4">
-              <label> Fecha de inicio : </label>  
-              <input class="form-control"  type="date" id="startdate" name="startdate">   
+              <label> Fecha de inicio </label>  
+              <input class="form-control"  type="date" id="start" name="start">   
            </div>
           </div>
           <div class="row">
             <div class="col-md-4"></div>
             <div class="form-group col-md-4">
-              <label> Fecha de finalizacion : </label>  
-              <input class="form-control"  type="date" id="enddate" name="enddate">   
+              <label> Fecha de finalizacion </label>  
+              <input class="form-control"  type="date" id="end" name="end">   
            </div>
           </div>
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="form-group col-md-4">
+              <label> Tipo </label>  
+              <select name="type"  value="" class="form-control" id="type">
+                    
+                    @hasanyrole('Administrador|Jefe de Departamento')
+                    <option value="Global">Global</option>
+                    @endhasanyrole
+                    @hasanyrole('Docente|Jefe de Departamento')
+                    <option value="Personal">Personal</option>
+                    @endhasanyrole
+                </select>   
+           </div>
+          </div>
+
           <div class="row">
             <div class="col-md-4"></div>
             <div class="form-group col-md-4">

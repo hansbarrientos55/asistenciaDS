@@ -123,7 +123,8 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
     Route::post('event/add','EventController@store');
     Route::get('event','EventController@calendar'); 
     Route::get('event/list','EventController@list');
-    Route::get('event/edit/{id}','EventController@createEvent');
-    Route::post('event/edit/{id}','EventController@store');
+    Route::get('event/edit/{id}','EventController@edit');
+    Route::post('event/edit/{id}','EventController@update');
+    Route::post('event/delete/{id}','EventController@destroy');
 
 });
