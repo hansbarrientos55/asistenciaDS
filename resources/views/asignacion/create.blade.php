@@ -46,7 +46,6 @@
         <div class="form-group">
             <label for="exampleFormControlSelect1">Auxiliar de Docencia</label>
             <select name="auxiliardocencia" class="form-control" id="auxiliardocencia">
-                <option value="NULL">Ninguno</option>
                 @foreach ($auxiliaresdocencia as $item)
                     <option value="{{$item->id}}">{{$item->nombres}} {{$item->apellidos}}</option>
                 @endforeach
@@ -56,7 +55,6 @@
         <div class="form-group">
             <label for="exampleFormControlSelect1">Auxiliar de Laboratorio</label>
             <select name="auxiliarlabo" class="form-control" id="auxiliarlabo">
-                <option value="NULL">Ninguno</option>
                 @foreach ($auxiliareslabo as $item)
                     <option value="{{$item->id}}">{{$item->nombres}} {{$item->apellidos}}</option>
                 @endforeach

@@ -16,7 +16,7 @@
             <th scope="col">Departamento</th>
             <th scope="col">Docente</th>
             <th scope="col">Auxiliar de Docencia</th>
-            <th scope="col">Auxiliar de Labo</th>
+            <th scope="col">Auxiliar de Laboratorio</th>
             <th scope="col">Materia</th>
             <th scope="col">Grupo</th>
             <th scope="col">Acciones</th>
