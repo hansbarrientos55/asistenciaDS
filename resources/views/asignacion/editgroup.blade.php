@@ -20,7 +20,7 @@
     <br/>
      <div class="form-group">
             <label for="exampleFormControlSelect1">Gestión</label>
-             <input class="form-control" type="hidden" id="llave" name="llave" value="{{$llave}}">
+             <input class="form-control" type="hidden" id="id" name="id" value="{{$llave}}">
               <input class="form-control" type="text" name="gestion" id="gestion" value="{{$gestion}}" readonly required>
         </div>
 
@@ -63,55 +63,4 @@
 
 </div>
 
-<script type=text/javascript>
-    $('#materia').change(function(){
-    var countryID = $(this).val();  
-    if(countryID){
-      $.ajax({
-        type:"GET",
-        url: 'getgroups/' +countryID,
-        dataType : "json",
-        success:function(res){        
-        if(res){
-          $("#grupo").empty();
-          $("#grupo").append('<option>--Seleccionar--</option>');
-          $.each(res,function(key,value){
-            $("#grupo").append('<option value="'+key+'">'+value+'</option>');
-          });
-        
-        }else{
-          $("#grupo").empty();
-        }
-        }
-      });
-    }else{
-      $("#grupo").empty();
-      $("#horario").empty();
-    }   
-    });
-    $('#grupo').on('change',function(){
-    var stateID = $(this).val();  
-    if(stateID){
-      $.ajax({
-        type:"GET",
-        url: 'gethorarios/' +stateID,
-        dataType : "json",
-        success:function(res){        
-        if(res){
-          $("#horario").empty();
-          $.each(res,function(key,value){
-            $("#horario").append('<option value="'+key+'">'+value+'</option>');
-          });
-        
-        }else{
-          $("#horario").empty();
-        }
-        }
-      });
-    }else{
-      $("#horario").empty();
-    }
-      
-    });
-  </script>
 @endsection

@@ -203,23 +203,14 @@ class AsignacionController extends Controller
         $nommateria = Materia::where('id',$materia)->select("nombremate")->value("nombremate");
         $grupos = Grupo::where("materia_id", $materia)->get();
 
-        return view('asignacion.editgroup', compact('gestion','departamento', 'docente', 'nomdocente', 'materia', 'nommateria', 'grupos'));
+        return view('asignacion.editgroup', compact('llave', 'gestion','departamento', 'docente', 'nomdocente', 'materia', 'nommateria', 'grupos'));
     }
 
-    public function actualizar(Request $request){
+    public function actualizar(Request $request, $id){
 
-        $asignacion = new Asignacion;
-        $asignacion->gestion = $request->gestion;
-        $asignacion->departamento = $request->departamento;
-        $asignacion->docente = $request->docente;
-        $asignacion->nomdocente = $request->nomdocente;
-        $asignacion->materia = $request->materia;
-        $asignacion->nommateria = $request->nommateria;
-        $asignacion->grupo = $request->grupo;
-
-        $asignacion->save();
-
-
+        $datosAsignacion=request()->except(['_token','_method']);
+        Asignacion::where('id','=',$id)->update($datosAsignacion);
+    
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();
