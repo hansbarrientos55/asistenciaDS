@@ -37,6 +37,8 @@
             <th scope="col">Observaciones</th>
             <th scope="col">Firma</th>
             <th scope="col">Archivo</th>
+            <th scope="col">Grabacion</th>
+            <th scope="col">Tarea</th>
         </tr>
         </thead>
         <tbody style="background-color: #adafb1;">
@@ -65,11 +67,15 @@
                 @else
                 <td>{{$item->archivo}}</td>
                 @endif
-                <td>
 
-                   
-
-                </td>
+                @hasrole('Auxiliar de Docencia|Jefe de Departamento')
+                <td>{{$item->grabacion}}</td>
+                @endrole
+    
+                @hasrole('Auxiliar de Laboratorio|Jefe de Departamento')
+                <td>{{$item->tarea}}</td>
+                @endrole
+                
             </tr>
             @endforeach
         </tbody>

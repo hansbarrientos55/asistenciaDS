@@ -32,6 +32,8 @@ class CreateAsistenciasTable extends Migration
             $table->string('observaciones')->nullable();
             $table->string('firma')->nullable();
             $table->string('archivo')->nullable();
+            $table->string('grabacion')->nullable();
+            $table->string('tarea')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

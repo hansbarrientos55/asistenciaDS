@@ -105,6 +105,21 @@
         <label for="firma" class="control-label">Firma</label>
         <input class="form-control" type="text" name="firma" id="firma" value="{{$asi->firma}}" required>
     </div>  
+
+    @hasrole('Auxiliar de Docencia')
+    <div class="form-group">
+        <label for="grabacion" class="control-label">Enlace de la grabacion</label>
+        <input class="form-control" type="text" name="grabacion" id="grabacion" value="{{$asi->grabacion}}" required>
+    </div> 
+    @endrole
+
+    @hasrole('Auxiliar de Laboratorio')
+    <div class="form-group">
+        <label for="tarea" class="control-label">Tarea</label>
+        <input class="form-control" type="text" name="tarea" id="tarea" value="{{$asi->tarea}}" required>
+    </div> 
+    @endrole
+
     <input type="submit" class="btn btn-success" value="Guardar">
     <a class="btn btn-danger" href="{{url('asistencia')}}">Cancelar</a>
 

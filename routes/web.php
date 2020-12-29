@@ -35,12 +35,6 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
 
     Route::resource('gestion','GestionController');
 
-    Route::resource('asignacion','AsignacionController');
-
-    Route::post('asignacion/store', 'AsignacionController@store');
-
-    //Route::get('asignacion/store', 'AsignacionController@store');
-
     Route::resource('user','UserController');
 
     Route::get('/grupo/{id}/index', 'GrupoController@vergrupos')-> name('vergrupos');
@@ -107,11 +101,6 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
     Route::get('/mensual/{id}/edit', 'MensualController@editar');
     Route::post('/mensual/update/{id}', 'MensualController@actualizar');
 
-    Route::get('asignacion/getgroups/{id}','AsignacionController@getgroups');
-    Route::get('asignacion/gethorarios/{id}','AsignacionController@gethorarios');
-
-    Route::resource('calendario','CalendarioController');
-
     Route::resource('bitacora','BitacoraController');
 
     Route::get('migracion', 'MigracionController@index' );
@@ -127,4 +116,17 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
     Route::post('event/edit/{id}','EventController@update');
     Route::post('event/delete/{id}','EventController@destroy');
 
+    //Route::resource('asignacion','AsignacionController');
+    Route::get('asignacion','AsignacionController@asignaciones');
+
+    Route::get('asignacion/crear','AsignacionController@crear');
+    Route::get('asignacion/grupo','AsignacionController@grupo');
+    Route::post('asignacion/grupo','AsignacionController@grupo');
+    Route::post('asignacion/guardar', 'AsignacionController@guardar');
+
+    Route::get('asignacion/editar/{id}','AsignacionController@editar');
+    Route::get('asignacion/editar/grupo/{id}','AsignacionController@editargrupo');
+    Route::post('asignacion/editar/grupo/{id}','AsignacionController@editargrupo');
+    Route::post('asignacion/editar/guardar/{id}', 'AsignacionController@actualizar');
+    
 });

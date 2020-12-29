@@ -6,7 +6,7 @@
 
     <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Administracion de Asignaciones de Materias - Grupos - Horarios</h1>
 
-    <a href="{{url('asignacion/create')}}" class="btn btn-success">Asignar materia a docente</a>
+    <a href="{{url('asignacion/crear')}}" class="btn btn-success">Asignar materia a docente</a>
 
     <table class="table table-light table-hover">
         <thead class="thead-light">
@@ -17,7 +17,6 @@
             <th scope="col">Docente</th>
             <th scope="col">Materia</th>
             <th scope="col">Grupo</th>
-            <th scope="col">Horario</th>
             <th scope="col">Acciones</th>
         </tr>
         </thead>
@@ -27,12 +26,11 @@
                 <th scope="row">{{$item->id}}</th>
                 <td>{{$item->gestion}}</td>
                 <td>{{$item->departamento}}</td>
-                <td>{{$item->docente}}</td>
-                <td>{{$item->materia}}</td>
+                <td>{{$item->nomdocente}}</td>
+                <td>{{$item->nommateria}}</td>
                 <td>{{$item->grupo}}</td>
-                <td>{{$item->horario}}</td>
                 <td>
-                    <a class="btn btn-warning" href="{{ url('/asignacion/'.$item->id.'/edit') }}">Editar</a>
+                    <a class="btn btn-warning" href="{{ url('/asignacion/editar/'.$item->id) }}">Editar</a>
                     
 
                 <form action="{{ url('/asignacion/'.$item->id) }}" style="display:inline" method="post">

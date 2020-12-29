@@ -25,7 +25,15 @@ class AsignacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
+    {
+        $docentes = User::where('rolprimario','Docente')->orWhere('rolsecundario','Docente')->get();
+        $asignaciones = Asignacion::all();
+        return view('asignacion.index',compact('asignaciones','docentes'));
+    }
+
+    public function asignaciones()
     {
         $docentes = User::where('rolprimario','Docente')->orWhere('rolsecundario','Docente')->get();
         $asignaciones = Asignacion::all();
@@ -37,24 +45,64 @@ class AsignacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function crear()
     {
         $gestiones = Gestion::all();
         $departamentos = Departamento::all();
         $docentes = User::where('rolprimario','Docente')->orWhere('rolsecundario','Docente')->get();
-        $materias = Materia::all()->pluck("nombremate","id");
+        $materias = Materia::all();
         return view('asignacion.create', compact('gestiones','departamentos', 'docentes', 'materias'));
     }
 
-    public function getgroups($id) 
-    {        
-        $grupos = Grupo::where("materia_id",$id)->pluck("numerogrupo","id");
-        return json_encode($grupos);
+    public function grupo(Request $request){
+
+        //dd($request);
+        $gestion = $request["gestion"];
+        $departamento = $request["departamento"];
+        $docente = $request["docente"];
+        $nombres = User::where('id',$docente)->select("nombres")->value("nombres");
+        $apellidos = User::where('id',$docente)->select("apellidos")->value("apellidos");
+        $nomdocente = $nombres." ".$apellidos;
+        $materia = $request["materia"];
+        $nommateria = Materia::where('id',$materia)->select("nombremate")->value("nombremate");
+        $grupos = Grupo::where("materia_id", $materia)->get();
+
+        return view('asignacion.group', compact('gestion','departamento', 'docente', 'nomdocente', 'materia', 'nommateria', 'grupos'));
     }
 
-    public function gethorarios($id){
-        $horarios = Horario::where("grupo_id",$id)->pluck("titulo","id");
-        return json_encode($horarios);
+    public function guardar(Request $request){
+
+        $asignacion = new Asignacion;
+        $asignacion->gestion = $request->gestion;
+        $asignacion->departamento = $request->departamento;
+        $asignacion->docente = $request->docente;
+        $asignacion->materia = $request->materia;
+        $asignacion->grupo = $request->grupo;
+
+        $asignacion->save();
+
+
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Registrada asignacion de materia-grupo-horario";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
+        return redirect('asignacion');
+
     }
 
     /**
@@ -125,6 +173,74 @@ class AsignacionController extends Controller
         $materias = Materia::all()->pluck("nombremate","id");
 
         return view('asignacion.edit', compact('asi','gestiones','departamentos', 'docentes', 'materias'));
+    }
+
+    public function editar($id)
+    {
+        $asi = Asignacion::findOrFail($id);
+        $llave = $asi->value("id");
+        $gestiones = Gestion::all();
+        $departamentos = Departamento::all();
+        $docentes = User::where('rolprimario','Docente')->orWhere('rolsecundario','Docente')->get();
+        $materias = Materia::all();
+
+        //dd($llave);
+
+        return view('asignacion.edit', compact('asi','llave','gestiones','departamentos', 'docentes', 'materias'));
+    }
+
+    public function editargrupo(Request $request){
+
+        //dd($request);
+        $llave = $request["llave"];
+        $gestion = $request["gestion"];
+        $departamento = $request["departamento"];
+        $docente = $request["docente"];
+        $nombres = User::where('id',$docente)->select("nombres")->value("nombres");
+        $apellidos = User::where('id',$docente)->select("apellidos")->value("apellidos");
+        $nomdocente = $nombres." ".$apellidos;
+        $materia = $request["materia"];
+        $nommateria = Materia::where('id',$materia)->select("nombremate")->value("nombremate");
+        $grupos = Grupo::where("materia_id", $materia)->get();
+
+        return view('asignacion.editgroup', compact('gestion','departamento', 'docente', 'nomdocente', 'materia', 'nommateria', 'grupos'));
+    }
+
+    public function actualizar(Request $request){
+
+        $asignacion = new Asignacion;
+        $asignacion->gestion = $request->gestion;
+        $asignacion->departamento = $request->departamento;
+        $asignacion->docente = $request->docente;
+        $asignacion->nomdocente = $request->nomdocente;
+        $asignacion->materia = $request->materia;
+        $asignacion->nommateria = $request->nommateria;
+        $asignacion->grupo = $request->grupo;
+
+        $asignacion->save();
+
+
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Registrada asignacion de materia-grupo-horario";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
+        return redirect('asignacion');
+
     }
 
     /**

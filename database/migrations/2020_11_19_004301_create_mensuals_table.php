@@ -34,6 +34,6 @@ class CreateMensualsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asistencia_mensuals');
+        Schema::dropIfExists('mensuals');
     }
 }

@@ -27,6 +27,8 @@ class CreateReposicionsTable extends Migration
             $table->string('observaciones')->nullable();
             $table->string('estado');
             $table->string('label')->nullable();
+            $table->string('grabacion')->nullable();
+            $table->string('tarea')->nullable();
             $table->timestamps();
 
             $table->foreign('ausencia_id')

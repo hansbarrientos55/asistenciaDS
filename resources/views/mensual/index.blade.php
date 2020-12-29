@@ -8,7 +8,9 @@
     <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Registro de asistencia y avance Mensual</h1>
 
     <div>
+        @hasrole('Jefe de Departamento')
         <a href="{{url('mensual/create')}}" class="btn btn-success">Agregar registro de asistencia mensual</a>
+        @endrole
         <br>
         <br>
         

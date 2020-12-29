@@ -111,6 +111,20 @@
                         <input class="form-control" type="file" name="archivo" id="archivo" value="">
                     </div> 
 
+                    @hasrole('Auxiliar de Docencia')
+                    <div class="form-group">
+                        <label for="grabacion" class="control-label">Enlace de la grabacion</label>
+                        <input class="form-control" type="text" name="grabacion" id="grabacion" value="" required>
+                    </div> 
+                    @endrole
+
+                    @hasrole('Auxiliar de Laboratorio')
+                    <div class="form-group">
+                        <label for="tarea" class="control-label">Tarea</label>
+                        <input class="form-control" type="text" name="tarea" id="tarea" value="" required>
+                    </div> 
+                    @endrole
+
                     <input type="submit" class="btn btn-success" value="Guardar">
                     <a class="btn btn-danger" href="{{url('asistencia')}}">Cancelar</a>
                 </form>

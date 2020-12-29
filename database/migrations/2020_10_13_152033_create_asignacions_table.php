@@ -18,7 +18,9 @@ class CreateAsignacionsTable extends Migration
             $table->string('gestion');
             $table->string('departamento');
             $table->integer('docente')->unsigned();
+            $table->string('nomdocente')->nullable();
             $table->string('materia');
+            $table->string('nommateria')->nullable();
             $table->string('grupo');
             $table->timestamps();
 
