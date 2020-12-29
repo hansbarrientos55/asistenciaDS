@@ -24,10 +24,16 @@
     <label >{{$asi->departamento}}</label>
     <br/>
     <label >{{ 'Docente : ' }}</label>
-    <label >{{$asi->docente}}</label>
+    <label >{{$asi->nomdocente}}</label>
+    <br/>
+    <label >{{ 'Auxiliar de Docencia : ' }}</label>
+    <label >{{$asi->nomauxdocencia}}</label>
+    <br/>
+    <label >{{ 'Auxiliar de Laboratorio : ' }}</label>
+    <label >{{$asi->nomauxlabo}}</label>
     <br/>
     <label>{{ 'Materia : ' }}</label>
-    <label >{{$asi->materia}}</label>
+    <label >{{$asi->nommateria}}</label>
     <br/>
     <label>{{ 'Grupos : ' }}</label>
     <label >{{$asi->grupo}}</label>
@@ -60,6 +66,26 @@
         <label for="exampleFormControlSelect1">Docente</label>
         <select name="docente" class="form-control" id="docente">
             @foreach ($docentes as $item)
+                <option value="{{$item->id}}">{{$item->nombres}} {{$item->apellidos}}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Auxiliar de Docencia</label>
+        <select name="auxiliardocencia" class="form-control" id="auxiliardocencia">
+            <option value="">Ninguno</option>
+            @foreach ($auxiliaresdocencia as $item)
+                <option value="{{$item->id}}">{{$item->nombres}} {{$item->apellidos}}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Auxiliar de Laboratorio</label>
+        <select name="auxiliarlabo" class="form-control" id="auxiliarlabo">
+            <option value="">Ninguno</option>
+            @foreach ($auxiliareslabo as $item)
                 <option value="{{$item->id}}">{{$item->nombres}} {{$item->apellidos}}</option>
             @endforeach
         </select>

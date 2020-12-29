@@ -36,6 +36,18 @@
         </div>
 
         <div class="form-group">
+          <label for="exampleFormControlSelect1">Auxiliar de Docencia</label>
+          <input class="form-control" type="text" name="nomauxdocencia" id="nomauxdocencia" value="{{$nomauxdocencia}}" readonly>
+          <input class="form-control" type="hidden" id="auxiliardocencia" name="auxiliardocencia" value="{{$auxiliardocencia}}">
+      </div>
+
+      <div class="form-group">
+          <label for="exampleFormControlSelect1">Auxiliar de Laboratorio</label>
+          <input class="form-control" type="text" name="nomauxlabo" id="nomauxlabo" value="{{$nomauxlabo}}" readonly>
+          <input class="form-control" type="hidden" id="auxiliarlabo" name="auxiliarlabo" value="{{$auxiliarlabo}}">
+      </div>
+
+        <div class="form-group">
         <label for="materia">Materia</label>
         <input class="form-control" type="text" name="nommateria" id="nommateria" value="{{$nommateria}}" readonly required>
         <input class="form-control" type="hidden" id="materia" name="materia" value="{{$materia}}">

@@ -6,7 +6,7 @@
 
     <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Administracion de Asignaciones de Materias - Grupos - Horarios</h1>
 
-    <a href="{{url('asignacion/crear')}}" class="btn btn-success">Asignar materia a docente</a>
+    <a href="{{url('asignacion/crear')}}" class="btn btn-success">Nueva asignacion</a>
 
     <table class="table table-light table-hover">
         <thead class="thead-light">
@@ -15,6 +15,8 @@
             <th scope="col">Gestion</th>
             <th scope="col">Departamento</th>
             <th scope="col">Docente</th>
+            <th scope="col">Auxiliar de Docencia</th>
+            <th scope="col">Auxiliar de Labo</th>
             <th scope="col">Materia</th>
             <th scope="col">Grupo</th>
             <th scope="col">Acciones</th>
@@ -27,6 +29,8 @@
                 <td>{{$item->gestion}}</td>
                 <td>{{$item->departamento}}</td>
                 <td>{{$item->nomdocente}}</td>
+                <td>{{$item->nomauxdocencia}}</td>
+                <td>{{$item->nomauxlabo}}</td>
                 <td>{{$item->nommateria}}</td>
                 <td>{{$item->grupo}}</td>
                 <td>

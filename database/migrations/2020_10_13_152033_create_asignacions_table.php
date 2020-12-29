@@ -19,6 +19,10 @@ class CreateAsignacionsTable extends Migration
             $table->string('departamento');
             $table->integer('docente')->unsigned();
             $table->string('nomdocente')->nullable();
+            $table->integer('auxiliardocencia')->nullable();
+            $table->string('nomauxdocencia')->nullable();
+            $table->integer('auxiliarlabo')->nullable();
+            $table->string('nomauxlabo')->nullable();
             $table->string('materia');
             $table->string('nommateria')->nullable();
             $table->string('grupo');

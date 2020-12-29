@@ -44,6 +44,26 @@
         </div>
 
         <div class="form-group">
+            <label for="exampleFormControlSelect1">Auxiliar de Docencia</label>
+            <select name="auxiliardocencia" class="form-control" id="auxiliardocencia">
+                <option value="">Ninguno</option>
+                @foreach ($auxiliaresdocencia as $item)
+                    <option value="{{$item->id}}">{{$item->nombres}} {{$item->apellidos}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Auxiliar de Laboratorio</label>
+            <select name="auxiliarlabo" class="form-control" id="auxiliarlabo">
+                <option value="">Ninguno</option>
+                @foreach ($auxiliareslabo as $item)
+                    <option value="{{$item->id}}">{{$item->nombres}} {{$item->apellidos}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
         <label for="materia">Materia</label>
         <select name="materia" class="form-control" id="materia">
             @foreach ($materias as $item)

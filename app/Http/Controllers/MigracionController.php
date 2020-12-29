@@ -82,9 +82,9 @@ class MigracionController extends Controller
 
         // Asignaciones
         $asignaciones = Asignacion::all();
-        $salida .= "\n INSERT INTO \"asignacions\" (\"id\", \"gestion\", \"departamento\", \"docente\", \"materia\", \"grupo\", \"created_at\", \"updated_at\") VALUES \n";
+        $salida .= "\n INSERT INTO \"asignacions\" (\"id\", \"gestion\", \"departamento\", \"docente\", \"nomdocente\", \"auxiliardocencia\", \"nomauxdocencia\", \"auxiliarlabo\", \"nomauxlabo\", \"materia\", \"nommateria\", \"grupo\", \"created_at\", \"updated_at\") VALUES \n";
         foreach($asignaciones as $list){
-            $salida .= "(".$list->id.", '".$list->gestion."', '".$list->departamento."', '".$list->docente."', '".$list->materia."', '".$list->grupo."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->gestion."', '".$list->departamento."', '".$list->docente."', '".$list->nomdocente."', '".$list->auxiliardocencia."', '".$list->nomauxdocencia."', '".$list->auxiliarlabo."', '".$list->nomauxlabo."', '".$list->materia."', '".$list->nommateria."', '".$list->grupo."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);

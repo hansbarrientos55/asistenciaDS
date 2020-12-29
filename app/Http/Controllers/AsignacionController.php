@@ -50,8 +50,10 @@ class AsignacionController extends Controller
         $gestiones = Gestion::all();
         $departamentos = Departamento::all();
         $docentes = User::where('rolprimario','Docente')->orWhere('rolsecundario','Docente')->get();
+        $auxiliaresdocencia = User::where('rolprimario','Auxiliar de Docencia')->orWhere('rolsecundario','Auxiliar de Docencia')->get();
+        $auxiliareslabo = User::where('rolprimario','Auxiliar de Laboratorio')->orWhere('rolsecundario','Auxiliar de Laboratorio')->get();
         $materias = Materia::all();
-        return view('asignacion.create', compact('gestiones','departamentos', 'docentes', 'materias'));
+        return view('asignacion.create', compact('gestiones','departamentos', 'docentes', 'auxiliaresdocencia','auxiliareslabo' , 'materias'));
     }
 
     public function grupo(Request $request){
@@ -63,11 +65,22 @@ class AsignacionController extends Controller
         $nombres = User::where('id',$docente)->select("nombres")->value("nombres");
         $apellidos = User::where('id',$docente)->select("apellidos")->value("apellidos");
         $nomdocente = $nombres." ".$apellidos;
+        
+        $auxiliardocencia = $request["auxiliardocencia"];
+        $nomaux = User::where('id',$auxiliardocencia)->select("nombres")->value("nombres");
+        $apeaux = User::where('id',$auxiliardocencia)->select("apellidos")->value("apellidos");
+        $nomauxdocencia = $nomaux." ".$apeaux;
+
+        $auxiliarlabo = $request["auxiliarlabo"];
+        $nomlabo = User::where('id',$auxiliarlabo)->select("nombres")->value("nombres");
+        $apelabo = User::where('id',$auxiliarlabo)->select("apellidos")->value("apellidos");
+        $nomauxlabo = $nomlabo." ".$apelabo;
+        
         $materia = $request["materia"];
         $nommateria = Materia::where('id',$materia)->select("nombremate")->value("nombremate");
         $grupos = Grupo::where("materia_id", $materia)->get();
 
-        return view('asignacion.group', compact('gestion','departamento', 'docente', 'nomdocente', 'materia', 'nommateria', 'grupos'));
+        return view('asignacion.group', compact('gestion','departamento', 'docente', 'nomdocente', 'auxiliardocencia', 'nomauxdocencia', 'auxiliarlabo', 'nomauxlabo', 'materia', 'nommateria', 'grupos'));
     }
 
     public function guardar(Request $request){
@@ -76,7 +89,15 @@ class AsignacionController extends Controller
         $asignacion->gestion = $request->gestion;
         $asignacion->departamento = $request->departamento;
         $asignacion->docente = $request->docente;
+        $asignacion->nomdocente = $request->nomdocente;
+
+        $asignacion->auxiliardocencia = $request->auxiliardocencia;
+        $asignacion->nomauxdocencia = $request->nomauxdocencia;
+        $asignacion->auxiliarlabo = $request->auxiliarlabo;
+        $asignacion->nomauxlabo = $request->nomauxlabo;
+
         $asignacion->materia = $request->materia;
+        $asignacion->nommateria = $request->nommateria;
         $asignacion->grupo = $request->grupo;
 
         $asignacion->save();
@@ -182,11 +203,13 @@ class AsignacionController extends Controller
         $gestiones = Gestion::all();
         $departamentos = Departamento::all();
         $docentes = User::where('rolprimario','Docente')->orWhere('rolsecundario','Docente')->get();
+        $auxiliaresdocencia = User::where('rolprimario','Auxiliar de Docencia')->orWhere('rolsecundario','Auxiliar de Docencia')->get();
+        $auxiliareslabo = User::where('rolprimario','Auxiliar de Laboratorio')->orWhere('rolsecundario','Auxiliar de Laboratorio')->get();
         $materias = Materia::all();
 
         //dd($llave);
 
-        return view('asignacion.edit', compact('asi','llave','gestiones','departamentos', 'docentes', 'materias'));
+        return view('asignacion.edit', compact('asi','llave','gestiones','departamentos', 'docentes', 'auxiliaresdocencia','auxiliareslabo', 'materias'));
     }
 
     public function editargrupo(Request $request){
@@ -199,11 +222,22 @@ class AsignacionController extends Controller
         $nombres = User::where('id',$docente)->select("nombres")->value("nombres");
         $apellidos = User::where('id',$docente)->select("apellidos")->value("apellidos");
         $nomdocente = $nombres." ".$apellidos;
+
+        $auxiliardocencia = $request["auxiliardocencia"];
+        $nomaux = User::where('id',$auxiliardocencia)->select("nombres")->value("nombres");
+        $apeaux = User::where('id',$auxiliardocencia)->select("apellidos")->value("apellidos");
+        $nomauxdocencia = $nomaux." ".$apeaux;
+
+        $auxiliarlabo = $request["auxiliarlabo"];
+        $nomlabo = User::where('id',$auxiliarlabo)->select("nombres")->value("nombres");
+        $apelabo = User::where('id',$auxiliarlabo)->select("apellidos")->value("apellidos");
+        $nomauxlabo = $nomlabo." ".$apelabo;
+
         $materia = $request["materia"];
         $nommateria = Materia::where('id',$materia)->select("nombremate")->value("nombremate");
         $grupos = Grupo::where("materia_id", $materia)->get();
 
-        return view('asignacion.editgroup', compact('llave', 'gestion','departamento', 'docente', 'nomdocente', 'materia', 'nommateria', 'grupos'));
+        return view('asignacion.editgroup', compact('llave', 'gestion','departamento', 'docente', 'nomdocente', 'auxiliardocencia', 'nomauxdocencia', 'auxiliarlabo', 'nomauxlabo', 'materia', 'nommateria', 'grupos'));
     }
 
     public function actualizar(Request $request, $id){
