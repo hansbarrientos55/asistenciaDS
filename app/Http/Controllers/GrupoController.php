@@ -65,16 +65,7 @@ class GrupoController extends Controller
 
     public function almacenar(Request $request,$id)
     {
-        
-        $datos = [
-            'numerogrupo' => 'unique:grupos,numerogrupo',
-        ];
-
-        $mensaje =[
-            'numerogrupo.unique' => 'Este grupo ya existe',
-        ];
-
-        $this->validate($request,$datos,$mensaje);
+    
         
         
         $datosGrupo=request()->except('_token');
