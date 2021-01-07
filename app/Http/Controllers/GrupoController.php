@@ -160,15 +160,7 @@ class GrupoController extends Controller
     public function actualizargrupo(Request $request, $id)
     {
         
-        $datos = [
-            'numerogrupo' => 'unique:grupos,numerogrupo,'.$id,
-        ];
-
-        $mensaje =[
-            'numerogrupo.unique' => 'Este grupo ya existe',
-        ];
-
-        $this->validate($request,$datos,$mensaje);
+        
         
         $datosGrupo=request()->except(['_token','_method']);
         Grupo::where('id','=',$id)->update($datosGrupo);
