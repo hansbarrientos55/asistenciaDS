@@ -14,16 +14,37 @@
 <form action="{{ url('/materia') }}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
     <label for="nombremate" class="control-label">{{ 'Nombre' }}</label>
-    <input class="form-control" type="text" name="nombremate" id="nombremate" value="" required>
+    <input class="form-control" type="text" name="nombremate" id="nombremate" value="{{ old('nombremate') }}" required>
+    @if($errors->first('nombremate'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('nombremate')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     <label for="codigomate" class="control-label">{{ 'Codigo' }}</label>
-    <input class="form-control" type="text" name="codigomate" id="codigomate" value="" required>
+    <input class="form-control" type="text" name="codigomate" id="codigomate" value="{{ old('codigomate') }}" required>
+    @if($errors->first('codigomate'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('codigomate')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     <label for="descripcionmate" class="control-label">{{ 'Descripcion' }}</label>
-    <input class="form-control" type="text" name="descripcionmate" id="descripcionmate" value="" required>
+    <input class="form-control" type="text" name="descripcionmate" id="descripcionmate" value="{{ old('descripcionmate') }}" required>
+    @if($errors->first('descripcionmate'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('descripcionmate')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     <label for="nivelmate" class="control-label">{{ 'Nivel' }}</label>
-    <input class="form-control" type="text" name="nivelmate" id="nivelmate" value="" required>
+    <input class="form-control" type="text" name="nivelmate" id="nivelmate" value="{{ old('nivelmate') }}" required>
     <br/>
     <div class="form-group">
         <label for="exampleFormControlSelect1" class="control-label">Departamento</label>

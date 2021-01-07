@@ -16,6 +16,13 @@
     <div class="form-group">
     <label for="name" class="control-label">{{ 'Titulo' }}</label>
     <input class="form-control" type="text" name="name" id="name" value="{{$ro->name}}" required>
+    @if($errors->first('name'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('name')}} </li>
+      </ul>
+    </div>
+    @endif      
     </div>
 
     <div class="form-group">

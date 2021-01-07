@@ -44,6 +44,18 @@ class RangoController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $datos = [
+            'name' => 'unique:roles,name',
+        ];
+
+        $mensaje =[
+            'name.unique' => 'Este rol ya existe',
+        ];
+
+        $this->validate($request,$datos,$mensaje);
+
+        
         $datosRol=request()->except('_token');
        
         $role = Role::create(['name' => $datosRol['name']]);
@@ -118,6 +130,17 @@ class RangoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $datos = [
+            'name' => 'unique:roles,name,'.$id,
+        ];
+
+        $mensaje =[
+            'name.unique' => 'Este rol ya existe',
+        ];
+
+        $this->validate($request,$datos,$mensaje);
+
+        
         $role = Role::findOrFail($id);
         $antigua= $role->getAllPermissions();
 

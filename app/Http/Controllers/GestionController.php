@@ -41,6 +41,9 @@ class GestionController extends Controller
      */
     public function store(Request $request)
     {
+        
+
+        
         $datosGestion=request()->except('_token');
         $datosGestion['gestion']=$datosGestion['periodogestion'].'-'.$datosGestion['añogestion'];
         Gestion::insert($datosGestion);

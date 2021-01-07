@@ -14,10 +14,10 @@ class CreateCarrerasTable extends Migration
     public function up()
     {
         Schema::create('carreras', function (Blueprint $table) {
-            $table->increments('id')->generatedAs('start with 50 increment by 1');
-            $table->string('codigocarrera');
-            $table->string('nombrecarrera');
-            $table->string('descripcioncarrera');
+            $table->increments('id')->generatedAs('start with 75 increment by 1');
+            $table->string('codigocarrera')->unique();
+            $table->string('nombrecarrera')->unique();
+            $table->string('descripcioncarrera')->unique();
             $table->string('estaactivo')->default('Activo');
             $table->unsignedInteger('facultad_id')->default('0');
             $table->timestamps();

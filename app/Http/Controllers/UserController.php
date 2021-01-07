@@ -13,6 +13,7 @@ use Spatie\Permission\Models\Role;
 use App\Bitacora;
 use Auth;
 use Carbon\Carbon;
+use App\Http\Requests\CrearUsuarioRequest;
 
 class UserController extends Controller
 {
@@ -47,17 +48,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-         //$datosDepartamento=request()->all();
 
-         //$datosUsuario=request()->except('_token');
-         //$datosUsuario['password']= Hash::make($request['contrasenia']);
+        $datos = [
+            'cedula' => 'unique:users,cedula',
+            'username' => 'unique:users,username',
+            'emailprincipal' => 'unique:users,emailprincipal',
+            'telefonoprincipal' => 'unique:users,telefonoprincipal',
+        ];
 
-         //$auxRolPrimario = Rango::findOrFail($request['rolprimario']); 
-         //$datosUsuario['rolprimariotexto']= $auxRolPrimario['titulo'];
-         //$auxRolSecundario = Rango::findOrFail($request['rolsecundario']);
-         //$datosUsuario['rolsecundariotexto']= $auxRolSecundario['titulo'];
+        $mensaje =[
+            'cedula.unique' => 'Esta cedula de identidad ya existe',
+            'username.unique' => 'Este codigo SIS ya existe',
+            'emailprincipal.unique' => 'Este email principal ya existe',
+            'telefonoprincipal.unique' => 'Este telefono principal ya existe',
+        ];
 
-         //User::insert($datosUsuario);
+        $this->validate($request,$datos,$mensaje);
+
+        
 
          $usuario = new User;
          $usuario->nombres = $request->nombres;
@@ -80,6 +88,9 @@ class UserController extends Controller
             $usuario->assignRole($request->rolprimario);
             $usuario->assignRole($request->rolsecundario);
          }
+
+
+
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();
@@ -137,15 +148,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //$datosUsuario=request()->except(['_token','_method']);
-        //$datosUsuario['password']= Hash::make($request['contrasenia']);
+        
+        $datos = [
+            'cedula' => 'unique:users,cedula,'.$id,
+            'username' => 'unique:users,username,'.$id,
+            'emailprincipal' => 'unique:users,emailprincipal,'.$id,
+            'telefonoprincipal' => 'unique:users,telefonoprincipal,'.$id,
+        ];
 
-        //$auxRolPrimario = Rango::findOrFail($request['rolprimario']); 
-        //$datosUsuario['rolprimariotexto']= $auxRolPrimario['titulo'];
-        //$auxRolSecundario = Rango::findOrFail($request['rolsecundario']);
-        //$datosUsuario['rolsecundariotexto']= $auxRolSecundario['titulo'];
+        $mensaje =[
+            'cedula.unique' => 'Esta cedula de identidad ya existe',
+            'username.unique' => 'Este codigo SIS ya existe',
+            'emailprincipal.unique' => 'Este email principal ya existe',
+            'telefonoprincipal.unique' => 'Este telefono principal ya existe',
+        ];
 
-        //User::where('id','=',$id)->update($datosUsuario);
+        $this->validate($request,$datos,$mensaje);
+
+
         $usuario = User::findOrFail($id);
         $rolprimarioantiguo = $usuario->rolprimario;
         $rolsecundarioantiguo = $usuario->rolsecundario;

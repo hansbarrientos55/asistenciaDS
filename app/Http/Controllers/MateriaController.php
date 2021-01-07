@@ -43,7 +43,19 @@ class MateriaController extends Controller
      */
     public function store(Request $request)
     {
-        //$datosDepartamento=request()->all();
+        $datos = [
+            'codigomate' => 'unique:materias,codigomate',
+            'nombremate' => 'unique:materias,nombremate',
+            'descripcionmate' => 'unique:materias,descripcionmate',
+        ];
+
+        $mensaje =[
+            'codigomate.unique' => 'Este codigo ya existe',
+            'nombremate.unique' => 'Esta materia ya existe',
+            'descripcionmate.unique' => 'Esta descripcion ya existe',
+        ];
+
+        $this->validate($request,$datos,$mensaje);
 
         $datosMateria=request()->except('_token');
         Materia::insert($datosMateria);
@@ -104,6 +116,21 @@ class MateriaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        $datos = [
+            'codigomate' => 'unique:materias,codigomate,'.$id,
+            'nombremate' => 'unique:materias,nombremate,'.$id,
+            'descripcionmate' => 'unique:materias,descripcionmate,'.$id,
+        ];
+
+        $mensaje =[
+            'codigomate.unique' => 'Este codigo ya existe',
+            'nombremate.unique' => 'Esta materia ya existe',
+            'descripcionmate.unique' => 'Esta descripcion ya existe',
+        ];
+
+        $this->validate($request,$datos,$mensaje);
+        
         $datosMateria=request()->except(['_token','_method']);
         Materia::where('id','=',$id)->update($datosMateria);
 

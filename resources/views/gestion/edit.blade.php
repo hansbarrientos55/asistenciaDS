@@ -10,7 +10,7 @@
                 <div class="card" style="width: 24rem; background-color: #a3bcc9;">
 
 
-    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Editar departamento</h1>
+    <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Editar gestion</h1>
 
 <form action="{{url('/gestion/'.$ges->id)}}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}

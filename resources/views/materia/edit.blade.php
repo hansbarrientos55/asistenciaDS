@@ -16,12 +16,33 @@
     {{method_field('PATCH')}}
     <label for="nombremate" class="control-label">{{ 'Nombre' }}</label>
     <input class="form-control" type="text" name="nombremate" id="nombremate" value="{{$mate->nombremate}}" required>
+    @if($errors->first('nombremate'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('nombremate')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     <label for="codigomate" class="control-label">{{ 'Codigo' }}</label>
     <input class="form-control" type="text" name="codigomate" id="codigomate" value="{{$mate->codigomate}}" required>
+    @if($errors->first('codigomate'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('codigomate')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     <label for="descripcionmate" class="control-label">{{ 'Descripcion' }}</label>
     <input class="form-control" type="text" name="descripcionmate" id="descripcionmate" value="{{$mate->descripcionmate}}" required>
+    @if($errors->first('descripcionmate'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('descripcionmate')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     <label for="nivelmate" class="control-label">{{ 'Nivel' }}</label>
     <input class="form-control" type="text" name="nivelmate" id="nivelmate" value="{{$mate->nivelmate}}" required>

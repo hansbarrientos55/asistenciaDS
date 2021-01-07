@@ -15,10 +15,24 @@
 <form action="{{ url('/departamento') }}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
     <label for="nombredepa">{{ 'Nombre' }}</label>
-    <input class="form-control" type="text" name="nombredepa" id="nombredepa" value="" required>
+    <input class="form-control" type="text" name="nombredepa" id="nombredepa" value="{{ old('nombredepa') }}" required>
+    @if($errors->first('nombredepa'))
+     <div class="alert alert-danger" role ="alert" >
+       <ul>
+                <li>{{ $errors->first('nombredepa')}} </li>
+       </ul>
+     </div>
+     @endif
     <br/>
     <label for="descripciondepa">{{ 'Descripcion' }}</label>
-    <input class="form-control" type="text" name="descripciondepa" id="descripciondepa" value="" required>
+    <input class="form-control" type="text" name="descripciondepa" id="descripciondepa" value="{{ old('descripciondepa') }}" required>
+    @if($errors->first('descripciondepa'))
+     <div class="alert alert-danger" role ="alert" >
+       <ul>
+                <li>{{ $errors->first('descripciondepa')}} </li>
+       </ul>
+     </div>
+     @endif
     <br/>
     <div class="form-group">
         <label for="exampleFormControlSelect1">Facultad</label>

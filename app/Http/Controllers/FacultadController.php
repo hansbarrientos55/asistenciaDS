@@ -9,6 +9,7 @@ use App\Bitacora;
 use Auth;
 use Carbon\Carbon;
 use App\User;
+use Illuminate\Validation\Rule;
 
 class FacultadController extends Controller
 {
@@ -41,7 +42,20 @@ class FacultadController extends Controller
      */
     public function store(Request $request)
     {
-        //$datosDepartamento=request()->all();
+        
+        $datos = [
+            'nombrefacu' => 'unique:facultads,nombrefacu',
+            'descripcionfacu' => 'unique:facultads,descripcionfacu',
+        ];
+
+        $mensaje =[
+            'nombrefacu.unique' => 'Esta facultad ya existe',
+            'descripcionfacu.unique' => 'Esta descripcion ya existe',
+        ];
+
+        $this->validate($request,$datos,$mensaje);
+
+
 
         $datosFacultad=request()->except('_token');
         Facultad::insert($datosFacultad);
@@ -101,6 +115,20 @@ class FacultadController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        $datos = [
+            'nombrefacu' => 'unique:facultads,nombrefacu,'.$id,
+            'descripcionfacu' => 'unique:facultads,descripcionfacu,'.$id,
+        ];
+
+        $mensaje =[
+            'nombrefacu.unique' => 'Esta facultad ya existe',
+            'descripcionfacu.unique' => 'Esta descripcion ya existe',
+        ];
+
+        $this->validate($request,$datos,$mensaje);
+        
+        
         $datosFacultad=request()->except(['_token','_method']);
         Facultad::where('id','=',$id)->update($datosFacultad);
 

@@ -17,12 +17,33 @@
     {{method_field('PATCH')}}
     <label for="nombrecarrera" class="control-label">{{ 'Nombre' }}</label>
     <input class="form-control" type="text" name="nombrecarrera" id="nombrecarrera" value="{{$carre->nombrecarrera}}" required>
+    @if($errors->first('nombrecarrera'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('nombrecarrera')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     <label for="codigocarrera" class="control-label">{{ 'Codigo' }}</label>
     <input class="form-control" type="text" name="codigocarrera" id="codigocarrera" value="{{$carre->codigocarrera}}" required>
+    @if($errors->first('codigocarrera'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('codigocarrera')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     <label for="descripcioncarrera" class="control-label">{{ 'Descripcion' }}</label>
     <input class="form-control" type="text" name="descripcioncarrera" id="descripcioncarrera" value="{{$carre->descripcioncarrera}}" required>
+    @if($errors->first('descripcioncarrera'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('descripcioncarrera')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     <div class="form-group">
         <label for="exampleFormControlSelect1" class="control-label">Facultad</label>

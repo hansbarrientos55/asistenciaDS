@@ -16,9 +16,23 @@
     {{method_field('PATCH')}}
     <label for="nombrefacu" class="control-label">{{ 'Nombre' }}</label>
     <input class="form-control" type="text" name="nombrefacu" id="nombrefacu" value="{{$facu->nombrefacu}}" required>
+    @if($errors->first('nombrefacu'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('nombrefacu')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     <label for="descripcionfacu" class="control-label">{{ 'Descripcion' }}</label>
     <input class="form-control" type="text" name="descripcionfacu" id="descripcionfacu" value="{{$facu->descripcionfacu}}" required>
+    @if($errors->first('descripcionfacu'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('descripcionfacu')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     
 

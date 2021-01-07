@@ -54,6 +54,8 @@
                                 <button type="reset" class="btn btn-secondary">
                                     {{ __('Limpiar campos') }}
                                 </button>
+
+                                <a class="btn btn-danger" href="{{url('/')}}">Inicio</a>
                             </div>
                         </div>
                     </form>

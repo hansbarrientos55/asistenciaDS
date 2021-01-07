@@ -15,8 +15,8 @@ class CreateFacultadsTable extends Migration
     {
         Schema::create('facultads', function (Blueprint $table) {
             $table->increments('id')->generatedAs('start with 50 increment by 1');
-            $table->string('nombrefacu');
-            $table->string('descripcionfacu');
+            $table->string('nombrefacu')->unique();
+            $table->string('descripcionfacu')->unique();
             $table->string('estaactivo')->default('Activo');
             $table->timestamps();
         });

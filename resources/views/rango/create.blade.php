@@ -15,8 +15,14 @@
 {{ csrf_field() }}
     <div class="form-group">
         <label for="name" class="control-label">{{ 'Titulo' }}</label>
-        <input class="form-control" type="text" name="name" id="name" value="" required>
-        
+        <input class="form-control" type="text" name="name" id="name" value="{{ old('name') }}" required>
+        @if($errors->first('name'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('name')}} </li>
+      </ul>
+    </div>
+    @endif
     </div>
 
     <div class="form-group">

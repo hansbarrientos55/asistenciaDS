@@ -15,13 +15,34 @@
 <form action="{{ url('/carrera') }}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
     <label for="nombrecarrera" class="control-label">{{ 'Nombre' }}</label>
-    <input class="form-control" type="text" name="nombrecarrera" id="nombrecarrera" value="" required>
+    <input class="form-control" type="text" name="nombrecarrera" id="nombrecarrera" value="{{ old('nombrecarrera') }}" required>
+    @if($errors->first('nombrecarrera'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('nombrecarrera')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     <label for="codigocarrera" class="control-label">{{ 'Codigo' }}</label>
-    <input class="form-control" type="text" name="codigocarrera" id="codigocarrera" value="" required>
+    <input class="form-control" type="text" name="codigocarrera" id="codigocarrera" value="{{ old('codigocarrera') }}" required>
+    @if($errors->first('codigocarrera'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('codigocarrera')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     <label for="descripcioncarrera" class="control-label">{{ 'Descripcion' }}</label>
-    <input class="form-control" type="text" name="descripcioncarrera" id="descripcioncarrera" value="" required>
+    <input class="form-control" type="text" name="descripcioncarrera" id="descripcioncarrera" value="{{ old('descripcioncarrera') }}" required>
+    @if($errors->first('descripcioncarrera'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('descripcioncarrera')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>
     <div class="form-group">
         <label for="exampleFormControlSelect1" class="control-label">Facultad</label>

@@ -9,15 +9,24 @@
             <div class="col-md-8">
                 <div class="card" style="width: 24rem; background-color: #a3bcc9;">
 
-    <h2 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Nuevo departamento</h2>
+    <h2 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Nueva gestion</h2>
+
+    @if($errors->first('gestion'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('gestion')}} </li>
+      </ul>
+    </div>
+    @endif
+
 
 <form action="{{ url('/gestion') }}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
     <label for="periodogestion">{{ 'Periodo' }}</label>
-    <input class="form-control" type="text" name="periodogestion" id="periodogestion" value="" required>
+    <input class="form-control" type="text" name="periodogestion" id="periodogestion" value="{{ old('periodogestion') }}" required>
     <br/>
     <label for="añogestion">{{ 'Año' }}</label>
-    <input class="form-control" type="text" name="añogestion" id="añogestion" value="" required>
+    <input class="form-control" type="text" name="añogestion" id="añogestion" value="{{ old('añogestion') }}" required>
     <br/>
 
     <div class="form-group">

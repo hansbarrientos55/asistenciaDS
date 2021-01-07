@@ -19,4 +19,9 @@ class PrincipalController extends Controller
 
         return view('auth.principal');
     }
+
+    function inicio(){
+
+        return view('welcome');
+    }
 }

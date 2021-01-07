@@ -15,8 +15,8 @@ class CreateDepartamentosTable extends Migration
     {
         Schema::create('departamentos', function (Blueprint $table) {
             $table->increments('id')->generatedAs('start with 50 increment by 1');
-            $table->string('nombredepa');
-            $table->string('descripciondepa');
+            $table->string('nombredepa')->unique();
+            $table->string('descripciondepa')->unique();
             $table->string('estaactivo')->default('Activo');
             $table->unsignedInteger('facultad_id')->default('0');
             $table->timestamps();

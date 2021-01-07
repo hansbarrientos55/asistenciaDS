@@ -15,21 +15,28 @@
             <div class="col-md-4"></div>
             <div class="form-group col-md-4">
               <label for="Title">Titulo</label>
-              <input type="text" class="form-control" name="title">
+              <input type="text" class="form-control" name="title" value="{{ old('title') }}" required>
+              @if($errors->first('title'))
+              <div class="alert alert-danger" role ="alert" >
+                <ul>
+                        <li>{{ $errors->first('title')}} </li>
+                </ul>
+              </div>
+              @endif
             </div>
           </div>
           <div class="row">
             <div class="col-md-4"></div>
             <div class="form-group col-md-4">
               <label> Fecha de inicio </label>  
-              <input class="form-control"  type="date" id="start" name="start">   
+              <input class="form-control"  type="date" id="start" name="start" value="{{ old('start') }}" required>   
            </div>
           </div>
           <div class="row">
             <div class="col-md-4"></div>
             <div class="form-group col-md-4">
               <label> Fecha de finalizacion </label>  
-              <input class="form-control"  type="date" id="end" name="end">   
+              <input class="form-control"  type="date" id="end" name="end" value="{{ old('end') }}" required>   
            </div>
           </div>
           <div class="row">

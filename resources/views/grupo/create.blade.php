@@ -13,7 +13,14 @@
 <form action="{{ url('/grupo/store/'.$id) }}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
     <label for="numerogrupo" class="control-label">{{ 'Numero' }}</label>
-    <input class="form-control" type="text" name="numerogrupo" id="numerogrupo" value="" required>
+    <input class="form-control" type="text" name="numerogrupo" id="numerogrupo" value="{{ old('numerogrupo') }}" required>
+    @if($errors->first('numerogrupo'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('numerogrupo')}} </li>
+      </ul>
+    </div>
+    @endif
     <br/>  
 
     <div class="form-group">

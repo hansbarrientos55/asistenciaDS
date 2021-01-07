@@ -15,9 +15,9 @@ class CreateMateriasTable extends Migration
     {
         Schema::create('materias', function (Blueprint $table) {
             $table->increments('id')->generatedAs('start with 50 increment by 1');
-            $table->string('codigomate');
-            $table->string('nombremate');
-            $table->string('descripcionmate');
+            $table->string('codigomate')->unique();
+            $table->string('nombremate')->unique();
+            $table->string('descripcionmate')->unique();
             $table->string('nivelmate');
             $table->string('estaactivo')->default('Activo');
             $table->unsignedInteger('departamento_id')->default('0'); // Relación con categorias

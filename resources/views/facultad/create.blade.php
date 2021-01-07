@@ -16,13 +16,26 @@
 {{ csrf_field() }}
 <div class="form-group">
     <label for="nombrefacu" class="control-label">{{ 'Nombre' }}</label>
-    <input class="form-control" type="text" name="nombrefacu" id="nombrefacu" value="" required>
+    <input class="form-control" type="text" name="nombrefacu" id="nombrefacu" value="{{ old('nombrefacu') }}" required>
+    @if($errors->first('nombrefacu'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('nombrefacu')}} </li>
+      </ul>
+    </div>
+    @endif
 </div>  
 
     <div class="form-group">
     <label for="descripciondfacu" class="control-label">{{ 'Descripcion' }}</label>
-    <input class="form-control" type="text" name="descripcionfacu" id="descripcionfacu" value="" required>
-
+    <input class="form-control" type="text" name="descripcionfacu" id="descripcionfacu" value="{{ old('descripcionfacu') }}" required>
+    @if($errors->first('descripcionfacu'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+               <li>{{ $errors->first('descripcionfacu')}} </li>
+      </ul>
+    </div>
+    @endif
 </div>  
 
 <div class="form-group">

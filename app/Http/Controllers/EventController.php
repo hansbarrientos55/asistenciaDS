@@ -57,6 +57,7 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+        
         $event= new Event();
         $event->title=$request->title;
         $event->start= substr($request->start,0,10);

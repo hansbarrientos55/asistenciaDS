@@ -43,6 +43,20 @@ class DepartamentoController extends Controller
      */
     public function store(Request $request)
     {
+    
+
+        $datos = [
+            'nombredepa' => 'unique:departamentos,nombredepa',
+            'descripciondepa' => 'unique:departamentos,descripciondepa',
+        ];
+
+        $mensaje =[
+            'nombredepa.unique' => 'Este departamento ya existe',
+            'descripciondepa.unique' => 'Esta descripcion ya existe',
+        ];
+
+        $this->validate($request,$datos,$mensaje);
+        
         //$datosDepartamento=request()->all();
 
         $datosDepartamento=request()->except('_token');
@@ -105,6 +119,19 @@ class DepartamentoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $datos = [
+            'nombredepa' => 'unique:departamentos,nombredepa,'.$id,
+            'descripciondepa' => 'unique:departamentos,descripciondepa,'.$id,
+        ];
+
+        $mensaje =[
+            'nombredepa.unique' => 'Este departamento ya existe',
+            'descripciondepa.unique' => 'Esta descripcion ya existe',
+        ];
+
+        $this->validate($request,$datos,$mensaje);
+        
+        
         $datosDepartamento=request()->except(['_token','_method']);
         Departamento::where('id','=',$id)->update($datosDepartamento);
 

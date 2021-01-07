@@ -23,12 +23,19 @@
 
     <div class="form-group">
     <label for="apellidos" class="control-label">{{ 'Apellidos' }}</label>
-    <input class="form-control" type="text" name="apellidos" id="codigomate" value="{{$usu->apellidos}}" required>
+    <input class="form-control" type="text" name="apellidos" id="apellidos" value="{{$usu->apellidos}}" required>
     </div>
 
     <div class="form-group">
     <label for="cedula" class="control-label">{{ 'Cedula de identidad' }}</label>
     <input class="form-control" type="text" name="cedula" id="cedula" value="{{$usu->cedula}}" required>
+    @if($errors->first('cedula'))
+     <div class="alert alert-danger" role ="alert" >
+       <ul>
+                <li>{{ $errors->first('cedula')}} </li>
+       </ul>
+     </div>
+     @endif
     </div>
 
     <div class="form-group">
@@ -49,6 +56,13 @@
     <div class="form-group">
     <label for="username" class="control-label">{{ 'Codigo SIS' }}</label>
     <input class="form-control" type="string" name="username" id="username" value="{{$usu->username}}" required>
+    @if($errors->first('username'))
+     <div class="alert alert-danger" role ="alert" >
+       <ul>
+                <li>{{ $errors->first('username')}} </li>
+       </ul>
+     </div>
+     @endif
     </div>
 
     <div class="form-group">
@@ -59,6 +73,13 @@
     <div class="form-group">
         <label for="emailprincipal" class="control-label">{{ 'Email principal' }}</label>
         <input class="form-control" type="email" name="emailprincipal" id="emailprincipal" value="{{$usu->emailprincipal}}" required>
+        @if($errors->first('emailprincipal'))
+     <div class="alert alert-danger" role ="alert" >
+       <ul>
+                <li>{{ $errors->first('emailprincipal')}} </li>
+       </ul>
+     </div>
+     @endif
     </div>
 
     <div class="form-group">
@@ -69,6 +90,13 @@
     <div class="form-group">
         <label for="telefonoprincipal" class="control-label">{{ 'Telefono principal' }}</label>
         <input class="form-control" type="number" name="telefonoprincipal" id="telefonoprincipal" value="{{$usu->telefonoprincipal}}" required>
+        @if($errors->first('telefonoprincipal'))
+     <div class="alert alert-danger" role ="alert" >
+       <ul>
+                <li>{{ $errors->first('telefonoprincipal')}} </li>
+       </ul>
+     </div>
+     @endif
     </div>
 
     <div class="form-group">

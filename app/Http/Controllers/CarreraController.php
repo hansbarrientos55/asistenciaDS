@@ -43,6 +43,22 @@ class CarreraController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $datos = [
+            'codigocarrera' => 'unique:carreras,codigocarrera',
+            'nombrecarrera' => 'unique:carreras,nombrecarrera',
+            'descripcioncarrera' => 'unique:carreras,descripcioncarrera',
+        ];
+
+        $mensaje =[
+            'codigocarrera.unique' => 'Este codigo ya existe',
+            'nombrecarrera.unique' => 'Este nombre ya existe',
+            'descripcioncarrera.unique' => 'Esta descripcion ya existe',
+        ];
+
+        $this->validate($request,$datos,$mensaje);
+        
+        
         $datosCarrera=request()->except('_token');
         Carrera::insert($datosCarrera);
 
@@ -103,6 +119,21 @@ class CarreraController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        $datos = [
+            'codigocarrera' => 'unique:carreras,codigocarrera,'.$id,
+            'nombrecarrera' => 'unique:carreras,nombrecarrera,'.$id,
+            'descripcioncarrera' => 'unique:carreras,descripcioncarrera,'.$id,
+        ];
+
+        $mensaje =[
+            'codigocarrera.unique' => 'Este codigo ya existe',
+            'nombrecarrera.unique' => 'Este nombre ya existe',
+            'descripcioncarrera.unique' => 'Esta descripcion ya existe',
+        ];
+
+        $this->validate($request,$datos,$mensaje);
+        
         $datosCarrera=request()->except(['_token','_method']);
         Carrera::where('id','=',$id)->update($datosCarrera);
 

@@ -17,9 +17,23 @@
     {{method_field('PATCH')}}
     <label for="nombredepa">{{ 'Nombre' }}</label>
     <input class="form-control" type="text" name="nombredepa" id="nombredepa" value="{{$depa->nombredepa}}" required>
+    @if($errors->first('nombredepa'))
+     <div class="alert alert-danger" role ="alert" >
+       <ul>
+                <li>{{ $errors->first('nombredepa')}} </li>
+       </ul>
+     </div>
+     @endif
     <br/>
     <label for="descripciondepa">{{ 'Descripcion' }}</label>
     <input class="form-control" type="text" name="descripciondepa" id="descripciondepa" value="{{$depa->descripciondepa}}" required>
+    @if($errors->first('descripciondepa'))
+     <div class="alert alert-danger" role ="alert" >
+       <ul>
+                <li>{{ $errors->first('descripciondepa')}} </li>
+       </ul>
+     </div>
+     @endif
     <br/>
     <div class="form-group">
         <label for="exampleFormControlSelect1">Facultad</label>
