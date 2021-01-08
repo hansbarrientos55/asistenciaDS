@@ -22,7 +22,8 @@ class UserImport implements ToModel, WithHeadingRow, WithValidation
          $usuario->nombres = $row['nombres'];
          $usuario->apellidos = $row['apellidos'];
          $usuario->cedula = $row['cedula'];
-         $usuario->fechanacimiento = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fechanacimiento']);
+         //$usuario->fechanacimiento = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fechanacimiento']);
+         $usuario->fechanacimiento = $row['fechanacimiento'];
          $usuario->direccion = $row['direccion'];
          $usuario->profesion = $row['profesion'];
          $usuario->username = $row['username'];
@@ -53,7 +54,6 @@ class UserImport implements ToModel, WithHeadingRow, WithValidation
             'profesion' => 'required',
             'username' => ['required', 'unique:users'],
             'contrasenia' => 'required',
-            'password' => 'required',
             'emailprincipal' => ['required', 'unique:users'],
             'emailsecundario' => 'required',
             'telefonoprincipal' => ['required', 'unique:users'],
@@ -76,7 +76,6 @@ class UserImport implements ToModel, WithHeadingRow, WithValidation
             'profesion.required' => 'Se encontro un dato vacio en :attribute, fila :row, no se añadio a nuestros registros por que el sistema no acepta datos NULL',
             'username.required' => 'Se encontro un dato vacio en :attribute, fila :row, no se añadio a nuestros registros por que el sistema no acepta datos NULL',
             'contrasenia.required' => 'Se encontro un dato vacio en :attribute, fila :row, no se añadio a nuestros registros por que el sistema no acepta datos NULL',
-            'password.required' => 'Se encontro un dato vacio en :attribute, fila :row, no se añadio a nuestros registros por que el sistema no acepta datos NULL',
             'emailprincipal.required' => 'Se encontro un dato vacio en :attribute, fila :row, no se añadio a nuestros registros por que el sistema no acepta datos NULL',
             'emailsecundario.required' => 'Se encontro un dato vacio en :attribute, fila :row, no se añadio a nuestros registros por que el sistema no acepta datos NULL',
             'telefonoprincipal.required' => 'Se encontro un dato vacio en :attribute, fila :row, no se añadio a nuestros registros por que el sistema no acepta datos NULL',

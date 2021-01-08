@@ -10,6 +10,9 @@ use App\Bitacora;
 use Auth;
 use Carbon\Carbon;
 use App\User;
+use App\Grupo;
+use App\Horario;
+use App\Asignacion;
 
 class MateriaController extends Controller
 {
@@ -57,8 +60,18 @@ class MateriaController extends Controller
 
         $this->validate($request,$datos,$mensaje);
 
-        $datosMateria=request()->except('_token');
-        Materia::insert($datosMateria);
+        //$datosMateria=request()->except('_token');
+        //Materia::insert($datosMateria);
+        
+        $datos = new Materia;
+        $datos->codigomate = $request->codigomate;
+        $datos->nombremate = $request->nombremate;
+        $datos->descripcionmate = $request->descripcionmate;
+        $datos->nivelmate = $request->nivelmate;
+        $datos->estaactivo = $request->estaactivo;
+        $datos->departamento_id = $request->departamento_id;
+        $datos->departamento_nombre = Departamento::where('id',$request->departamento_id)->value('nombredepa');
+        $datos->save();
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();
@@ -131,8 +144,18 @@ class MateriaController extends Controller
 
         $this->validate($request,$datos,$mensaje);
         
-        $datosMateria=request()->except(['_token','_method']);
-        Materia::where('id','=',$id)->update($datosMateria);
+        //$datosMateria=request()->except(['_token','_method']);
+        //Materia::where('id','=',$id)->update($datosMateria);
+
+        $datos = Materia::findOrFail($id);
+        $datos->codigomate = $request->codigomate;
+        $datos->nombremate = $request->nombremate;
+        $datos->descripcionmate = $request->descripcionmate;
+        $datos->nivelmate = $request->nivelmate;
+        $datos->estaactivo = $request->estaactivo;
+        $datos->departamento_id = $request->departamento_id;
+        $datos->departamento_nombre = Departamento::where('id',$request->departamento_id)->value('nombredepa');
+        $datos->save();
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();
@@ -164,6 +187,26 @@ class MateriaController extends Controller
     public function destroy(Request $request, $id)
     {
         Materia::destroy($id);
+
+        $grupos = Grupo::where('materia_id',$id)->get();
+        foreach($grupos as $item){
+            $cod = $item->id;
+            Grupo::destroy($cod);
+            $horarios = Horario::where('grupo_id',$cod)->get();
+            foreach($horarios as $ele){
+                $moh = $ele->id;
+                Horario::destroy($moh);
+            }
+        }
+
+        $asignaciones = Asignacion::where('materia',$id)->get();
+        foreach($asignaciones as $item){
+            $ind = $item->id;
+            $asigna = Asignacion::findOrFail($ind);
+            $asigna->materia = 0;
+            $asigna->nommateria = '-Ninguna-';
+            $asigna->save();
+        }
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();

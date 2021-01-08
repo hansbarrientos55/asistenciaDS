@@ -16,6 +16,7 @@
             <th>Id </th>
             <th>Nombre</th>
             <th>Descripcion</th>
+            <th>Facultad</th>
             <th>Activo</th>
             <th>Acciones</th>
             
@@ -30,6 +31,7 @@
                 <td>{{$item->id}}</td>
                 <td>{{$item->nombredepa}}</td>
                 <td>{{$item->descripciondepa}}</td>
+                <td>{{$item->facultad_nombre}}</td>
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     

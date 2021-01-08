@@ -10,6 +10,8 @@ use Auth;
 use Carbon\Carbon;
 use App\User;
 use Illuminate\Validation\Rule;
+use App\Departamento;
+use App\Carrera;
 
 class FacultadController extends Controller
 {
@@ -20,8 +22,9 @@ class FacultadController extends Controller
      */
     public function index()
     {
-        $datos['facultades']=Facultad::paginate(20);
-        return view('facultad.index', $datos);
+        //$datos['facultades']=Facultad::paginate(20);
+        $facultades = Facultad::where('id','!=','0')->get();
+        return view('facultad.index',compact('facultades'));
     }
 
     /**
@@ -162,6 +165,20 @@ class FacultadController extends Controller
     public function destroy(Request $request, $id)
     {
         Facultad::destroy($id);
+
+        $depas = Departamento::where('facultad_id',$id)->get();
+        foreach($depas as $item){
+            $item->facultad_id = '0';
+            $item->facultad_nombre = '-Ninguno-';
+            $item->save();
+        }
+
+        $carreras = Carrera::where('facultad_id',$id)->get();
+        foreach($carreras as $item){
+            $item->facultad_id = '0';
+            $item->facultad_nombre = '-Ninguno-';
+            $item->save();
+        }
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();

@@ -15,6 +15,7 @@
             <th> Id </th>
             <th>Hora</th>
             <th>Dia</th>
+            <th>Acciones</th>
             
         </tr>
     </thead>

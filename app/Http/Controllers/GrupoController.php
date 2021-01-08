@@ -10,6 +10,7 @@ use App\Bitacora;
 use Auth;
 use Carbon\Carbon;
 use App\User;
+use App\Horario;
 
 class GrupoController extends Controller
 {
@@ -65,7 +66,7 @@ class GrupoController extends Controller
 
     public function almacenar(Request $request,$id)
     {
-    
+        
         
         
         $datosGrupo=request()->except('_token');
@@ -160,8 +161,6 @@ class GrupoController extends Controller
     public function actualizargrupo(Request $request, $id)
     {
         
-        
-        
         $datosGrupo=request()->except(['_token','_method']);
         Grupo::where('id','=',$id)->update($datosGrupo);
         $aux = Grupo::findOrFail($id);
@@ -198,6 +197,8 @@ class GrupoController extends Controller
     {
         Grupo::destroy($id);
 
+
+
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();
         $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
@@ -227,6 +228,19 @@ class GrupoController extends Controller
 
         Grupo::destroy($id);
 
+        $horarios = Horario::where('grupo_id',$id)->get();
+        foreach($horarios as $item){
+            $moh = $item->id;
+            Horario::destroy($moh);
+        }
+
+        $asignaciones = Asignacion::where('grupo',$id)->get();
+        foreach($asignaciones as $item){
+            $ind = $item->id;
+            $asigna = Asignacion::findOrFail($ind);
+            $asigna->grupo = 'Ninguno';
+            $asigna->save();
+        }
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();

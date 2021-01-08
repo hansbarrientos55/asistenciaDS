@@ -15,8 +15,9 @@ class BitacoraController extends Controller
      */
     public function index()
     {
-        $datos['bitacoras']=Bitacora::paginate(60);
-        return view('bitacora.index', $datos);
+        //$datos['bitacoras']=Bitacora::paginate(60);
+        $bitacoras = Bitacora::all();
+        return view('bitacora.index', compact('bitacoras'));
     }
 
     /**

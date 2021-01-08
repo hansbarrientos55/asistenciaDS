@@ -14,7 +14,7 @@ class CreateBitacorasTable extends Migration
     public function up()
     {
         Schema::create('bitacoras', function (Blueprint $table) {
-            $table->bigIncrements('id')->generatedAs('start with 400 increment by 1');
+            $table->bigIncrements('id')->generatedAs('start with 450 increment by 1');
             $table->string('user_id');
             $table->string('usuario');
             $table->string('rol');

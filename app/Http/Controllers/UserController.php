@@ -14,6 +14,7 @@ use App\Bitacora;
 use Auth;
 use Carbon\Carbon;
 use App\Http\Requests\CrearUsuarioRequest;
+use App\Asignacion;
 
 class UserController extends Controller
 {
@@ -36,7 +37,8 @@ class UserController extends Controller
     public function create()
     {
         //$rangos = Rango::all();
-        $roles = Role::all()->pluck('name', 'id');
+        //$roles = Role::all()->pluck('name', 'id');
+        $roles = Role::where('name','!=','Administrador')->where('name','!=','-Ninguno-')->pluck('name', 'id');
         return view('user.create', compact('roles'));
     }
 
@@ -65,7 +67,6 @@ class UserController extends Controller
 
         $this->validate($request,$datos,$mensaje);
 
-        
 
          $usuario = new User;
          $usuario->nombres = $request->nombres;
@@ -84,6 +85,7 @@ class UserController extends Controller
          $usuario->estaactivo = $request->estaactivo;
          $usuario->rolprimario = $request->rolprimario;
          $usuario->rolsecundario = $request->rolsecundario;
+
          if($usuario->save()){
             $usuario->assignRole($request->rolprimario);
             $usuario->assignRole($request->rolsecundario);
@@ -134,7 +136,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $usu = User::findOrFail($id);
-        $roles = Role::all()->pluck('name', 'id');
+        //$roles = Role::all()->pluck('name', 'id');
+        $roles = Role::where('name','!=','Administrador')->where('name','!=','-Ninguno-')->pluck('name', 'id');
 
         return view('user.edit', compact('usu','roles'));
     }
@@ -225,6 +228,34 @@ class UserController extends Controller
     {
         User::destroy($id);
 
+        $asidocente = Asignacion::where('docente',$id)->get();
+        foreach($asidocente as $item){
+            $ind = $item->id;
+            $docente = Asignacion::findOrFail($ind);
+            $docente->docente = 0;
+            $docente->nomdocente = 'Ninguno';
+            $docente->save();
+        }
+
+        $asiaux = Asignacion::where('auxiliardocencia',$id)->get();
+        foreach($asiaux as $item){
+            $indi = $item->id;
+            $auxi = Asignacion::findOrFail($indi);
+            $auxi->auxiliardocencia = 0;
+            $auxi->nomauxdocencia = 'Ninguno';
+            $auxi->save();
+        }
+
+        $asilabo = Asignacion::where('auxiliarlabo',$id)->get();
+        foreach($asilabo as $item){
+            $indu = $item->id;
+            $auxlabo = Asignacion::findOrFail($indu);
+            $auxlabo->auxiliarlabo = 0;
+            $auxlabo->nomauxlabo = 'Ninguno';
+            $auxlabo->save();
+        }
+
+
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();
         $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
@@ -271,9 +302,44 @@ class UserController extends Controller
         $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
         $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
         $bitacora->accion = "Importados usuarios de archivo externo";
+        $bitacora->direccion_ip = $request->getClientIp();
         $bitacora->save();
 
         return view('user/import', ['numRows'=>$import->getRowCount()]);
     
+    }
+
+    public function descargarejemplo(){
+        $public_path = public_path();
+        $url = $public_path.'\usuariosejemplo.csv';
+
+          return response()->download($url);
+
+
+    }
+
+    public function generarAdministrador(){
+        $usuario = new User;
+         $usuario->nombres = 'Administrador';
+         $usuario->apellidos = 'del Sistema';
+         $usuario->cedula = '0123456789';
+         $usuario->fechanacimiento = '01-01-2021';
+         $usuario->direccion = 'Personal';
+         $usuario->profesion = 'Administrador';
+         $usuario->username = 'admin';
+         $usuario->contrasenia = 'admin';
+         $usuario->password = Hash::make('admin');
+         $usuario->emailprincipal = 'controlasistencia@fcyt.umss.bo';
+         $usuario->emailsecundario = 'controlasistencia@gmail.com';
+         $usuario->telefonoprincipal = '76400001';
+         $usuario->telefonosecundario = '4250001';
+         $usuario->estaactivo = 'Activo';
+         $usuario->rolprimario = 'Administrador';
+         $usuario->rolsecundario = 'Administrador';
+
+         if($usuario->save()){
+            $usuario->assignRole('Administrador');
+            $usuario->assignRole('Administrador');
+         }
     }
 }

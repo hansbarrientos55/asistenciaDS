@@ -18,6 +18,7 @@
             <th>Codigo</th>
             <th>Descripcion</th>
             <th>Nivel</th>
+            <th>Departamento</th>
             <th>Activo</th>
             <th>Acciones</th>
             
@@ -34,6 +35,7 @@
                 <td>{{$item->codigomate}}</td>
                 <td>{{$item->descripcionmate}}</td>
                 <td>{{$item->nivelmate}}</td>
+                <td>{{$item->departamento_nombre}}</td>
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     

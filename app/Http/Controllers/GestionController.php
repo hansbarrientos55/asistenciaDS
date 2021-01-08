@@ -9,6 +9,7 @@ use App\Bitacora;
 use Auth;
 use Carbon\Carbon;
 use App\User;
+use App\Asignacion;
 
 class GestionController extends Controller
 {
@@ -137,6 +138,14 @@ class GestionController extends Controller
      */
     public function destroy(Request $request, $id)
     {
+        $asignaciones = Asignacion::where('gestion',$id)->get();
+        foreach($asignaciones as $item){
+            $ind = $item->id;
+            $asigna = Asignacion::findOrFail($ind);
+            $asigna->gestion = '-Ninguna-';
+            $asigna->save();
+        }
+        
         Gestion::destroy($id);
 
         $bitacora = new Bitacora;

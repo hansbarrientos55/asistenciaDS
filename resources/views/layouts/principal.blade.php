@@ -44,7 +44,7 @@
               </svg>ATRAS</a></div>
 
             <div class="col-12 col-md"><input class="form-control-plaintext" type="text" readonly=""></div>
-            <div class="col-6 col-md-2"><input class="form-control-plaintext" type="text" value="{{ Auth::user()->nombres }} {{ Auth::user()->apellidos }}" readonly="" style="color: rgb(255,255,255);"></div>
+            <div class="col-6 col-md-2"><input class="form-control-plaintext" type="text" value="   {{ Auth::user()->nombres }} {{ Auth::user()->apellidos }}" readonly="" style="color: rgb(255,255,255);"></div>
            
             
             
@@ -178,25 +178,19 @@
                   @endcan
 
                 
-                  <div class="col-6 col-md"><a href="{{url('/event')}}" style="color: rgb(255, 255, 255);"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-collection-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7z"/>
-                    <path fill-rule="evenodd" d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z"/>
+                  <div class="col-6 col-md"><a href="{{url('/event')}}" style="color: rgb(255, 255, 255);"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor" class="bi bi-calendar3-week-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2h16a2 2 0 0 0-2-2H2zM0 14V3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm12-8a1 1 0 1 0 2 0 1 1 0 0 0-2 0zM5 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm5-2a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM2 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
                   </svg> CALENDARIO</a></div>
 
             </div>
-
 
          
             
         </div>
 
         <div class="card-body" style="font-family: Arial;font-size: 18px;color: rgb(0, 0, 0);">
-
-
         </div>
-
         
-
         <main class="py-4">
             @yield('content')
         </main>

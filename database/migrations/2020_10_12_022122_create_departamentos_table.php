@@ -19,6 +19,7 @@ class CreateDepartamentosTable extends Migration
             $table->string('descripciondepa')->unique();
             $table->string('estaactivo')->default('Activo');
             $table->unsignedInteger('facultad_id')->default('0');
+            $table->string('facultad_nombre')->nullable();
             $table->timestamps();
         });
     }

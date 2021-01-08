@@ -132,9 +132,9 @@ class MigracionController extends Controller
 
         //Carreras
         $carreras = Carrera::all();
-        $salida .= "\n INSERT INTO \"carreras\" (\"id\", \"codigocarrera\", \"nombrecarrera\", \"descripcioncarrera\", \"estaactivo\", \"facultad_id\", \"created_at\", \"updated_at\") VALUES \n";
+        $salida .= "\n INSERT INTO \"carreras\" (\"id\", \"codigocarrera\", \"nombrecarrera\", \"descripcioncarrera\", \"estaactivo\", \"facultad_id\", \"facultad_nombre\", \"created_at\", \"updated_at\") VALUES \n";
         foreach($carreras as $list){
-            $salida .= "(".$list->id.", '".$list->codigocarrera."', '".$list->nombrecarrera."', '".$list->descripcioncarrera."', '".$list->estaactivo."', '".$list->facultad_id."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->codigocarrera."', '".$list->nombrecarrera."', '".$list->descripcioncarrera."', '".$list->estaactivo."', '".$list->facultad_id."', '".$list->facultad_nombre."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -142,9 +142,9 @@ class MigracionController extends Controller
 
         //Departamentos
         $departamentos = Departamento::all();
-        $salida .= "\n INSERT INTO \"departamentos\" (\"id\", \"nombredepa\", \"descripciondepa\", \"estaactivo\", \"facultad_id\", \"created_at\", \"updated_at\") VALUES \n";
+        $salida .= "\n INSERT INTO \"departamentos\" (\"id\", \"nombredepa\", \"descripciondepa\", \"estaactivo\", \"facultad_id\", \"facultad_nombre\",\"created_at\", \"updated_at\") VALUES \n";
         foreach($departamentos as $list){
-            $salida .= "(".$list->id.", '".$list->nombredepa."', '".$list->descripciondepa."', '".$list->estaactivo."', '".$list->facultad_id."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->nombredepa."', '".$list->descripciondepa."', '".$list->estaactivo."', '".$list->facultad_id."', '".$list->facultad_nombre."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -212,9 +212,9 @@ class MigracionController extends Controller
 
         //Materias
         $materias = Materia::all();
-        $salida .= "\n INSERT INTO \"materias\" (\"id\", \"codigomate\", \"nombremate\", \"descripcionmate\", \"nivelmate\", \"estaactivo\", \"departamento_id\", \"created_at\", \"updated_at\") VALUES \n";
+        $salida .= "\n INSERT INTO \"materias\" (\"id\", \"codigomate\", \"nombremate\", \"descripcionmate\", \"nivelmate\", \"estaactivo\", \"departamento_id\", \"departamento_nombre\", \"created_at\", \"updated_at\") VALUES \n";
         foreach($materias as $list){
-            $salida .= "(".$list->id.", '".$list->codigomate."', '".$list->nombremate."', '".$list->descripcionmate."', '".$list->nivelmate."', '".$list->estaactivo."', '".$list->departamento_id."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->codigomate."', '".$list->nombremate."', '".$list->descripcionmate."', '".$list->nivelmate."', '".$list->estaactivo."', '".$list->departamento_id."', '".$list->departamento_nombre."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -375,9 +375,9 @@ class MigracionController extends Controller
 
         //Carreras
         $carreras = Carrera::all();
-        $salida .= "\n INSERT INTO `carreras` (`id`, `codigocarrera`, `nombrecarrera`, `descripcioncarrera`, `estaactivo`, `facultad_id`, `created_at`, `updated_at`) VALUES \n";
+        $salida .= "\n INSERT INTO `carreras` (`id`, `codigocarrera`, `nombrecarrera`, `descripcioncarrera`, `estaactivo`, `facultad_id`, `facultad_nombre`, `created_at`, `updated_at`) VALUES \n";
         foreach($carreras as $list){
-            $salida .= "(".$list->id.", '".$list->codigocarrera."', '".$list->nombrecarrera."', '".$list->descripcioncarrera."', '".$list->estaactivo."', '".$list->facultad_id."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->codigocarrera."', '".$list->nombrecarrera."', '".$list->descripcioncarrera."', '".$list->estaactivo."', '".$list->facultad_id."', '".$list->facultad_nombre."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -385,9 +385,9 @@ class MigracionController extends Controller
 
         //Departamentos
         $departamentos = Departamento::all();
-        $salida .= "\n INSERT INTO `departamentos` (`id`, `nombredepa`, `descripciondepa`, `estaactivo`, `facultad_id`, `created_at`, `updated_at`) VALUES \n";
+        $salida .= "\n INSERT INTO `departamentos` (`id`, `nombredepa`, `descripciondepa`, `estaactivo`, `facultad_id`, `facultad_nombre`, `created_at`, `updated_at`) VALUES \n";
         foreach($departamentos as $list){
-            $salida .= "(".$list->id.", '".$list->nombredepa."', '".$list->descripciondepa."', '".$list->estaactivo."', '".$list->facultad_id."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->nombredepa."', '".$list->descripciondepa."', '".$list->estaactivo."', '".$list->facultad_id."', '".$list->facultad_nombre."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -455,9 +455,9 @@ class MigracionController extends Controller
 
         //Materias
         $materias = Materia::all();
-        $salida .= "\n INSERT INTO `materias` (`id`, `codigomate`, `nombremate`, `descripcionmate`, `nivelmate`, `estaactivo`, `departamento_id`, `created_at`, `updated_at`) VALUES \n";
+        $salida .= "\n INSERT INTO `materias` (`id`, `codigomate`, `nombremate`, `descripcionmate`, `nivelmate`, `estaactivo`, `departamento_id`, `departamento_nombre`, `created_at`, `updated_at`) VALUES \n";
         foreach($materias as $list){
-            $salida .= "(".$list->id.", '".$list->codigomate."', '".$list->nombremate."', '".$list->descripcionmate."', '".$list->nivelmate."', '".$list->estaactivo."', '".$list->departamento_id."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->codigomate."', '".$list->nombremate."', '".$list->descripcionmate."', '".$list->nivelmate."', '".$list->estaactivo."', '".$list->departamento_id."', '".$list->departamento_nombre."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);

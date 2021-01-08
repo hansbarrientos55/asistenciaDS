@@ -17,6 +17,7 @@
             <th>Nombre</th>
             <th>Codigo</th>
             <th>Descripcion</th>
+            <th>Facultad</th>
             <th>Activo</th>
             <th>Acciones</th>
             
@@ -32,6 +33,7 @@
                 <td>{{$item->nombrecarrera}}</td>
                 <td>{{$item->codigocarrera}}</td>
                 <td>{{$item->descripcioncarrera}}</td>
+                <td>{{$item->facultad_nombre}}</td>
                 <td>{{$item->estaactivo}}</td>
                 <td> 
                     

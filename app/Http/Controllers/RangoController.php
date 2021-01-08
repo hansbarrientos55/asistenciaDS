@@ -21,8 +21,10 @@ class RangoController extends Controller
      */
     public function index()
     {
-        $datos['rangos']=Role::paginate(20);
-        return view('rango.index', $datos);
+        //$datos['rangos']=Role::paginate(20);
+        $rangos = Role::where('name','!=','-Ninguno-')->get();
+
+        return view('rango.index', compact('rangos'));
     }
 
     /**
@@ -198,6 +200,32 @@ class RangoController extends Controller
      */
     public function destroy(Request $request, $id)
     {
+
+        $roleliminar = Role::findOrFail($id);
+
+        $rolaux = Role::where('id',$id)->value('name');
+        $usuarios = User::where('rolprimario',$rolaux)->orWhere('rolsecundario',$rolaux)->get();
+        foreach($usuarios as $item){
+            $ind = $item->id;
+            $modificado = User::findOrFail($ind);
+            if($modificado->rolprimario == $rolaux){
+                $modificado->rolprimario = '-Ninguno-';
+                $modificado->assignRole('-Ninguno-');
+            }
+            if($modificado->rolsecundario ==$rolaux){
+                $modificado->rolsecundario = '-Ninguno';
+                $modificado->assignRole('-Ninguno-');
+                
+            }
+            $modificado->save();
+            
+        }
+        
+        $antiguos= $roleliminar->getAllPermissions();
+        foreach($antiguos as $item){
+            $roleliminar->revokePermissionTo($item);
+        }
+
         Role::destroy($id);
 
         $bitacora = new Bitacora;

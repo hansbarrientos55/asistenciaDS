@@ -14,6 +14,7 @@
 {{ csrf_field() }}
     <label for="numerogrupo" class="control-label">{{ 'Numero' }}</label>
     <input class="form-control" type="text" name="numerogrupo" id="numerogrupo" value="{{ old('numerogrupo') }}" required>
+    
     <br/>  
 
     <div class="form-group">

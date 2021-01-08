@@ -59,10 +59,20 @@ class CarreraController extends Controller
         $this->validate($request,$datos,$mensaje);
         
         
-        $datosCarrera=request()->except('_token');
-        Carrera::insert($datosCarrera);
+        $datos = new Carrera;
+        $datos->codigocarrera = $request->codigocarrera;
+        $datos->nombrecarrera = $request->nombrecarrera;
+        $datos->descripcioncarrera = $request->descripcioncarrera;
+        $datos->estaactivo = $request->estaactivo;
+        $datos->facultad_id = $request->facultad_id;
+        $datos->facultad_nombre = Facultad::where('id',$request->facultad_id)->value('nombrefacu');
+        $datos->save();
 
-       // return response()->json($datosDepartamento);
+
+        //$datosCarrera=request()->except('_token');
+        //Carrera::insert($datosCarrera);
+
+
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();
@@ -134,8 +144,18 @@ class CarreraController extends Controller
 
         $this->validate($request,$datos,$mensaje);
         
-        $datosCarrera=request()->except(['_token','_method']);
-        Carrera::where('id','=',$id)->update($datosCarrera);
+        $datos = Carrera::findOrFail($id);
+        $datos->codigocarrera = $request->codigocarrera;
+        $datos->nombrecarrera = $request->nombrecarrera;
+        $datos->descripcioncarrera = $request->descripcioncarrera;
+        $datos->estaactivo = $request->estaactivo;
+        $datos->facultad_id = $request->facultad_id;
+        $datos->facultad_nombre = Facultad::where('id',$request->facultad_id)->value('nombrefacu');
+        $datos->save();
+
+
+        //$datosCarrera=request()->except(['_token','_method']);
+        //Carrera::where('id','=',$id)->update($datosCarrera);
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();

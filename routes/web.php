@@ -11,17 +11,18 @@
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
 
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function () {
+    return view('welcome');
+});
 
 Route::get('login', function () {
     return view('auth.login');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes(['register'=>false,'reset'=>false]);
 
@@ -66,6 +67,8 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
 
     Route::get('/importar','UserController@importar');
     Route::post('/importar','UserController@guardar')->name('guardar');
+
+    Route::get('descargarejemplo','UserController@descargarejemplo');
 
     Route::get('/configuracion','ControlConfiguracionController@index');
     Route::get('/permisos','ControlConfiguracionController@crearPermisos');
@@ -132,5 +135,8 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
     Route::get('asignacion/editar/grupo/{id}','AsignacionController@editargrupo');
     Route::post('asignacion/editar/grupo/{id}','AsignacionController@editargrupo');
     Route::post('asignacion/editar/guardar/{id}', 'AsignacionController@actualizar');
+
+
+    
     
 });

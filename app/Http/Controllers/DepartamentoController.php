@@ -10,6 +10,8 @@ use App\Bitacora;
 use Auth;
 use Carbon\Carbon;
 use App\User;
+use App\Materia;
+use App\Asignacion;
 
 class DepartamentoController extends Controller
 {
@@ -20,8 +22,9 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        $datos['departamentos']=Departamento::paginate(20);
-        return view('departamento.index', $datos);
+        //$datos['departamentos']=Departamento::paginate(20);
+        $departamentos = Departamento::where('id','!=','0')->get();
+        return view('departamento.index', compact('departamentos'));
     }
 
     /**
@@ -57,12 +60,20 @@ class DepartamentoController extends Controller
 
         $this->validate($request,$datos,$mensaje);
         
-        //$datosDepartamento=request()->all();
 
-        $datosDepartamento=request()->except('_token');
-        Departamento::insert($datosDepartamento);
 
-       // return response()->json($datosDepartamento);
+        $datos = new Departamento;
+        $datos->nombredepa = $request->nombredepa;
+        $datos->descripciondepa = $request->descripciondepa;
+        $datos->estaactivo = $request->estaactivo;
+        $datos->facultad_id = $request->facultad_id;
+        $datos->facultad_nombre = Facultad::where('id',$request->facultad_id)->value('nombrefacu');
+        $datos->save();
+
+        //$datosDepartamento=request()->except('_token');
+        //Departamento::insert($datosDepartamento);
+
+
        $bitacora = new Bitacora;
        $bitacora->user_id = Auth::id();
        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
@@ -132,8 +143,17 @@ class DepartamentoController extends Controller
         $this->validate($request,$datos,$mensaje);
         
         
-        $datosDepartamento=request()->except(['_token','_method']);
-        Departamento::where('id','=',$id)->update($datosDepartamento);
+        $datos = Departamento::findOrFail($id);
+        $datos->nombredepa = $request->nombredepa;
+        $datos->descripciondepa = $request->descripciondepa;
+        $datos->estaactivo = $request->estaactivo;
+        $datos->facultad_id = $request->facultad_id;
+        $datos->facultad_nombre = Facultad::where('id',$request->facultad_id)->value('nombrefacu');
+        $datos->save();
+
+
+        //$datosDepartamento=request()->except(['_token','_method']);
+        //Departamento::where('id','=',$id)->update($datosDepartamento);
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();
@@ -165,6 +185,21 @@ class DepartamentoController extends Controller
     public function destroy(Request $request, $id)
     {
         Departamento::destroy($id);
+
+        $materias = Materia::where('departamento_id',$id)->get();
+        foreach($materias as $item){
+            $item->departamento_id = '0';
+            $item->departamento_nombre = '-Ninguno-';
+            $item->save();
+        }
+
+        $asignaciones = Asignacion::where('departamento',$id)->get();
+        foreach($asignaciones as $item){
+            $ind = $item->id;
+            $asigna = Asignacion::findOrFail($ind);
+            $asigna->departamento = '-Ninguno-';
+            $asigna->save();
+        }
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();

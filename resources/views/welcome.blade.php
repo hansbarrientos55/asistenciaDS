@@ -11,7 +11,7 @@
                         <p class="text-center" style="font-size:24px;margin-top:50px;font-weight:bold;">Esta aplicacion ayuda al control de la asistencia</p>
                         <p class="text-center" style="font-size:24px;margin-top:35px;font-weight:bold;">de los Docentes y Auxiliares de la UMSS</p>
                         <p class="text-center" style="font-size:24px;margin-top:35px;font-weight:bold;">Su alcance es a nivel facultades, departamentos, carreras</p>
-                        <p class="text-center" style="font-size:24px;margin-top:35px;font-weight:bold;">y aumentar unas lineas mas</p>
+                        <p class="text-center" style="font-size:24px;margin-top:35px;font-weight:bold;">Con un entorno de trabajo facil e intuitivo</p>
                     
                     </div>
                     <div class="col-md-4">

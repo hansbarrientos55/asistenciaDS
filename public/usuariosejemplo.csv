@@ -1,0 +1,3 @@
+nombres,apellidos,cedula,fechanacimiento,direccion,profesion,username,contrasenia,emailprincipal,emailsecundario,telefonoprincipal,telefonosecundario,estaactivo,rolprimario,rolsecundario
+carlos fernando,garcia,357789951,6/10/1990,Republica,Lic. Fisica,carlos,fernando,carlosfernando@gmail.com,carlosfer@aol.net,321654987,4255879,Activo,Docente,Docente
+luis,rios,321852963,9/9/1990,Colombia,Lic. Matematicas,luis,rios,luisrios@gmail.com,luisriosoficial@aol.net,54123332,426598,Activo,Docente,Docente

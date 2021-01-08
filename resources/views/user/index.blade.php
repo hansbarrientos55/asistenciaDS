@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container-fluid" style="width: auto">
 
     <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Administracion de Usuarios</h1>
 
@@ -18,6 +18,7 @@
 <br>
 <br>
 
+<div class="table-responsive">
 <table class="table table-light table-hover">
     <thead class="thead-light">
         <tr>
@@ -74,6 +75,7 @@
         
     </tbody>
 </table>
+</div>
 
 </div>
 @endsection
