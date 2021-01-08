@@ -3,7 +3,7 @@
 @section('content')
     
 
-<div class="container">
+<div class="container-fluid" style="width: auto">
 
     <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Asistencias y Avances Semanales</h1>
 
@@ -19,7 +19,7 @@
 
     
 
-    <table class="table table-light table-hover">
+    <table class="table table-responsive table-light table-hover">
         <thead class="thead-light">
         <tr>
             <th scope="col">Id</th>
