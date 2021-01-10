@@ -25,8 +25,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $datos['users']=User::where('id','!=',0)->paginate(60);
-        return view('user.index', $datos);
+        $users = User::where('id','!=',0)->get();
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -224,9 +224,12 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function disable(Request $request, $id)
     {
-        User::destroy($id);
+        //User::destroy($id);
+        $usuario = User::findOrFail($id);
+        $usuario->estaactivo = 'Archivado';
+        $usuario->save();
 
         $asidocente = Asignacion::where('docente',$id)->get();
         foreach($asidocente as $item){
@@ -270,7 +273,36 @@ class UserController extends Controller
         $bitacora->rol = $rolprimario.", ".$rolsecundario;
         $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
         $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
-        $bitacora->accion = "Eliminado usuario";
+        $bitacora->accion = "Usuario archivado";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
+        return redirect('user');
+    }
+
+    public function enable(Request $request, $id)
+    {
+        //User::destroy($id);
+        $usuario = User::findOrFail($id);
+        $usuario->estaactivo = 'Activo';
+        $usuario->save();
+
+        
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Usuario activado";
         $bitacora->direccion_ip = $request->getClientIp();
         $bitacora->save();
 

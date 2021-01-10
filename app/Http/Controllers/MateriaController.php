@@ -23,8 +23,8 @@ class MateriaController extends Controller
      */
     public function index()
     {
-        $datos['materias']=Materia::paginate(20);
-        return view('materia.index', $datos);
+        $materias=Materia::all();
+        return view('materia.index', compact('materias'));
     }
 
     /**
@@ -34,7 +34,7 @@ class MateriaController extends Controller
      */
     public function create()
     {
-        $departamentos = Departamento::all();
+        $departamentos = Departamento::where('estaactivo','Activo')->get();
         return view('materia.create', compact('departamentos'));
     }
 
@@ -115,7 +115,7 @@ class MateriaController extends Controller
     public function edit($id)
     {
         $mate = Materia::findOrFail($id);
-        $departamentos = Departamento::all();
+        $departamentos = Departamento::where('estaactivo','Activo')->get();
 
         return view('materia.edit', compact('mate','departamentos'));
     }
@@ -184,9 +184,12 @@ class MateriaController extends Controller
      * @param  \App\Materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function disable(Request $request, $id)
     {
-        Materia::destroy($id);
+        //Materia::destroy($id);
+        $materia = Materia::findOrFail($id);
+        $materia->estaactivo = 'Archivado';
+        $materia->save();
 
         $grupos = Grupo::where('materia_id',$id)->get();
         foreach($grupos as $item){
@@ -222,10 +225,46 @@ class MateriaController extends Controller
         $bitacora->rol = $rolprimario.", ".$rolsecundario;
         $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
         $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
-        $bitacora->accion = "Eliminada materia";
+        $bitacora->accion = "Materia archivada";
         $bitacora->direccion_ip = $request->getClientIp();
         $bitacora->save();
 
         return redirect('materia');
+    }
+
+    public function enable(Request $request, $id)
+    {
+        $asignaciones = Asignacion::where('gestion',$id)->get();
+        foreach($asignaciones as $item){
+            $ind = $item->id;
+            $asigna = Asignacion::findOrFail($ind);
+            $asigna->gestion = '-Ninguna-';
+            $asigna->save();
+        }
+        
+        //Gestion::destroy($id);
+        $gestion = Gestion::findOrFail($id);
+        $gestion->estaactivo = 'Activo';
+        $gestion->save();
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Gestion activada";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
+        return redirect('gestion');
     }
 }

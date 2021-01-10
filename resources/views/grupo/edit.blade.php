@@ -16,7 +16,13 @@
     
     <label for="numerogrupo" class="control-label">{{ 'Numero' }}</label>
     <input class="form-control" type="text" name="numerogrupo" id="numerogrupo" value="{{$gru->numerogrupo}}" required>
-    
+    @if($errors->first('numerogrupo'))
+     <div class="alert alert-danger" role ="alert" >
+       <ul>
+                <li>{{ $errors->first('numerogrupo')}} </li>
+       </ul>
+     </div>
+     @endif
     <br/>
 
     <div class="form-group">

@@ -13,7 +13,13 @@
 
 <form action="{{url('/horario/update/'.$id)}}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
-    
+    @if($errors->first('titulo'))
+     <div class="alert alert-danger" role ="alert" >
+       <ul>
+                <li>{{ $errors->first('titulo')}} </li>
+       </ul>
+     </div>
+     @endif
        
     <div class="form-group">
         <label for="exampleFormControlSelect1" class="control-label">Hora</label>
@@ -31,6 +37,10 @@
             <option value="{{$item->dia}}">{{$item->dia}}</option>
         @endforeach
     </select>
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" type="text" name="titulo" id="titulo" value="" hidden>
     </div>
 
 

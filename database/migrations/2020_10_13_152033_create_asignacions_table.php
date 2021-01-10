@@ -14,7 +14,7 @@ class CreateAsignacionsTable extends Migration
     public function up()
     {
         Schema::create('asignacions', function (Blueprint $table) {
-            $table->increments('id')->generatedAs('start with 100 increment by 1');
+            $table->increments('id')->generatedAs('start with 125 increment by 1');
             $table->string('gestion');
             $table->string('departamento');
             $table->integer('docente')->unsigned();
@@ -26,6 +26,8 @@ class CreateAsignacionsTable extends Migration
             $table->string('materia');
             $table->string('nommateria')->nullable();
             $table->string('grupo');
+            $table->string('numgrupo')->nullable();
+            $table->string('etiqueta')->nullable();
             $table->timestamps();
 
             $table->foreign('docente')->references('id')->on('users')

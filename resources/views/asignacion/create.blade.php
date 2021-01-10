@@ -71,7 +71,7 @@
         </div>
 
         <button class="btn btn-primary" type="submit">Siguiente</button>
-        <a class="btn btn-danger" href="{{url('asignaciones')}}">Cancelar</a>
+        <a class="btn btn-danger" href="{{url('asignacion')}}">Cancelar</a>
 
     </form>
 </div>

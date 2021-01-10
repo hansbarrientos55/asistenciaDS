@@ -11,6 +11,9 @@ use Auth;
 use Carbon\Carbon;
 use App\User;
 use App\Horario;
+use App\Rules\GrupoSinRepetir;
+use App\Asignacion;
+use App\Rules\GrupoActualizar;
 
 class GrupoController extends Controller
 {
@@ -67,7 +70,12 @@ class GrupoController extends Controller
     public function almacenar(Request $request,$id)
     {
         
-        
+
+        //$request['materia_id'] = $id;
+
+        //dd($request);
+
+        $this->validate($request, ['numerogrupo' => ['required', new GrupoSinRepetir($id)]]);
         
         $datosGrupo=request()->except('_token');
         $datosGrupo['materia_id'] = $id;
@@ -134,6 +142,8 @@ class GrupoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, ['numerogrupo' => ['required', new GrupoSinRepetir($id)]]);
+        
         $datosGrupo=request()->except(['_token','_method']);
         Grupo::where('id','=',$id)->update($datosGrupo);
 
@@ -161,6 +171,11 @@ class GrupoController extends Controller
     public function actualizargrupo(Request $request, $id)
     {
         
+        //dd($request);
+        $matid = Grupo::where('id',$id)->value('materia_id');
+
+        $this->validate($request, ['numerogrupo' => ['required', new GrupoActualizar($matid,$id)]]);
+
         $datosGrupo=request()->except(['_token','_method']);
         Grupo::where('id','=',$id)->update($datosGrupo);
         $aux = Grupo::findOrFail($id);

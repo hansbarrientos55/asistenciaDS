@@ -20,22 +20,22 @@
     @endif
 
 
-<form action="{{ url('/gestion') }}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
-{{ csrf_field() }}
+    <form action="{{ url('/gestion') }}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    <div class="form-group">
     <label for="periodogestion">{{ 'Periodo' }}</label>
     <input class="form-control" type="text" name="periodogestion" id="periodogestion" value="{{ old('periodogestion') }}" required>
-    <br/>
-    <label for="añogestion">{{ 'Año' }}</label>
-    <input class="form-control" type="text" name="añogestion" id="añogestion" value="{{ old('añogestion') }}" required>
-    <br/>
+    </div>
 
     <div class="form-group">
-        <label for="exampleFormControlSelect1" class="control-label">Estado</label>
-        <select name="estaactivo"  value="" class="form-control" id="estaactivo">
-            <option value="Activo">Activo</option>
-            <option value="Archivado">Archivado</option>
+    <label for="añogestion">{{ 'Año' }}</label>
+    <input class="form-control" type="text" name="añogestion" id="añogestion" value="{{ old('añogestion') }}" required>
+    <input class="form-control" type="text" name="gestion" id="gestion" value="" hidden>
+    </div>
 
-    </select>
+    <div class="form-group">
+        <label for="estaactivo" class="control-label">Estado</label>
+        <input class="form-control" type="text" name="estaactivo" id="estaactivo" value="Activo" required readonly>
     </div>
     
     
@@ -47,12 +47,9 @@
     <a class="btn btn-danger" href="{{url('gestion')}}">Cancelar</a>
 
 
-</form>
+    </form>
 
-<div class="container" >
-    <div class="row justify-content-center" >
-        <div class="col-md-8">
-            <div class="card" style="width: 24rem; background-color: #006699;">
+
 
 </div>
 @endsection

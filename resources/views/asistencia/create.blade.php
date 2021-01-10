@@ -83,17 +83,26 @@
 
                     <div class="form-group">
                         <label for="repositorio" class="control-label">Repositorio</label>
-                        <input class="form-control" type="text" name="repositorio" id="repositorio" value="" required>
+                        <select name="repositorio"  value="" class="form-control" id="repositorio">
+                            <option value="Google Drive">Google Drive</option>
+                        </select>    
                     </div>  
 
                     <div class="form-group">
                         <label for="notificacion" class="control-label">Notificacion</label>
-                        <input class="form-control" type="text" name="notificacion" id="notificacion" value="" required>
+                        <select name="notificacion"  value="" class="form-control" id="notificacion">
+                            <option value="Gmail">Gmail</option>
+                            <option value="Whatsapp">Whatsapp</option>
+                            <option value="Telegram">Telegram</option>
+                        </select>    
                     </div> 
 
                     <div class="form-group">
                         <label for="claseonline" class="control-label">Clase online</label>
-                        <input class="form-control" type="text" name="claseonline" id="claseonline" value="" required>
+                        <select name="claseonline"  value="" class="form-control" id="claseonline">
+                            <option value="Google Classroom">Google Classroom</option>
+                            <option value="Zoom">Zoom</option>
+                        </select>    
                     </div> 
 
                     <div class="form-group">

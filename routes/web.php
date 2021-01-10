@@ -42,6 +42,20 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
 
     Route::resource('user','UserController');
 
+    Route::post('/user/disable/{id}', 'UserController@disable');
+    Route::post('/departamento/disable/{id}', 'DepartamentoController@disable');
+    Route::post('/carrera/disable/{id}', 'CarreraController@disable');
+    Route::post('/facultad/disable/{id}', 'FacultadController@disable');
+    Route::post('/gestion/disable/{id}', 'GestionController@disable');
+    Route::post('/materia/disable/{id}', 'MateriaController@disable');
+
+    Route::post('/user/enable/{id}', 'UserController@enable');
+    Route::post('/departamento/enable/{id}', 'DepartamentoController@enable');
+    Route::post('/carrera/enable/{id}', 'CarreraController@enable');
+    Route::post('/facultad/enable/{id}', 'FacultadController@enable');
+    Route::post('/gestion/enable/{id}', 'GestionController@enable');
+    Route::post('/materia/enable/{id}', 'MateriaController@enable');
+
     Route::get('/grupo/{id}/index', 'GrupoController@vergrupos')-> name('vergrupos');
     Route::get('/grupo/create/{id}', 'GrupoController@creargrupo');
     Route::post('/grupo/store/{id}', 'GrupoController@almacenar');
@@ -136,6 +150,7 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
     Route::post('asignacion/editar/grupo/{id}','AsignacionController@editargrupo');
     Route::post('asignacion/editar/guardar/{id}', 'AsignacionController@actualizar');
 
+    Route::post('asignacion/eliminar/{id}','AsignacionController@eliminar');
 
     
     

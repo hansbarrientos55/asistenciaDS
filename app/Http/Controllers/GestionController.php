@@ -10,6 +10,8 @@ use Auth;
 use Carbon\Carbon;
 use App\User;
 use App\Asignacion;
+use App\Rules\GestionSinRepetir;
+use App\Rules\GestionActualizar;
 
 class GestionController extends Controller
 {
@@ -20,8 +22,8 @@ class GestionController extends Controller
      */
     public function index()
     {
-        $datos['gestiones']=Gestion::paginate(20);
-        return view('gestion.index', $datos);
+        $gestiones=Gestion::all();
+        return view('gestion.index', compact('gestiones'));
     }
 
     /**
@@ -42,6 +44,11 @@ class GestionController extends Controller
      */
     public function store(Request $request)
     {
+        $request['gestion'] = $request['periodogestion']."-".$request['añogestion'];
+
+        //dd($request);
+
+        $this->validate($request, ['gestion' => ['required', new GestionSinRepetir]]);
         
 
         
@@ -105,6 +112,12 @@ class GestionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request['gestion'] = $request['periodogestion']."-".$request['añogestion'];
+
+        //dd($request,$id);
+
+        $this->validate($request, ['gestion' => ['required', new GestionActualizar($id)]]);
+        
         $datosGestion=request()->except(['_token','_method']);
         $datosGestion['gestion']=$datosGestion['periodogestion'].'-'.$datosGestion['añogestion'];
         Gestion::where('id','=',$id)->update($datosGestion);
@@ -136,7 +149,7 @@ class GestionController extends Controller
      * @param  \App\Gestion  $gestion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function disable(Request $request, $id)
     {
         $asignaciones = Asignacion::where('gestion',$id)->get();
         foreach($asignaciones as $item){
@@ -146,7 +159,10 @@ class GestionController extends Controller
             $asigna->save();
         }
         
-        Gestion::destroy($id);
+        //Gestion::destroy($id);
+        $gestion = Gestion::findOrFail($id);
+        $gestion->estaactivo = 'Archivado';
+        $gestion->save();
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();
@@ -162,7 +178,43 @@ class GestionController extends Controller
         $bitacora->rol = $rolprimario.", ".$rolsecundario;
         $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
         $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
-        $bitacora->accion = "Eliminada gestion";
+        $bitacora->accion = "Gestion archivada";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
+        return redirect('gestion');
+    }
+
+    public function enable(Request $request, $id)
+    {
+        $asignaciones = Asignacion::where('gestion',$id)->get();
+        foreach($asignaciones as $item){
+            $ind = $item->id;
+            $asigna = Asignacion::findOrFail($ind);
+            $asigna->gestion = '-Ninguna-';
+            $asigna->save();
+        }
+        
+        //Gestion::destroy($id);
+        $gestion = Gestion::findOrFail($id);
+        $gestion->estaactivo = 'Activo';
+        $gestion->save();
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Gestion activada";
         $bitacora->direccion_ip = $request->getClientIp();
         $bitacora->save();
 

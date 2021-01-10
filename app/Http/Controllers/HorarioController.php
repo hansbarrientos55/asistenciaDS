@@ -12,6 +12,8 @@ use App\Bitacora;
 use Auth;
 use Carbon\Carbon;
 use App\User;
+use App\Rules\HorarioSinRepetir;
+use App\Rules\HorarioActualizar;
 
 class HorarioController extends Controller
 {
@@ -65,12 +67,15 @@ class HorarioController extends Controller
     public function almacenar(Request $request,$id)
     {
         
+        $request['titulo'] = $request['dia']." ".$request['hora'];
+
+        $this->validate($request, ['titulo' => ['required', new HorarioSinRepetir($id)]]);
+        
         $horario = new Horario;
         $horario->hora = $request->hora;
         $horario->dia = $request->dia;
         $horario->titulo = $request->dia." ".$request->hora;
         $horario->grupo_id = $id; 
-        
         $horario->save();
 
         $bitacora = new Bitacora;
@@ -144,6 +149,12 @@ class HorarioController extends Controller
 
     public function actualizarhorario(Request $request, $id)
     {
+        $request['titulo'] = $request['dia']." ".$request['hora'];
+        $gruid = Horario::where('id',$id)->value('grupo_id');
+
+        $this->validate($request, ['titulo' => ['required', new HorarioActualizar($gruid,$id)]]);
+        //dd($request,$id, $gruid);
+        
         $datosHorario=request()->except(['_token','_method']);
         $datosHorario['titulo'] = $datosHorario['dia']." ".$datosHorario['hora'];
         Horario::where('id','=',$id)->update($datosHorario);

@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id')->generatedAs('start with 200 increment by 1');
+            $table->increments('id')->generatedAs('start with 175 increment by 1');
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('cedula')->unique();

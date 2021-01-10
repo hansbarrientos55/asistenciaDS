@@ -43,6 +43,7 @@
 
     <label for="">Modificar datos</label>
     <br/>
+
     <div class="form-group">
         <label for="exampleFormControlSelect1">Gestión</label>
         <input class="form-control" type="hidden" id="llave" name="llave" value="{{$llave}}">

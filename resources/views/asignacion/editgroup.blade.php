@@ -15,12 +15,34 @@
 <form action="{{url('/asignacion/editar/guardar/'.$llave)}}"  class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
     @csrf
     
-
     <label for="">Modificar datos</label>
+    <input class="form-control" type="hidden" id="llave" name="llave" value="{{$llave}}">
+
+    @if($errors->first('etiqueta'))
+          <div class="alert alert-danger" role ="alert" >
+            <ul>
+                      <li>{{ $errors->first('etiqueta')}} </li>
+            </ul>
+          </div>
+          <a class="btn btn-danger" href="{{url('asignacion')}}">Volver a asignaciones</a>
+          
+          @elseif (!$grupos->isNotEmpty())
+          <div class="alert alert-danger" role ="alert" >
+            <ul>
+                      <li>{{ 'La materia no tiene grupos.'}} </li>
+            </ul>
+          </div>
+          <a class="btn btn-danger" href="{{url('asignacion')}}">Volver a asignaciones</a>
+          @else
+          
+
+        <input class="form-control" type="text" name="etiqueta" id="etiqueta" value="" hidden>
+
+
     <br/>
+    
      <div class="form-group">
             <label for="exampleFormControlSelect1">Gestión</label>
-             <input class="form-control" type="hidden" id="id" name="id" value="{{$llave}}">
               <input class="form-control" type="text" name="gestion" id="gestion" value="{{$gestion}}" readonly required>
         </div>
 
@@ -64,7 +86,7 @@
 
     <input type="submit" class="btn btn-success" value="Guardar cambios">
     <a class="btn btn-danger" href="{{url('asignacion')}}">Cancelar</a>
-
+    @endif
 
 </form>
 

@@ -32,14 +32,13 @@
                 <td>{{$item->nomauxdocencia}}</td>
                 <td>{{$item->nomauxlabo}}</td>
                 <td>{{$item->nommateria}}</td>
-                <td>{{$item->grupo}}</td>
+                <td>{{$item->numgrupo}}</td>
                 <td>
                     <a class="btn btn-warning" href="{{ url('/asignacion/editar/'.$item->id) }}">Editar</a>
                     
 
-                <form action="{{ url('/asignacion/'.$item->id) }}" style="display:inline" method="post">
+                <form action="{{ url('/asignacion/eliminar/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   
-                     {{method_field('DELETE')}}
                     <button class="btn btn-danger" type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
                 </form>
                 </td>

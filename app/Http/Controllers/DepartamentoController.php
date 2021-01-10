@@ -34,7 +34,7 @@ class DepartamentoController extends Controller
      */
     public function create()
     {
-        $facultades = Facultad::all();
+        $facultades = Facultad::where('estaactivo','Activo')->get();
         return view('departamento.create', compact('facultades'));
     }
 
@@ -116,7 +116,7 @@ class DepartamentoController extends Controller
     public function edit($id)
     {
         $depa = Departamento::findOrFail($id);
-        $facultades = Facultad::all();
+        $facultades = Facultad::where('estaactivo','Activo')->get();
 
         return view('departamento.edit', compact('depa', 'facultades'));
     }
@@ -182,9 +182,13 @@ class DepartamentoController extends Controller
      * @param  \App\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function disable(Request $request, $id)
     {
-        Departamento::destroy($id);
+        //Departamento::destroy($id);
+        $departamento = Departamento::findOrFail($id);
+        $departamento->estaactivo = 'Archivado';;
+        $departamento->save();
+
 
         $materias = Materia::where('departamento_id',$id)->get();
         foreach($materias as $item){
@@ -215,7 +219,51 @@ class DepartamentoController extends Controller
         $bitacora->rol = $rolprimario.", ".$rolsecundario;
         $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
         $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
-        $bitacora->accion = "Eliminado departamento";
+        $bitacora->accion = "Departamento archivado";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
+        return redirect('departamento');
+    }
+
+    public function enable(Request $request, $id)
+    {
+        //Departamento::destroy($id);
+        $departamento = Departamento::findOrFail($id);
+        $departamento->estaactivo = 'Activo';;
+        $departamento->save();
+
+
+        $materias = Materia::where('departamento_id',$id)->get();
+        foreach($materias as $item){
+            $item->departamento_id = '0';
+            $item->departamento_nombre = '-Ninguno-';
+            $item->save();
+        }
+
+        $asignaciones = Asignacion::where('departamento',$id)->get();
+        foreach($asignaciones as $item){
+            $ind = $item->id;
+            $asigna = Asignacion::findOrFail($ind);
+            $asigna->departamento = '-Ninguno-';
+            $asigna->save();
+        }
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Departamento activado";
         $bitacora->direccion_ip = $request->getClientIp();
         $bitacora->save();
 

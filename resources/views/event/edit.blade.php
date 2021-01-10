@@ -13,9 +13,18 @@
 
 <form action="{{url('/event/edit/'.$evento->id)}}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
+
+    @if($errors->first('title'))
+          <div class="alert alert-danger" role ="alert" >
+            <ul>
+                      <li>{{ $errors->first('title')}} </li>
+            </ul>
+          </div>
+          @endif
     
     <label for="title" class="control-label">{{ 'Titulo' }}</label>
     <input class="form-control" type="text" name="title" id="title" value="{{$evento->title}}" required>
+    <input class="form-control" type="text" name="creator" id="creator" value="" hidden>
     <br/>
     <label for="start" class="control-label">{{ 'Fecha de inicio' }}</label>
     <input class="form-control" type="date" name="start" id="start" value="{{$evento->start}}" required>

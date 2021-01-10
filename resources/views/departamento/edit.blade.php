@@ -45,12 +45,8 @@
     </div>
 
     <div class="form-group">
-        <label for="exampleFormControlSelect1" class="control-label">Estado</label>
-        <select name="estaactivo"  value="" class="form-control" id="estaactivo">
-            <option value="Activo">Activo</option>
-            <option value="Archivado">Archivado</option>
-
-    </select>
+        <label for="estaactivo" class="control-label">Estado</label>
+        <input class="form-control" type="text" name="estaactivo" id="estaactivo" value="{{$depa->estaactivo}}" required readonly>
     </div>
 
     <input class="btn btn-success" type="submit" value="Guardar cambios">

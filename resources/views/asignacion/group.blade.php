@@ -17,6 +17,25 @@
     <form action="{{url('asignacion/guardar')}}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post"  enctype="multipart/form-data">
         @csrf
 
+        @if($errors->first('etiqueta'))
+          <div class="alert alert-danger" role ="alert" >
+            <ul>
+                      <li>{{ $errors->first('etiqueta')}} </li>
+            </ul>
+          </div>
+          <a class="btn btn-danger" href="{{url('asignacion')}}">Volver a asignaciones</a>
+          @elseif (!$grupos->isNotEmpty())
+          <div class="alert alert-danger" role ="alert" >
+            <ul>
+                      <li>{{ 'La materia no tiene grupos.'}} </li>
+            </ul>
+          </div>
+          <a class="btn btn-danger" href="{{url('asignacion')}}">Volver a asignaciones</a>
+          @else
+          
+
+        <input class="form-control" type="text" name="etiqueta" id="etiqueta" value="" hidden>
+
 
         <div class="form-group">
             <label for="exampleFormControlSelect1">Gestión</label>
@@ -62,8 +81,8 @@
         </div>
 
         <button class="btn btn-primary" type="submit">Guardar</button>
-        <a class="btn btn-danger" href="{{url('asignaciones')}}">Cancelar</a>
-
+        <a class="btn btn-danger" href="{{ url()->previous() }}">Cancelar</a>
+        @endif
     </form>
 </div>
 </div>

@@ -162,21 +162,24 @@ class FacultadController extends Controller
      * @param  \App\Facultad  $facultad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function disable(Request $request, $id)
     {
-        Facultad::destroy($id);
+        //Facultad::destroy($id);
+        $facultad = Facultad::findOrFail($id);
+        $facultad->estaactivo('Archivado');
+        $facultad->save();
 
         $depas = Departamento::where('facultad_id',$id)->get();
         foreach($depas as $item){
             $item->facultad_id = '0';
-            $item->facultad_nombre = '-Ninguno-';
+            //$item->facultad_nombre = '-Ninguno-';
             $item->save();
         }
 
         $carreras = Carrera::where('facultad_id',$id)->get();
         foreach($carreras as $item){
             $item->facultad_id = '0';
-            $item->facultad_nombre = '-Ninguno-';
+            //$item->facultad_nombre = '-Ninguno-';
             $item->save();
         }
 
@@ -194,7 +197,49 @@ class FacultadController extends Controller
         $bitacora->rol = $rolprimario.", ".$rolsecundario;
         $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
         $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
-        $bitacora->accion = "Eliminada facultad";
+        $bitacora->accion = "Facultad archivada";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
+        return redirect('facultad');
+    }
+
+    public function enable(Request $request, $id)
+    {
+        //Facultad::destroy($id);
+        $facultad = Facultad::findOrFail($id);
+        $facultad->estaactivo('Activo');
+        $facultad->save();
+
+        $depas = Departamento::where('facultad_id',$id)->get();
+        foreach($depas as $item){
+            $item->facultad_id = '0';
+            //$item->facultad_nombre = '-Ninguno-';
+            $item->save();
+        }
+
+        $carreras = Carrera::where('facultad_id',$id)->get();
+        foreach($carreras as $item){
+            $item->facultad_id = '0';
+            //$item->facultad_nombre = '-Ninguno-';
+            $item->save();
+        }
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Facultad activada";
         $bitacora->direccion_ip = $request->getClientIp();
         $bitacora->save();
 

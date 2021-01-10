@@ -8,7 +8,7 @@
         <br/>
         <h2 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Listado de eventos</h2>
 
-
+        <a href="{{url('event/add')}}" class="btn btn-success">Agregar evento</a>
         <table class="table table-light table-hover">
           <thead class="thead-light">
               <tr>

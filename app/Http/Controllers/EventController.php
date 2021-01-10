@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Auth;
 use App\Bitacora;
 use App\User;
+use App\Rules\EventosSinRepetir;
+use App\Rules\EventosActualizar;
 
 class EventController extends Controller
 {
@@ -57,7 +59,12 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        
+
+        $creador = Auth::id();
+        $tipo = $request['type'];
+
+        $this->validate($request, ['title' => ['required', new EventosSinRepetir($creador,$tipo)]]);
+
         $event= new Event();
         $event->title=$request->title;
         $event->start= substr($request->start,0,10);
@@ -108,11 +115,27 @@ class EventController extends Controller
 
     public function update(Request $request, $id)
     {
-        $datosEvento=request()->except(['_token','_method']);
+        $creador = Auth::id();
+        $tipo = $request['type'];
+
+        //dd($request,$creador,$tipo,$id);
+
+        $this->validate($request, ['title' => ['required', new EventosActualizar($creador,$tipo,$id)]]);
+
+        $event= Event::findOrFail($id);
+        $event->title=$request->title;
+        $event->start= substr($request->start,0,10);
+        $event->end= substr($request->end,0,10);
+        $event->creator = Auth::id();
+        $event->type = $request->type;
+        $event->save();
+        
+        //$datosEvento=request()->except(['_token','_method']);
+
         //$datosEvento->start = substr($datosEvento->start,0,10);
         //$datosEvento->end = substr($datosEvento->end,0,10);
 
-        Event::where('id','=',$id)->update($datosEvento);
+        //Event::where('id','=',$id)->update($datosEvento);
 
 
         $bitacora = new Bitacora;

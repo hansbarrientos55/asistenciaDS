@@ -43,11 +43,19 @@
                 <a class="btn btn-warning" href="{{ url('/materia/'.$item->id.'/edit') }}">Editar</a>
                     
 
-                <form action="{{ url('/materia/'.$item->id) }}" style="display:inline" method="post">
+                @if($item->estaactivo == 'Activo')
+                <form action="{{ url('/materia/disable/'.$item->id) }}" style="display:inline" method="post">
                      {{ csrf_field() }}   
-                     {{method_field('DELETE')}}
-                    <button class="btn btn-danger" type="submit" onclick="return confirm('Eliminar ?');" >Eliminar</button>
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Se archivara el registro.');" >Archivar</button>
                 </form>
+                @endif
+
+                @if($item->estaactivo == 'Archivado')
+                <form action="{{ url('/materia/enable/'.$item->id) }}" style="display:inline" method="post">
+                    {{ csrf_field() }}   
+                   <button class="btn btn-info" type="submit" onclick="return confirm('Se desarchivara el registro. ');" >Desarchivar</button>
+               </form>
+               @endif
 
 
                 </td>

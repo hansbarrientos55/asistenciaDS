@@ -14,7 +14,7 @@ class CreateReposicionsTable extends Migration
     public function up()
     {
         Schema::create('reposicions', function (Blueprint $table) {
-            $table->bigIncrements('id')->generatedAs('start with 100 increment by 1');
+            $table->bigIncrements('id')->generatedAs('start with 125 increment by 1');
             $table->integer('ausencia_id')->unsigned();
             $table->string('fecha');
             $table->string('hora');

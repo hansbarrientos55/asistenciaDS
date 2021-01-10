@@ -20,8 +20,8 @@ class CarreraController extends Controller
      */
     public function index()
     {
-        $datos['carreras']=Carrera::paginate(20);
-        return view('carrera.index', $datos);
+        $carreras=Carrera::all();
+        return view('carrera.index', compact('carreras'));
     }
 
     /**
@@ -31,7 +31,7 @@ class CarreraController extends Controller
      */
     public function create()
     {
-        $facultades = Facultad::all();
+        $facultades = Facultad::where('estaactivo','Activo')->get();
         return view('carrera.create', compact('facultades'));
     }
 
@@ -115,7 +115,7 @@ class CarreraController extends Controller
     public function edit($id)
     {
         $carre = Carrera::findOrFail($id);
-        $facultades = Facultad::all();
+        $facultades = Facultad::where('estaactivo','Activo')->get();
 
         return view('carrera.edit', compact('carre', 'facultades'));
     }
@@ -184,9 +184,12 @@ class CarreraController extends Controller
      * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function disable(Request $request, $id)
     {
-        Carrera::destroy($id);
+        //Carrera::destroy($id);
+        $carrera = Carrera::findOrFail($id);
+        $carrera->estaactivo = 'Archivado';
+        $carrera->save();
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();
@@ -202,7 +205,35 @@ class CarreraController extends Controller
         $bitacora->rol = $rolprimario.", ".$rolsecundario;
         $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
         $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
-        $bitacora->accion = "Eliminada carrera";
+        $bitacora->accion = "Carrera archivada";
+        $bitacora->direccion_ip = $request->getClientIp();
+        $bitacora->save();
+
+        return redirect('carrera');
+    }
+
+    public function enable(Request $request, $id)
+    {
+        //Carrera::destroy($id);
+        $carrera = Carrera::findOrFail($id);
+        $carrera->estaactivo = 'Activo';
+        $carrera->save();
+
+        $bitacora = new Bitacora;
+        $bitacora->user_id = Auth::id();
+        $consulta = User::where('id',Auth::id())->select("nombres","apellidos","rolprimario","rolsecundario")->get();
+        foreach($consulta as $item){
+            $nombres = $item->nombres;
+            $apellidos = $item->apellidos;
+            $rolprimario = $item->rolprimario;
+            $rolsecundario = $item->rolsecundario;
+        }
+        
+        $bitacora->usuario = $nombres." ".$apellidos;
+        $bitacora->rol = $rolprimario.", ".$rolsecundario;
+        $bitacora->fecha = Carbon::now()->setTimezone('America/Caracas')->toDateString();
+        $bitacora->hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
+        $bitacora->accion = "Carrera activada";
         $bitacora->direccion_ip = $request->getClientIp();
         $bitacora->save();
 
