@@ -39,15 +39,6 @@
         <input class="form-control" type="text" name="horario" id="horario" value="{{$repos->horario}}" required readonly>
     </div>
 
-    <div class="form-group">
-        <label for="grupo" class="control-label">Grupo</label>
-        <input class="form-control" type="text" name="grupo" id="grupo" value="{{$repos->grupo}}" required readonly>
-    </div>  
-
-    <div class="form-group">
-        <label for="materia" class="control-label">Materia</label>
-        <input class="form-control" type="text" name="materia" id="materia" value="{{$repos->materia}}" required readonly>
-    </div>
 
     @role('Jefe de Departamento')
         <div class="form-group">

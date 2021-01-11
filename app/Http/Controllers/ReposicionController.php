@@ -12,6 +12,9 @@ use App\Hora;
 use Auth;
 use App\Bitacora;
 use App\User;
+use App\Rules\ReposicionSinRepetir;
+use App\Rules\ReposicionActualizar;
+use App\Rules\AusenciaFecha;
 
 class ReposicionController extends Controller
 {
@@ -48,7 +51,8 @@ class ReposicionController extends Controller
         $materias = Materia::all();
         $grupos = Grupo::all();
         $horarios = Hora::all();
-        return view('reposicion.create', compact('id', 'fecha', 'hora', 'materias', 'grupos', 'horarios'));
+        $usuario = Auth::id();
+        return view('reposicion.create', compact('id', 'fecha', 'hora', 'materias', 'grupos', 'horarios', 'usuario'));
     }
 
     /**
@@ -64,6 +68,17 @@ class ReposicionController extends Controller
 
     public function almacenar(Request $request,$id)
     {
+        $ausencia = $id;
+        $fecha = $request['nuevafecha'];
+        $hora = $request['horario'];
+        
+        $this->validate($request, [
+                                    'estado' => ['required', new ReposicionSinRepetir($ausencia,$fecha,$hora)],
+                                    'nuevafecha' => ['required', new AusenciaFecha()], 
+                                  ]
+                        
+                       );
+        
         $datosRepo=request()->except('_token');
         $datosRepo['ausencia_id'] = $id;
         reposicion::insert($datosRepo);
@@ -136,6 +151,21 @@ class ReposicionController extends Controller
 
     public function actualizar(Request $request, $id)
     {
+        $repo = Reposicion::findOrFail($id);
+        
+        $ausencia = $repo['ausencia_id'];
+        $fecha = $request['nuevafecha'];
+        $hora = $request['horario'];
+        $repo = $id;
+        
+        $this->validate($request, [
+                                    'estado' => ['required', new ReposicionActualizar($ausencia,$fecha,$hora,$repo)],
+                                    'nuevafecha' => ['required', new AusenciaFecha()], 
+                                  ]
+                        
+                       );
+        
+        
         $datosRepo=request()->except(['_token','_method']);
         Reposicion::where('id','=',$id)->update($datosRepo);
         $aux = Reposicion::findOrFail($id);

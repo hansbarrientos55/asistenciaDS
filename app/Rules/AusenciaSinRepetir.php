@@ -4,29 +4,26 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-use App\Asistencia;
+use App\Ausencia;
 
-class AsistenciaSinRepetir implements Rule
+class AusenciaSinRepetir implements Rule
 {
-    
         private $usuario;
-        private $materia;
-        private $grupo;
-        private $horario;
         private $fecha;
+        private $hora;
+        
     
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($usuario,$materia,$grupo,$horario,$fecha)
+    public function __construct($usuario,$fecha,$hora)
     {
         $this->usuario = $usuario;
-        $this->materia = $materia;
-        $this->grupo =  $grupo;
-        $this->horario = $horario;
         $this->fecha = $fecha;
+        $this->hora = $hora;
+        
     }
 
     /**
@@ -40,7 +37,7 @@ class AsistenciaSinRepetir implements Rule
     {
         $res;
 
-       if(Asistencia::where('user_id',$this->usuario)->where('materia',$this->materia)->where('grupo',$this->grupo)->where('horario',$this->horario)->where('fecha',$this->fecha)->exists()){
+       if(Ausencia::where('user_id',$this->usuario)->where('fechaausencia',$this->fecha)->where('horaausencia',$this->hora)->exists()){
            $res = false; 
 
        } else {
@@ -58,6 +55,6 @@ class AsistenciaSinRepetir implements Rule
      */
     public function message()
     {
-        return 'No se puede repetir esta asistencia.';
+        return 'No se puede repetir este permiso. Elija otra fecha y hora.';
     }
 }

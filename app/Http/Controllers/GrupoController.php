@@ -130,6 +130,7 @@ class GrupoController extends Controller
     public function editargrupo($id)
     {
         $gru = Grupo::findOrFail($id);
+
         return view('grupo.edit', compact('gru',"id"));
     }
 

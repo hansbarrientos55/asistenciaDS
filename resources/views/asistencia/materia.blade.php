@@ -10,7 +10,7 @@
                 <div class="card" style="width: 24rem; background-color: #a3bcc9;">
                 <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Nueva asistencia</h1>
 
-                <form action="{{url('asistencia/store')}}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post"  enctype="multipart/form-data">
+                <form action="{{url('asistenciagrupo')}}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post"  enctype="multipart/form-data">
                     @csrf
                     
                     <div class="form-group">
@@ -24,14 +24,8 @@
                         </select>
                     </div>
 
-                    
 
-                    
-                    
-                    
-                    
-
-                    <input type="submit" class="btn btn-success" value="Guardar">
+                    <input type="submit" class="btn btn-success" value="Siguiente">
                     <a class="btn btn-danger" href="{{url('asistencia')}}">Cancelar</a>
                 </form>
                 </div>

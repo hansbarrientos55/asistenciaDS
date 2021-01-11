@@ -33,7 +33,16 @@ class GestionController extends Controller
      */
     public function create()
     {
-        return view('gestion.create');
+        $ahora = Carbon::now();
+        $actual = Carbon::createFromFormat('Y-m-d H:i:s', $ahora)->year;
+        $siguiente = $actual + 1;
+
+        $anho = [
+            "actual" => $actual,
+            "siguiente" => $siguiente,
+        ];
+
+        return view('gestion.create', compact('anho'));
     }
 
     /**
@@ -46,11 +55,7 @@ class GestionController extends Controller
     {
         $request['gestion'] = $request['periodogestion']."-".$request['añogestion'];
 
-        //dd($request);
-
         $this->validate($request, ['gestion' => ['required', new GestionSinRepetir]]);
-        
-
         
         $datosGestion=request()->except('_token');
         $datosGestion['gestion']=$datosGestion['periodogestion'].'-'.$datosGestion['añogestion'];
@@ -100,7 +105,16 @@ class GestionController extends Controller
     {
         $ges = Gestion::findOrFail($id);
 
-        return view('gestion.edit', compact('ges'));
+        $ahora = Carbon::now();
+        $actual = Carbon::createFromFormat('Y-m-d H:i:s', $ahora)->year;
+        $siguiente = $actual + 1;
+
+        $anho = [
+            "actual" => $actual,
+            "siguiente" => $siguiente,
+        ];
+
+        return view('gestion.edit', compact('ges','anho'));
     }
 
     /**

@@ -36,7 +36,7 @@
 
 
     <input class="btn btn-success" type="submit" value="Guardar cambios">
-    <a class="btn btn-danger" href="{{ url()->previous() }}">Cancelar</a>
+    <a class="btn btn-danger" href="{{ url('materia') }}">Cancelar</a>
 
 
 </form>

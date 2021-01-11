@@ -10,6 +10,9 @@ use Carbon\Carbon;
 use Auth;
 use App\Bitacora;
 use App\User;
+use App\Rules\AusenciaSinRepetir;
+use App\Rules\AusenciaActualizar;
+use App\Rules\AusenciaFecha;
 
 class AusenciaController extends Controller
 {
@@ -32,11 +35,13 @@ class AusenciaController extends Controller
      */
     public function create()
     {
+        $usuario = Auth::id();
+
         $fecha = Carbon::now()->toDateString();
         $hora = Carbon::now()->setTimezone('America/Caracas')->toTimeString();
         $horas = Hora::all();
 
-        return view('ausencia.create', compact('fecha','hora','horas'));
+        return view('ausencia.create', compact('fecha','hora','horas', 'usuario'));
     }
 
     /**
@@ -47,11 +52,27 @@ class AusenciaController extends Controller
      */
     public function store(Request $request)
     {
+        
+        //dd($request);
+        $usuario = $request['usuario'];
+        $fecha = $request['fechaausencia'];
+        $hora = $request['horaausencia'];
+        
+        $this->validate($request, [
+                                    'motivo' => ['required', new AusenciaSinRepetir($usuario,$fecha,$hora)],
+                                    'fechaausencia' => ['required', new AusenciaFecha()], 
+                                  ]
+                        
+                       );
+        
+        
         if ($request->file('archivo') == null) {
             $real = "";
         }else{
            $real = $request->file('archivo')->store('public');  
         }
+
+        
         
         $ausencia = new Ausencia;
         $ausencia->user_id = Auth::id();
@@ -118,8 +139,31 @@ class AusenciaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datosAusencia=request()->except(['_token','_method']);
-        Ausencia::where('id','=',$id)->update($datosAusencia);
+        $usuario = Auth::id();
+        $fecha = $request['fechaausencia'];
+        $hora = $request['horaausencia'];
+        $ause = $id;
+
+        //dd($request,$id);
+        
+        $this->validate($request, [
+            'motivo' => ['required', new AusenciaActualizar($usuario,$fecha,$hora,$ause)],
+            'fechaausencia' => ['required', new AusenciaFecha()],]
+        );
+        
+       
+        //$datosAusencia=request()->except(['_token','_method']);
+        //Ausencia::where('id','=',$id)->update($datosAusencia);
+
+        $ausencia = Ausencia::findOrFail($id);
+        $ausencia->user_id = Auth::id();
+        $ausencia->fecha = $request->fecha;
+        $ausencia->hora = $request->hora;
+        $ausencia->motivo = $request->motivo;
+        $ausencia->fechaausencia = $request->fechaausencia;
+        $ausencia->horaausencia = $request->horaausencia;
+
+        $ausencia->save();
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();

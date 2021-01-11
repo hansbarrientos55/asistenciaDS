@@ -18,6 +18,16 @@
 
     <label for="">Editar permiso</label>
     <br/>
+    @if($errors->first('motivo'))
+    <div class="alert alert-danger" role ="alert" >
+      <ul>
+                <li>{{ $errors->first('motivo')}} </li>
+      </ul>
+    </div>
+   
+    @endif 
+    <input class="form-control" type="text" name="usuario" id="usuario" value="{{$ause->id}}" hidden>
+
 
     <div class="form-group">
         <label for="fecha" class="control-label">Fecha</label>
@@ -45,6 +55,14 @@
 
 
     @role('Docente')
+    @if($errors->first('fechaausencia'))
+          <div class="alert alert-danger" role ="alert" >
+            <ul>
+                      <li>{{ $errors->first('fechaausencia')}} </li>
+            </ul>
+          </div>
+         
+          @endif 
     <div class="form-group">
         <label for="fechaausencia" class="control-label">Fecha de ausencia</label>
     <input class="form-control" type="date" name="fechaausencia" id="fechaausencia" value="{{$ause->fechaausencia}}" required>

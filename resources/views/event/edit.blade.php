@@ -26,9 +26,30 @@
     <input class="form-control" type="text" name="title" id="title" value="{{$evento->title}}" required>
     <input class="form-control" type="text" name="creator" id="creator" value="" hidden>
     <br/>
+    @if($errors->first('type'))
+            <div class="alert alert-danger" role ="alert" >
+              <ul>
+                        <li>{{ $errors->first('type')}} </li>
+              </ul>
+            </div>
+            @endif
+            @if($errors->first('start'))
+            <div class="alert alert-danger" role ="alert" >
+              <ul>
+                        <li>{{ $errors->first('start')}} </li>
+              </ul>
+            </div>
+            @endif
     <label for="start" class="control-label">{{ 'Fecha de inicio' }}</label>
     <input class="form-control" type="date" name="start" id="start" value="{{$evento->start}}" required>
     <br/>
+    @if($errors->first('end'))
+            <div class="alert alert-danger" role ="alert" >
+              <ul>
+                        <li>{{ $errors->first('end')}} </li>
+              </ul>
+            </div>
+            @endif
     <label for="end" class="control-label">{{ 'Fecha de finalizacion' }}</label>
     <input class="form-control" type="date" name="end" id="end" value="{{$evento->end}}" required>
     <br/>

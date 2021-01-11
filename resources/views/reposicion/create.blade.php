@@ -12,6 +12,14 @@
 
                 <form action="{{url('reposicion/store/'.$id)}}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post"  enctype="multipart/form-data">
                     @csrf
+                    @if($errors->first('estado'))
+                    <div class="alert alert-danger" role ="alert" >
+                        <ul>
+                                <li>{{ $errors->first('estado')}} </li>
+                        </ul>
+                    </div>
+                    
+                    @endif 
                     <div class="form-group">
                         <label for="fecha" class="control-label">{{ 'Fecha' }}</label>
                     <input class="form-control" type="string" name="fecha" id="fecha" value="{{$fecha}}" required readonly>
@@ -22,6 +30,14 @@
                         <input class="form-control" type="string" name="hora" id="hora" value="{{ $hora }}" required readonly>
                     </div> 
 
+                    @if($errors->first('nuevafecha'))
+                    <div class="alert alert-danger" role ="alert" >
+                        <ul>
+                                <li>{{ $errors->first('nuevafecha')}} </li>
+                        </ul>
+                    </div>
+                    
+                    @endif 
                     <div class="form-group">
                         <label for="nuevafecha" class="control-label">{{ 'Nueva fecha' }}</label>
                         <input class="form-control" type="date" name="nuevafecha" id="nuevafecha" value="" required>
@@ -36,23 +52,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Grupo</label>
-                        <select name="grupo" class="form-control" id="grupo">
-                            @foreach ($grupos as $item)
-                                <option value="{{$item->numerogrupo}}">{{$item->numerogrupo}}</option>
-                            @endforeach
-                        </select>
-                    </div>
                     
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Materia</label>
-                        <select name="materia" class="form-control" id="materia">
-                            @foreach ($materias as $item)
-                                <option value="{{$item->nombremate}}">{{$item->nombremate}}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
                     @role('Docente')
                     <div class="form-group">
@@ -63,7 +63,7 @@
                   
 
                     <input type="submit" class="btn btn-success" value="Guardar">
-                    <a class="btn btn-danger" href="{{url()->previous()}}">Cancelar</a>
+                    <a class="btn btn-danger" href="{{url('ausencia')}}">Cancelar</a>
                 </form>
                 </div>
             </div>

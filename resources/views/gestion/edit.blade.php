@@ -24,13 +24,20 @@
     </div>
     @endif
 
+    <input class="form-control" type="text" name="gestion" id="gestion" value="" hidden>
+    <br/>
+
     <label for="periodogestion">{{ 'Periodo' }}</label>
     <input class="form-control" type="text" name="periodogestion" id="periodogestion" value="{{$ges->periodogestion}}" required>
     <br/>
-    <label for="añogestion">{{ 'Año' }}</label>
-    <input class="form-control" type="text" name="añogestion" id="añogestion" value="{{$ges->añogestion}}" required>
-    <input class="form-control" type="text" name="gestion" id="gestion" value="" hidden>
-    <br/>
+    
+    <div class="form-group">
+        <label for="añogestion">{{ 'Año' }}</label>
+        <select name="añogestion"  value="{{$ges->añogestion}}" class="form-control" id="añogestion">
+            <option value="{{$anho['actual']}}">{{$anho['actual']}}</option>
+            <option value="{{$anho['siguiente']}}">{{$anho['siguiente']}}</option>
+    </select>
+    </div>
 
     <div class="form-group">
         <label for="estaactivo" class="control-label">Estado</label>

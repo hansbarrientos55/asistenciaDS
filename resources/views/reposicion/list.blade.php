@@ -15,8 +15,6 @@
             <th scope="col">Hora</th>
             <th scope="col">Nueva fecha</th>
             <th scope="col">Nueva hora</th>
-            <th scope="col">Grupo</th>
-            <th scope="col">Materia</th>
             <th scope="col">Estado</th>
             <th scope="col">Acciones</th>
         </tr>
@@ -29,8 +27,6 @@
                 <td>{{$item->hora}}</td>
                 <td>{{$item->nuevafecha}}</td>
                 <td>{{$item->horario}}</td>
-                <td>{{$item->grupo}}</td>
-                <td>{{$item->materia}}</td>
                 <td>{{$item->estado}}</td>
                 <td>
                     @can('editar-ausencia-control')

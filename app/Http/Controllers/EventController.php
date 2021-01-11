@@ -12,6 +12,9 @@ use App\Bitacora;
 use App\User;
 use App\Rules\EventosSinRepetir;
 use App\Rules\EventosActualizar;
+use App\Rules\EventosControlFecha;
+use App\Rules\EventosControlFechaInicio;
+use App\Rules\EventosControlFechaFin;
 
 class EventController extends Controller
 {
@@ -62,8 +65,15 @@ class EventController extends Controller
 
         $creador = Auth::id();
         $tipo = $request['type'];
+        $inicio = $request['start'];
+        $fin = $request['end'];
 
-        $this->validate($request, ['title' => ['required', new EventosSinRepetir($creador,$tipo)]]);
+        $this->validate($request, ['title' => ['required', new EventosSinRepetir($creador,$tipo)],
+                                   'type' => ['required', new EventosControlFecha($inicio,$fin)],
+                                   'start' => ['required', new EventosControlFechaInicio($inicio)],
+                                   'end' => ['required', new EventosControlFechaFin($fin)]       
+                                  ]
+        );
 
         $event= new Event();
         $event->title=$request->title;
@@ -117,10 +127,18 @@ class EventController extends Controller
     {
         $creador = Auth::id();
         $tipo = $request['type'];
+        $inicio = $request['start'];
+        $fin = $request['end'];
 
         //dd($request,$creador,$tipo,$id);
 
-        $this->validate($request, ['title' => ['required', new EventosActualizar($creador,$tipo,$id)]]);
+        $this->validate($request, [
+                                   'title' => ['required', new EventosActualizar($creador,$tipo,$id)],
+                                   'type' => ['required', new EventosControlFecha($inicio,$fin)],
+                                   'start' => ['required', new EventosControlFechaInicio($inicio)],
+                                   'end' => ['required', new EventosControlFechaFin($fin)]                            
+                                  ]
+        );
 
         $event= Event::findOrFail($id);
         $event->title=$request->title;

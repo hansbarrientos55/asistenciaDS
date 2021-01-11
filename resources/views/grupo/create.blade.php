@@ -37,7 +37,7 @@
     <br/>
     <input class="btn btn-success" type="submit" value="Guardar">
     <input class="btn btn-primary" type="reset" value="Limpiar campos">
-    <a class="btn btn-danger" href="{{ url()->previous() }}">Cancelar</a>
+    <a class="btn btn-danger" href="{{ url('/grupo/'.$id.'/index') }}">Cancelar</a>
 
 
 </form>

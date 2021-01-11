@@ -30,13 +30,32 @@
           </div>
           <div class="form-group">
 
-
+            @if($errors->first('type'))
+            <div class="alert alert-danger" role ="alert" >
+              <ul>
+                        <li>{{ $errors->first('type')}} </li>
+              </ul>
+            </div>
+            @endif
+            @if($errors->first('start'))
+            <div class="alert alert-danger" role ="alert" >
+              <ul>
+                        <li>{{ $errors->first('start')}} </li>
+              </ul>
+            </div>
+            @endif
               <label> Fecha de inicio </label>  
               <input class="form-control"  type="date" id="start" name="start" value="{{ old('start') }}" required>   
 
           </div>
           <div class="form-group">
-
+            @if($errors->first('end'))
+            <div class="alert alert-danger" role ="alert" >
+              <ul>
+                        <li>{{ $errors->first('end')}} </li>
+              </ul>
+            </div>
+            @endif
 
               <label> Fecha de finalizacion </label>  
               <input class="form-control"  type="date" id="end" name="end" value="{{ old('end') }}" required>   

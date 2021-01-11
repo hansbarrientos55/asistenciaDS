@@ -88,12 +88,6 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
     Route::get('/permisos','ControlConfiguracionController@crearPermisos');
     Route::get('/horasydias','ControlConfiguracionController@crearHorasyDias');
 
-
-    Route::resource('asistencia','AsistenciaController');//asistencia
-    Route::post('asistencia/store', 'AsistenciaController@store');
-    Route::get('asistenciamenu','AsistenciaController@menu');
-    Route::get('asistencialista','AsistenciaController@list')->name('asistencialista');
-
     Route::resource('ausencia','AusenciaController');
     Route::post('ausencia/store', 'AusenciaController@store');
     Route::resource('reposicion','ReposicionController');
@@ -152,6 +146,29 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
 
     Route::post('asignacion/eliminar/{id}','AsignacionController@eliminar');
 
-    
+    Route::resource('asistencia','AsistenciaController');//asistencia
+
+    Route::get('asistenciamateria','AsistenciaController@materia');
+    Route::get('asistenciagrupo','AsistenciaController@grupo');
+    Route::post('asistenciagrupo','AsistenciaController@grupo');
+    Route::get('asistenciahorario','AsistenciaController@horario');
+    Route::post('asistenciahorario','AsistenciaController@horario');
+    Route::get('asistenciadatos','AsistenciaController@datos');
+    Route::post('asistenciadatos','AsistenciaController@datos');
+    Route::post('asistenciaguardar', 'AsistenciaController@guardar');
+
+    Route::get('asistenciamateriaeditar/{id}','AsistenciaController@materiaeditar');
+    Route::get('asistenciagrupoeditar/{id}','AsistenciaController@grupoeditar');
+    Route::post('asistenciagrupoeditar/{id}','AsistenciaController@grupoeditar');
+    Route::get('asistenciahorarioeditar/{id}','AsistenciaController@horarioeditar');
+    Route::post('asistenciahorarioeditar/{id}','AsistenciaController@horarioeditar');
+    Route::get('asistenciadatoseditar/{id}','AsistenciaController@datoseditar');
+    Route::post('asistenciadatoseditar/{id}','AsistenciaController@datoseditar');
+    Route::post('asistencia/actualizar/{id}', 'AsistenciaController@actualizar');
+
+    Route::post('asistencia/store', 'AsistenciaController@store');
+    Route::get('asistenciamenu','AsistenciaController@menu');
+    Route::get('asistencialista','AsistenciaController@list')->name('asistencialista');
+
     
 });

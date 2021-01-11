@@ -14,6 +14,16 @@
 
     <form action="{{url('ausencia/store')}}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post"  enctype="multipart/form-data">
         @csrf
+        @if($errors->first('motivo'))
+          <div class="alert alert-danger" role ="alert" >
+            <ul>
+                      <li>{{ $errors->first('motivo')}} </li>
+            </ul>
+          </div>
+         
+          @endif 
+        <input class="form-control" type="text" name="usuario" id="usuario" value="{{$usuario}}" hidden>
+
         <div class="form-group">
             <label for="fecha" class="control-label">Fecha</label>
         <input class="form-control" type="string" name="fecha" id="fecha" value="{{$fecha}}" required readonly>
@@ -26,9 +36,17 @@
 
         <div class="form-group">
             <label for="motivo" class="control-label">Motivo</label>
-            <input class="form-control" type="text" name="motivo" id="motivo" value="" required>
+            <input class="form-control" type="text" name="motivo" id="motivo" value="{{ old('motivo') }}" required>
         </div> 
 
+        @if($errors->first('fechaausencia'))
+          <div class="alert alert-danger" role ="alert" >
+            <ul>
+                      <li>{{ $errors->first('fechaausencia')}} </li>
+            </ul>
+          </div>
+         
+          @endif 
         <div class="form-group">
             <label for="fechaausencia" class="control-label">Fecha de ausencia</label>
         <input class="form-control" type="date" name="fechaausencia" id="fechaausencia" value="" required>

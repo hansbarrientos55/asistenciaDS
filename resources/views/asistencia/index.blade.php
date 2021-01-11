@@ -3,15 +3,15 @@
 @section('content')
     
 
-<div class="container">
+<div class="container-fluid" style="width: auto">
 
     <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Registro de asistencia y avance</h1>
 
     @can('crear-asistencia-avance')
-    <a href="{{url('asistencia/create')}}" class="btn btn-success">Agregar asistencia</a>
+    <a href="{{url('asistenciamateria')}}" class="btn btn-success">Agregar asistencia</a>
     @endcan
 
-    <table class="table table-light table-hover">
+    <table class="table table-responsive table-light table-hover">
         <thead class="thead-light">
         <tr>
             <th scope="col">Id</th>
@@ -50,9 +50,9 @@
                 <td>{{$item->iniciosemana}}</td>
                 <td>{{$item->finsemana}}</td>
                 <td>{{$item->tipo}}</td>
-                <td>{{$item->horario}}</td>
-                <td>{{$item->grupo}}</td>
-                <td>{{$item->materia}}</td>
+                <td>{{$item->titulohorario}}</td>
+                <td>{{$item->nombregrupo}}</td>
+                <td>{{$item->nombremateria}}</td>
                 <td>{{$item->contenido}}</td>
                 <td>{{'Repositorio : '.$item->repositorio.', Notificacion : '.$item->notificacion.', Clase online : '.$item->claseonline}}</td>
                 <td>{{$item->observaciones}}</td>
@@ -80,7 +80,7 @@
                 <td>
 
                     @can('editar-asistencia-avance')
-                    <a class="btn btn-warning" href="{{ url('/asistencia/'.$item->id.'/edit') }}">Editar</a>
+                    <a class="btn btn-warning" href="{{ url('/asistenciamateriaeditar/'.$item->id) }}">Editar</a>
                     @endcan
 
                     @can('eliminar-asistencia-avance')

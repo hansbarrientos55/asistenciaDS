@@ -28,9 +28,15 @@
     </div>
 
     <div class="form-group">
-    <label for="añogestion">{{ 'Año' }}</label>
-    <input class="form-control" type="text" name="añogestion" id="añogestion" value="{{ old('añogestion') }}" required>
-    <input class="form-control" type="text" name="gestion" id="gestion" value="" hidden>
+        <input class="form-control" type="text" name="gestion" id="gestion" value="" hidden>
+    </div>
+    
+    <div class="form-group">
+        <label for="añogestion">{{ 'Año' }}</label>
+        <select name="añogestion"  value="" class="form-control" id="añogestion">
+            <option value="{{$anho['actual']}}">{{$anho['actual']}}</option>
+            <option value="{{$anho['siguiente']}}">{{$anho['siguiente']}}</option>
+    </select>
     </div>
 
     <div class="form-group">
