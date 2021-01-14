@@ -26,7 +26,6 @@
 
         <div>
             <a href="{{url('respaldar')}}" class="btn btn-light">Respaldar archivos aplicacion</a>
-            <a href="{{url('respaldos')}}" class="btn btn-dark">Lista de respaldos</a>
             <br>    
             </div>
 
