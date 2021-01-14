@@ -118,13 +118,13 @@ Route::group(['middleware'=>['permission:acceso-al-sistema']],function(){
 
     Route::resource('bitacora','BitacoraController');
 
-    //Route::get('migracion', 'MigracionController@index' );
+    Route::get('migracion', 'MigracionController@index' );
     Route::get('migracionpostgre', 'MigracionController@generarPostgre' );
     Route::get('migracionmy', 'MigracionController@generarMy' );
     Route::get('respaldar','MigracionController@respaldaraplicacion');
     Route::get('respaldos','MigracionController@respaldos');
     Route::get('respaldo/descarga/{id}','MigracionController@respaldodescarga');
-    Route::get('migracion', 'MigracionController@inicio' );
+    //Route::get('migracion', 'MigracionController@inicio' );
 
     Route::get('event/add','EventController@createEvent');
     Route::post('event/add','EventController@store');
