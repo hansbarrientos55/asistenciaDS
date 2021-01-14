@@ -14,7 +14,7 @@ class CreateMensualsTable extends Migration
     public function up()
     {
         Schema::create('mensuals', function (Blueprint $table) {
-            $table->bigIncrements('id')->generatedAs('start with 150 increment by 1');
+            $table->bigIncrements('id')->generatedAs('start with 200 increment by 1');
             $table->string('fecha')->nullable();
             $table->string('hora')->nullable();
             $table->string('mes')->nullable();

@@ -14,7 +14,7 @@ class CreateAusenciasTable extends Migration
     public function up()
     {
         Schema::create('ausencias', function (Blueprint $table) {
-            $table->bigIncrements('id')->generatedAs('start with 175 increment by 1');
+            $table->bigIncrements('id')->generatedAs('start with 225 increment by 1');
             $table->integer('user_id')->unsigned();
             $table->string('fecha');
             $table->string('hora');

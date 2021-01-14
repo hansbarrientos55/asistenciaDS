@@ -14,7 +14,7 @@ class CreateGestionsTable extends Migration
     public function up()
     {
         Schema::create('gestions', function (Blueprint $table) {
-            $table->increments('id')->generatedAs('start with 125 increment by 1');
+            $table->increments('id')->generatedAs('start with 175 increment by 1');
             $table->string('periodogestion');
             $table->string('añogestion');
             $table->string('gestion');

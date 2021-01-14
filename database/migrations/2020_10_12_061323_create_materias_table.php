@@ -14,7 +14,7 @@ class CreateMateriasTable extends Migration
     public function up()
     {
         Schema::create('materias', function (Blueprint $table) {
-            $table->increments('id')->generatedAs('start with 100 increment by 1');
+            $table->increments('id')->generatedAs('start with 150 increment by 1');
             $table->string('codigomate')->unique();
             $table->string('nombremate')->unique();
             $table->string('descripcionmate')->unique();

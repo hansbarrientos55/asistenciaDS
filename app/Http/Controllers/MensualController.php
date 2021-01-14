@@ -339,7 +339,7 @@ class MensualController extends Controller
 
         //dd($reportes);
         $pdf = PDF::loadView('mensual.impresion',compact('reportes','pagables','nopagables'));
-        return $pdf->setPaper('a4', 'landscape')->stream('pdfprueba.pdf');
+        return $pdf->setPaper('a4', 'landscape')->stream('informe-mensual.pdf');
 
     }
 }
