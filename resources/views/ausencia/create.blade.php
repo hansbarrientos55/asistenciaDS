@@ -39,6 +39,16 @@
             <input class="form-control" type="text" name="motivo" id="motivo" value="{{ old('motivo') }}" required>
         </div> 
 
+        <div class="form-group">
+            <label for="tipo">Tipo</label>
+            <select name="tipo" class="form-control" id="tipo">
+                    <option value="Licencia">Licencia</option>
+                    <option value="Baja">Baja</option>
+                    <option value="Comision">Comision</option>
+            </select>
+        </div>
+
+
         @if($errors->first('fechaausencia'))
           <div class="alert alert-danger" role ="alert" >
             <ul>

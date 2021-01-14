@@ -10,6 +10,15 @@ use App\User;
 use App\Asistencia;
 use App\Bitacora;
 use Auth;
+use App\Asignacion;
+use App\Grupo;
+use App\Horario;
+use App\Ausencia;
+
+use App\Rules\MensualSinRepetir;
+use App\Rules\MensualActualizar;
+
+use Barryvdh\DomPDF\Facade as PDF;
 
 class MensualController extends Controller
 {
@@ -74,24 +83,70 @@ class MensualController extends Controller
      */
     public function store(Request $request)
     {
+        $mes = $request['mes'];
+        $usuario = $request['user_id'];
+        //dd($request);
+        $this->validate($request, ['vistobueno' => ['required', new MensualSinRepetir($mes,$usuario)]]);
+
+        
         if ($request->file('archivo') == null) {
             $real = "";
         }else{
            $real = $request->file('archivo')->store('public');  
         }
 
+        $contador=0;
+        $horarios=0;
+        $acumulador=0;
+
+        $materias = Asignacion::where('docente',$request->user_id)->get();
+        foreach($materias as $item){
+            $grupos = Grupo::where('materia_id',$item->materia)->get();
+            foreach($grupos as $gru){
+                $horarios = Horario::where('grupo_id',$gru->id)->count();
+                $contador = $contador + $horarios;
+            }
+            $acumulador = $acumulador + $contador;
+            //dd($horarios,$contador,$acumulador);
+        }
+
         $periodos = Asistencia::where('user_id',$request->user_id)->where('mes',$request->mes)->count();
         $horaclase = 1.5;
-        $horas = $periodos*$horaclase;
+        $horas = $acumulador*$horaclase*4;
+        $asistidas = $periodos*$horaclase;
+        $faltas = $horas - $asistidas;
+
+        $licencia = Ausencia::where('user_id',$request->user_id)->where('mes', $request->mes)->where('tipo', 'Licencia')->count();
+        $licencias = $licencia * $horaclase;
+
+        $baja = Ausencia::where('user_id',$request->user_id)->where('mes', $request->mes)->where('tipo', 'Baja')->count();
+        $bajas = $baja * $horaclase;
+
+        $comision = Ausencia::where('user_id',$request->user_id)->where('mes', $request->mes)->where('tipo','Comision')->count();
+        $comisiones = $comision * $horaclase;
+
+        $totalpagables = $asistidas+$licencias+$comisiones;
+
+        $usuario = User::findOrFail($request->user_id);
 
         $asistencia = new Mensual;
         $asistencia->user_id = $request->user_id;
         $asistencia->fecha = $request->fecha;
         $asistencia->hora = $request->hora;
         $asistencia->mes = $request->mes;
+        $asistencia->usuario = $usuario->nombres.' '.$usuario->apellidos;
+        
+        $asistencia->horas = $horas;
+        $asistencia->asistidas = $asistidas;
+        $asistencia->faltas = $faltas;
+        $asistencia->licencia = $licencias;
+        $asistencia->baja = $bajas;
+        $asistencia->comision = $comisiones;
+        $asistencia->totalpagables = $totalpagables;
+
         $asistencia->vistobueno = $request->vistobueno;
         $asistencia->firma = $request->firma;
-        $asistencia->horas = $horas;
+        
         $asistencia->archivo =$real;
 
         $asistencia->save();
@@ -152,8 +207,72 @@ class MensualController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datosasistencia=request()->except(['_token','_method']);
-        Mensual::where('id','=',$id)->update($datosasistencia);
+        //$datosasistencia=request()->except(['_token','_method']);
+        //Mensual::where('id','=',$id)->update($datosasistencia);
+
+        $mes = $request['mes'];
+        $usuario = $request['user_id'];
+        $registro = $id;
+        //dd($request);
+        $this->validate($request, ['vistobueno' => ['required', new MensualActualizar($mes,$usuario,$registro)]]);
+
+        
+
+        $contador=0;
+        $horarios=0;
+        $acumulador=0;
+
+        $materias = Asignacion::where('docente',$request->user_id)->get();
+        foreach($materias as $item){
+            $grupos = Grupo::where('materia_id',$item->materia)->get();
+            foreach($grupos as $gru){
+                
+                $horarios = Horario::where('grupo_id',$gru->id)->count();
+                $contador = $contador + $horarios;
+            }
+            $acumulador = $acumulador + $contador;
+            //dd($horarios,$contador,$acumulador);
+        }
+        $periodos = Asistencia::where('user_id',$request->user_id)->where('mes',$request->mes)->count();
+        $horaclase = 1.5;
+        $horas = $acumulador*$horaclase*4;
+        $asistidas = $periodos*$horaclase;
+        $faltas = $horas - $asistidas;
+
+        $licencia = Ausencia::where('user_id',$request->user_id)->where('mes', $request->mes)->where('tipo', 'Licencia')->count();
+        $licencias = $licencia * $horaclase;
+
+        $baja = Ausencia::where('user_id',$request->user_id)->where('mes', $request->mes)->where('tipo', 'Baja')->count();
+        $bajas = $baja * $horaclase;
+
+        $comision = Ausencia::where('user_id',$request->user_id)->where('mes', $request->mes)->where('tipo','Comision')->count();
+        $comisiones = $comision * $horaclase;
+        $totalpagables = $asistidas+$licencias+$comisiones;
+
+        $nombres = User::findOrFail($request->user_id);
+
+        $asistencia = Mensual::findOrFail($id);
+        $asistencia->user_id = $request->user_id;
+        $asistencia->fecha = $request->fecha;
+        $asistencia->hora = $request->hora;
+        $asistencia->mes = $request->mes;
+        $asistencia->usuario = $nombres->nombres.' '.$nombres->apellidos;
+        
+        $asistencia->horas = $horas;
+        $asistencia->asistidas = $asistidas;
+        $asistencia->faltas = $faltas;
+        $asistencia->licencia = $licencias;
+        $asistencia->baja = $bajas;
+        $asistencia->comision = $comisiones;
+        $asistencia->totalpagables = $totalpagables;
+
+        $asistencia->vistobueno = $request->vistobueno;
+        $asistencia->firma = $request->firma;
+        
+
+        $asistencia->save();
+
+
 
         $bitacora = new Bitacora;
         $bitacora->user_id = Auth::id();
@@ -205,5 +324,22 @@ class MensualController extends Controller
         $bitacora->save();
 
         return redirect('mensual');
+    }
+
+    public function preparar()
+    {
+        $reportes = Mensual::all();
+
+        $pagables=0;
+        $nopagables=0;
+        foreach($reportes as $item){
+            $pagables = $pagables + $item->totalpagables;
+            $nopagables = $nopagables + $item->faltas;
+        }
+
+        //dd($reportes);
+        $pdf = PDF::loadView('mensual.impresion',compact('reportes','pagables','nopagables'));
+        return $pdf->setPaper('a4', 'landscape')->stream('pdfprueba.pdf');
+
     }
 }

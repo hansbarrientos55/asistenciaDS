@@ -15,13 +15,20 @@ class CreateMensualsTable extends Migration
     {
         Schema::create('mensuals', function (Blueprint $table) {
             $table->bigIncrements('id')->generatedAs('start with 150 increment by 1');
-            $table->integer('user_id')->unsigned();
             $table->string('fecha')->nullable();
             $table->string('hora')->nullable();
-            $table->string('mes');
-            $table->string('vistobueno');
-            $table->string('firma');
-            $table->double('horas', 5 ,1);
+            $table->string('mes')->nullable();
+            $table->integer('user_id')->unsigned();
+            $table->string('usuario')->nullable();
+            $table->double('horas', 5 ,1)->nullable();
+            $table->double('asistidas', 5 ,1)->nullable();
+            $table->double('faltas', 5 ,1)->nullable();
+            $table->double('licencia', 5 ,1)->nullable();
+            $table->double('baja', 5 ,1)->nullable();
+            $table->double('comision', 5 ,1)->nullable();
+            $table->double('totalpagables', 5 ,1)->nullable();
+            $table->string('vistobueno')->nullable();
+            $table->string('firma')->nullable();
             $table->string('archivo')->nullable();
             $table->timestamps();
         });

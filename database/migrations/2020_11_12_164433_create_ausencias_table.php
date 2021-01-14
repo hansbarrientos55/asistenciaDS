@@ -19,8 +19,10 @@ class CreateAusenciasTable extends Migration
             $table->string('fecha');
             $table->string('hora');
             $table->string('motivo');
+            $table->string('tipo')->nullable();
             $table->string('fechaausencia');
             $table->string('horaausencia');
+            $table->string('mes')->nullable();
             $table->string('estaaceptada')->default('Esperando confirmacion');
             $table->string('archivo')->nullable();
             $table->string('label')->nullable();

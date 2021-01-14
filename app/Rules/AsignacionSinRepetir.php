@@ -39,11 +39,18 @@ class AsignacionSinRepetir implements Rule
         $res;
 
        if(Asignacion::where('gestion',$this->gestion)->where('materia',$this->materia)->where('grupo',$this->grupo)->where('docente',$this->docente)->exists()){
-           $res = false; 
+            $res = false;
 
        } else {
-
+             
+        if(Asignacion::where('gestion',$this->gestion)->where('materia',$this->materia)->where('grupo',$this->grupo)->exists()){
+            $res = false;
+        } else {
             $res = true;
+
+        }
+
+            
        }
 
        return $res;

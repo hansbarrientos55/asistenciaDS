@@ -3,13 +3,14 @@
 @section('content')
     
 
-<div class="container">
+<div class="container-fluid" style="width: auto">
 
     <h1 class="text-center" style="font-family: Arial;font-size: 25px;color: rgb(0, 0, 0);" >Registro de asistencia y avance Mensual</h1>
 
     <div>
         @hasrole('Jefe de Departamento')
         <a href="{{url('mensual/create')}}" class="btn btn-success">Agregar registro de asistencia mensual</a>
+        <a href="{{url('prepararmensual')}}" class="btn btn-info">Preparar impresion</a>
         @endrole
         <br>
         <br>
@@ -18,7 +19,7 @@
     </div>
     
 
-    <table class="table table-light table-hover">
+    <table class="table table-responsive table-light table-hover">
         <thead class="thead-light">
         <tr>
             <th scope="col">Id</th>
@@ -26,7 +27,13 @@
             <th scope="col">Hora</th>
             <th scope="col">Mes</th>
             <th scope="col">Usuario</th>
+            <th scope="col">Horas asignadas</th>
             <th scope="col">Horas trabajadas</th>
+            <th scope="col">Faltas (Horas)</th>
+            <th scope="col">Licencias (Horas)</th>
+            <th scope="col">Bajas (Horas)</th>
+            <th scope="col">Comision (Horas)</th>
+            <th scope="col">Total Horas Pagables</th>
             <th scope="col">Visto Bueno</th>
             <th scope="col">Firma</th>
             <th scope="col">Archivo</th>
@@ -40,8 +47,14 @@
                 <td>{{$item->fecha}}</td>
                 <td>{{$item->hora}}</td>
                 <td>{{$item->mes}}</td>
-                <td>{{$item->user_id}}</td>
+                <td>{{$item->usuario}}</td>
                 <td>{{$item->horas}}</td>
+                <td>{{$item->asistidas}}</td>
+                <td>{{$item->faltas}}</td>
+                <td>{{$item->licencia}}</td>
+                <td>{{$item->baja}}</td>
+                <td>{{$item->comision}}</td>
+                <td>{{$item->totalpagables}}</td>
                 <td>{{$item->vistobueno}}</td>
                 <td>{{$item->firma}}</td>
                 @if($item->archivo != "")

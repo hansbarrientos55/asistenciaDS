@@ -55,6 +55,15 @@
 
 
     @role('Docente')
+    <div class="form-group">
+        <label for="tipo">Tipo</label>
+        <select name="tipo" class="form-control" id="tipo">
+                <option value="Licencia">Licencia</option>
+                <option value="Baja">Baja</option>
+                <option value="Comision">Comision</option>
+        </select>
+    </div>
+
     @if($errors->first('fechaausencia'))
           <div class="alert alert-danger" role ="alert" >
             <ul>
@@ -70,6 +79,10 @@
     @endrole
 
     @role('Jefe de Departamento')
+    <div class="form-group">
+        <label for="tipo" class="control-label">Tipo</label>
+        <input class="form-control" type="text" name="tipo" id="tipo" value="{{$ause->tipo}}" readonly required>
+    </div>
     <div class="form-group">
         <label for="fechaausencia" class="control-label">Fecha de ausencia</label>
         <input class="form-control" type="date" name="fechaausencia" id="fechaausencia" value="{{$ause->fechaausencia}}" readonly required>

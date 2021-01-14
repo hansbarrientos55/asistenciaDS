@@ -12,6 +12,16 @@
 
                 <form action="{{url('mensual/store')}}" class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post"  enctype="multipart/form-data">
                     @csrf
+
+                    @if($errors->first('vistobueno'))
+                    <div class="alert alert-danger" role ="alert" >
+                    <ul>
+                            <li>{{ $errors->first('vistobueno')}} </li>
+                    </ul>
+                    </div>
+                   @endif
+
+
                     <div class="form-group">
                         <label for="fecha" class="control-label">{{ 'Fecha' }}</label>
                     <input class="form-control" type="string" name="fecha" id="fecha" value="{{$fecha}}" required readonly>

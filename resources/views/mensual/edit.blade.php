@@ -15,6 +15,14 @@
 <form action="{{url('/mensual/'.$asi->id)}}"  class= "form-horizontal" style="font-family: Arial;color: rgb(0, 0, 0);" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{method_field('PATCH')}}
+
+    @if($errors->first('vistobueno'))
+                    <div class="alert alert-danger" role ="alert" >
+                    <ul>
+                            <li>{{ $errors->first('vistobueno')}} </li>
+                    </ul>
+                    </div>
+                   @endif
     <div class="form-group">
         <label for="fecha" class="control-label">Fecha</label>
         <input class="form-control" type="text" name="fecha" id="fecha" value="{{$asi->fecha}}" required readonly>

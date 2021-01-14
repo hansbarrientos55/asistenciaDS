@@ -17,6 +17,7 @@
             <th scope="col">Fecha</th>
             <th scope="col">Hora</th>
             <th scope="col">Motivo</th>
+            <th scope="col">Tipo</th>
             <th scope="col">Fecha de ausencia</th>
             <th scope="col">Hora de ausencia</th>
             <th scope="col">Estado del permiso</th>
@@ -31,6 +32,7 @@
                 <td>{{$item->fecha}}</td>
                 <td>{{$item->hora}}</td>
                 <td>{{$item->motivo}}</td>
+                <td>{{$item->tipo}}</td>
                 <td>{{$item->fechaausencia}}</td>
                 <td>{{$item->horaausencia}}</td>
                 <td>{{$item->estaaceptada}}</td>

@@ -44,14 +44,13 @@ class AsignacionActualizar implements Rule
 
        } else {
              
-        if(Asignacion::where('gestion',$this->gestion)->where('materia',$this->materia)->where('grupo',$this->grupo)->where('docente',$this->docente)->exists()){
+        if(Asignacion::where('gestion',$this->gestion)->where('materia',$this->materia)->where('grupo',$this->grupo)->exists()){
             $res = false;
         } else {
             $res = true;
 
         }
 
-            
        }
 
        return $res;

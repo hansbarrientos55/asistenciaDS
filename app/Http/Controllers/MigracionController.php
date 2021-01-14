@@ -82,9 +82,9 @@ class MigracionController extends Controller
 
         // Asignaciones
         $asignaciones = Asignacion::all();
-        $salida .= "\n INSERT INTO \"asignacions\" (\"id\", \"gestion\", \"departamento\", \"docente\", \"nomdocente\", \"auxiliardocencia\", \"nomauxdocencia\", \"auxiliarlabo\", \"nomauxlabo\", \"materia\", \"nommateria\", \"grupo\", \"created_at\", \"updated_at\") VALUES \n";
+        $salida .= "\n INSERT INTO \"asignacions\" (\"id\", \"gestion\", \"departamento\", \"docente\", \"nomdocente\", \"auxiliardocencia\", \"nomauxdocencia\", \"auxiliarlabo\", \"nomauxlabo\", \"materia\", \"nommateria\", \"grupo\", \"numgrupo\", \"etiqueta\", \"created_at\", \"updated_at\") VALUES \n";
         foreach($asignaciones as $list){
-            $salida .= "(".$list->id.", '".$list->gestion."', '".$list->departamento."', '".$list->docente."', '".$list->nomdocente."', '".$list->auxiliardocencia."', '".$list->nomauxdocencia."', '".$list->auxiliarlabo."', '".$list->nomauxlabo."', '".$list->materia."', '".$list->nommateria."', '".$list->grupo."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->gestion."', '".$list->departamento."', '".$list->docente."', '".$list->nomdocente."', '".$list->auxiliardocencia."', '".$list->nomauxdocencia."', '".$list->auxiliarlabo."', '".$list->nomauxlabo."', '".$list->materia."', '".$list->nommateria."', '".$list->grupo."', '".$list->numgrupo."', '".$list->etiqueta."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -92,9 +92,9 @@ class MigracionController extends Controller
 
         // Asistencias
         $asistencias = Asistencia::all();
-        $salida .= "\n INSERT INTO \"asistencias\" (\"id\", \"user_id\", \"tipo\", \"fecha\", \"hora\", \"mes\", \"iniciosemana\", \"finsemana\", \"horario\", \"grupo\", \"materia\", \"contenido\", \"repositorio\", \"notificacion\", \"claseonline\", \"observaciones\", \"firma\", \"archivo\", \"created_at\", \"updated_at\") VALUES \n";
+        $salida .= "\n INSERT INTO \"asistencias\" (\"id\", \"user_id\", \"tipo\", \"fecha\", \"hora\", \"mes\", \"iniciosemana\", \"finsemana\", \"horario\", \"titulohorario\", \"grupo\", \"nombregrupo\",\"materia\", \"nombremateria\", \"contenido\", \"repositorio\", \"notificacion\", \"claseonline\", \"observaciones\", \"firma\", \"archivo\", \"grabacion\", \"tarea\",\"created_at\", \"updated_at\") VALUES \n";
         foreach($asistencias as $list){
-            $salida .= "(".$list->id.", '".$list->user_id."', '".$list->tipo."', '".$list->fecha."', '".$list->hora."', '".$list->mes."', '".$list->iniciosemana."', '".$list->finsemana."', '".$list->horario."', '".$list->grupo."', '".$list->materia."', '".$list->contenido."', '".$list->repositorio."', '".$list->notificacion."', '".$list->claseonline."', '".$list->observaciones."', '".$list->firma."', '".$list->archivo."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->user_id."', '".$list->tipo."', '".$list->fecha."', '".$list->hora."', '".$list->mes."', '".$list->iniciosemana."', '".$list->finsemana."', '".$list->horario."', '".$list->titulohorario."', '".$list->grupo."', '".$list->nombregrupo."', '".$list->materia."', '".$list->nombremateria."', '".$list->contenido."', '".$list->repositorio."', '".$list->notificacion."', '".$list->claseonline."', '".$list->observaciones."', '".$list->firma."', '".$list->archivo."', '".$list->grabacion."', '".$list->tarea."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -102,9 +102,9 @@ class MigracionController extends Controller
 
         //Ausencias
         $ausencias = Ausencia::all();
-        $salida .= "\n INSERT INTO \"ausencias\" (\"id\", \"user_id\", \"fecha\", \"hora\", \"motivo\", \"fechaausencia\", \"horaausencia\", \"estaaceptada\", \"archivo\", \"label\", \"created_at\", \"updated_at\") VALUES \n";
+        $salida .= "\n INSERT INTO \"ausencias\" (\"id\", \"user_id\", \"fecha\", \"hora\", \"motivo\", \"tipo\",\"fechaausencia\", \"horaausencia\", \"mes\", \"estaaceptada\", \"archivo\", \"label\", \"created_at\", \"updated_at\") VALUES \n";
         foreach($ausencias as $list){
-            $salida .= "(".$list->id.", '".$list->user_id."', '".$list->fecha."', '".$list->hora."', '".$list->motivo."', '".$list->fechaausencia."', '".$list->horaausencia."', '".$list->estaaceptada."', '".$list->archivo."', '".$list->label."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->user_id."', '".$list->fecha."', '".$list->hora."', '".$list->motivo."', '".$list->tipo."', '".$list->fechaausencia."', '".$list->horaausencia."', '".$list->mes."', '".$list->estaaceptada."', '".$list->archivo."', '".$list->label."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -222,9 +222,9 @@ class MigracionController extends Controller
 
         //Mensuales
         $mensuales = Mensual::all();
-        $salida .= "\n INSERT INTO \"mensuals\" (\"id\", \"user_id\", \"fecha\", \"hora\", \"mes\", \"vistobueno\", \"firma\", \"horas\", \"archivo\", \"created_at\", \"updated_at\") VALUES \n";
+        $salida .= "\n INSERT INTO \"mensuals\" (\"id\", \"fecha\", \"hora\", \"mes\", \"user_id\", \"usuario\", \"horas\", \"asistidas\", \"faltas\", \"licencia\",\"baja\",\"comision\",\"totalpagables\",\"vistobueno\", \"firma\", \"archivo\", \"created_at\", \"updated_at\") VALUES \n";
         foreach($mensuales as $list){
-            $salida .= "(".$list->id.", '".$list->user_id."', '".$list->fecha."', '".$list->hora."', '".$list->mes."', '".$list->vistobueno."', '".$list->firma."', '".$list->horas."', '".$list->archivo."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->fecha."', '".$list->hora."', '".$list->mes."', '".$list->user_id."', '".$list->usuario."', '".$list->horas."', '".$list->asistidas."', '".$list->faltas."', '".$list->licencia."', '".$list->baja."', '".$list->comision."', '".$list->totalpagables."', '".$list->vistobueno."', '".$list->firma."', '".$list->horas."', '".$list->archivo."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -325,9 +325,9 @@ class MigracionController extends Controller
 
         // Asignaciones
         $asignaciones = Asignacion::all();
-        $salida .= "\n INSERT INTO `asignacions` (`id`, `gestion`, `departamento`, `docente`, `materia`, `grupo`, `created_at`, `updated_at`) VALUES \n";
+        $salida .= "\n INSERT INTO `asignacions` (`id`, `gestion`, `departamento`, `docente`, `nomdocente`, `auxiliardocencia`, `nomauxdocencia`, `auxiliarlabo`, `nomauxlabo`, `materia`, `nommateria`, `grupo`, `numgrupo`, `etiqueta`, `created_at`, `updated_at`) VALUES \n";
         foreach($asignaciones as $list){
-            $salida .= "(".$list->id.", '".$list->gestion."', '".$list->departamento."', '".$list->docente."', '".$list->materia."', '".$list->grupo."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->gestion."', '".$list->departamento."', '".$list->docente."', '".$list->nomdocente."', '".$list->auxiliardocencia."', '".$list->nomauxdocencia."', '".$list->auxiliarlabo."', '".$list->nomauxlabo."', '".$list->materia."', '".$list->nommateria."', '".$list->grupo."', '".$list->numgrupo."', '".$list->etiqueta."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -335,9 +335,9 @@ class MigracionController extends Controller
 
         // Asistencias
         $asistencias = Asistencia::all();
-        $salida .= "\n INSERT INTO `asistencias` (`id`, `user_id`, `tipo`, `fecha`, `hora`, `mes`, `iniciosemana`, `finsemana`, `horario`, `grupo`, `materia`, `contenido`, `repositorio`, `notificacion`, `claseonline`, `observaciones`, `firma`, `archivo`, `created_at`, `updated_at`) VALUES \n";
+        $salida .= "\n INSERT INTO `asistencias` (`id`, `user_id`, `tipo`, `fecha`, `hora`, `mes`, `iniciosemana`, `finsemana`, `horario`, `titulohorario`, `grupo`, `nombregrupo`,`materia`, `nombremateria`, `contenido`, `repositorio`, `notificacion`, `claseonline`, `observaciones`, `firma`, `archivo`, `grabacion`, `tarea`,`created_at`, `updated_at`) VALUES \n";
         foreach($asistencias as $list){
-            $salida .= "(".$list->id.", '".$list->user_id."', '".$list->tipo."', '".$list->fecha."', '".$list->hora."', '".$list->mes."', '".$list->iniciosemana."', '".$list->finsemana."', '".$list->horario."', '".$list->grupo."', '".$list->materia."', '".$list->contenido."', '".$list->repositorio."', '".$list->notificacion."', '".$list->claseonline."', '".$list->observaciones."', '".$list->firma."', '".$list->archivo."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->user_id."', '".$list->tipo."', '".$list->fecha."', '".$list->hora."', '".$list->mes."', '".$list->iniciosemana."', '".$list->finsemana."', '".$list->horario."', '".$list->titulohorario."', '".$list->grupo."', '".$list->nombregrupo."', '".$list->materia."', '".$list->nombremateria."', '".$list->contenido."', '".$list->repositorio."', '".$list->notificacion."', '".$list->claseonline."', '".$list->observaciones."', '".$list->firma."', '".$list->archivo."', '".$list->grabacion."', '".$list->tarea."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -345,9 +345,9 @@ class MigracionController extends Controller
 
         //Ausencias
         $ausencias = Ausencia::all();
-        $salida .= "\n INSERT INTO `ausencias` (`id`, `user_id`, `fecha`, `hora`, `motivo`, `fechaausencia`, `horaausencia`, `estaaceptada`, `archivo`, `label`, `created_at`, `updated_at`) VALUES \n";
+        $salida .= "\n INSERT INTO `ausencias` (`id`, `user_id`, `fecha`, `hora`, `motivo`, `tipo`,`fechaausencia`, `horaausencia`, `mes`, `estaaceptada`, `archivo`, `label`, `created_at`, `updated_at`) VALUES \n";
         foreach($ausencias as $list){
-            $salida .= "(".$list->id.", '".$list->user_id."', '".$list->fecha."', '".$list->hora."', '".$list->motivo."', '".$list->fechaausencia."', '".$list->horaausencia."', '".$list->estaaceptada."', '".$list->archivo."', '".$list->label."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->user_id."', '".$list->fecha."', '".$list->hora."', '".$list->motivo."', '".$list->tipo."', '".$list->fechaausencia."', '".$list->horaausencia."', '".$list->mes."', '".$list->estaaceptada."', '".$list->archivo."', '".$list->label."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -385,7 +385,7 @@ class MigracionController extends Controller
 
         //Departamentos
         $departamentos = Departamento::all();
-        $salida .= "\n INSERT INTO `departamentos` (`id`, `nombredepa`, `descripciondepa`, `estaactivo`, `facultad_id`, `facultad_nombre`, `created_at`, `updated_at`) VALUES \n";
+        $salida .= "\n INSERT INTO `departamentos` (`id`, `nombredepa`, `descripciondepa`, `estaactivo`, `facultad_id`, `facultad_nombre`,`created_at`, `updated_at`) VALUES \n";
         foreach($departamentos as $list){
             $salida .= "(".$list->id.", '".$list->nombredepa."', '".$list->descripciondepa."', '".$list->estaactivo."', '".$list->facultad_id."', '".$list->facultad_nombre."', '".$list->created_at."', '".$list->updated_at."'),";
 
@@ -465,9 +465,9 @@ class MigracionController extends Controller
 
         //Mensuales
         $mensuales = Mensual::all();
-        $salida .= "\n INSERT INTO `mensuals` (`id`, `user_id`, `fecha`, `hora`, `mes`, `vistobueno`, `firma`, `horas`, `archivo`, `created_at`, `updated_at`) VALUES \n";
+        $salida .= "\n INSERT INTO `mensuals` (`id`, `fecha`, `hora`, `mes`, `user_id`, `usuario`, `horas`, `asistidas`, `faltas`, `licencia`,`baja`,`comision`,`totalpagables`,`vistobueno`, `firma`, `archivo`, `created_at`, `updated_at`) VALUES \n";
         foreach($mensuales as $list){
-            $salida .= "(".$list->id.", '".$list->user_id."', '".$list->fecha."', '".$list->hora."', '".$list->mes."', '".$list->vistobueno."', '".$list->firma."', '".$list->horas."', '".$list->archivo."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->fecha."', '".$list->hora."', '".$list->mes."', '".$list->user_id."', '".$list->usuario."', '".$list->horas."', '".$list->asistidas."', '".$list->faltas."', '".$list->licencia."', '".$list->baja."', '".$list->comision."', '".$list->totalpagables."', '".$list->vistobueno."', '".$list->firma."', '".$list->horas."', '".$list->archivo."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -506,9 +506,9 @@ class MigracionController extends Controller
         //Eventos
         //Materias
         $eventos = Event::all();
-        $salida .= "\n INSERT INTO `events` (`id`, `title`, `start`, `end`,`created_at`, `updated_at`) VALUES \n";
+        $salida .= "\n INSERT INTO `events` (`id`, `title`, `start`, `end`, `creator`, `type`,`created_at`, `updated_at`) VALUES \n";
         foreach($eventos as $list){
-            $salida .= "(".$list->id.", '".$list->title."', '".$list->start."', '".$list->end."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->title."', '".$list->start."', '".$list->end."', '".$list->creator."', '".$list->type."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -541,12 +541,112 @@ class MigracionController extends Controller
             //dd($output);
             // log the results
             Log::info("Backpack\BackupManager -- new backup started from admin interface \r\n" . $output);
+            //dd('Listo');
             // return the results as a response to the ajax call
             //Alert::success('New backup created');
-            return redirect()->back();
+            //return redirect()->back();
+            //return redirect('user');
+            return redirect('migracion')->with('success','Respaldo creado, revise la Carpeta de Respaldos');
         } catch (Exception $e) {
             Flash::error($e->getMessage());
-            return redirect()->back();
+            //return redirect()->back();
+            return redirect('migracion')->with('fail','Fracaso el respaldo. No ejecute otras aplicaciones mientras el sistema se respalda');
         }
+    }
+
+    function respaldos(){
+
+        // Array en el que obtendremos los resultados
+        $respaldos = array();
+      
+        $storage_path = storage_path();
+        $directorio = $storage_path.'\app\Laravel';
+
+        // Agregamos la barra invertida al final en caso de que no exista
+        if(substr($directorio, -1) != "/") $directorio .= "/";
+      
+        // Creamos un puntero al directorio y obtenemos el listado de archivos
+        $dir = @dir($directorio) or die("getFileList: Error abriendo el directorio $directorio para leerlo");
+        while(($archivo = $dir->read()) !== false) {
+            // Obviamos los archivos ocultos
+            if($archivo[0] == ".") continue;
+            if(is_dir($directorio . $archivo)) {
+                $respaldos[] = array(
+                  "Nombre" => $archivo,
+                  //"Ruta" => $directorio . $archivo . "/",
+                  "Tamaño" => 0,
+                  "Modificado" => filemtime($directorio . $archivo)
+                );
+            } else if (is_readable($directorio . $archivo)) {
+                $respaldos[] = array(
+                  "Nombre" => $archivo,
+                  //"Ruta" => $directorio . $archivo,
+                  "Tamaño" => filesize($directorio . $archivo),
+                  "Modificado" => filemtime($directorio . $archivo)
+                );
+            }
+        }
+        $dir->close();
+
+        //dd($respaldos);
+        //return $res;
+
+        return view('migracion.listado', compact('respaldos'));
+      }
+
+      public function respaldodescarga($nombre){
+        //$public_path = public_path();
+        $storage_path = storage_path();
+        $ruta = $storage_path.'\app\Laravel/'.$nombre;
+        //$url = $nombre;
+
+        //dd($ruta);
+
+        return response()->download($ruta);
+
+    }
+
+    public function inicio(){
+
+        // Array en el que obtendremos los resultados
+        $respaldos = array();
+      
+        $storage_path = storage_path();
+        $directorio = $storage_path.'\app\Laravel';
+
+        // Agregamos la barra invertida al final en caso de que no exista
+        if(substr($directorio, -1) != "/") $directorio .= "/";
+      
+        // Creamos un puntero al directorio y obtenemos el listado de archivos
+        $dir = @dir($directorio) or die("getFileList: Error abriendo el directorio $directorio para leerlo");
+        while(($archivo = $dir->read()) !== false) {
+            // Obviamos los archivos ocultos
+            if($archivo[0] == ".") continue;
+            if(is_dir($directorio . $archivo)) {
+                $respaldos[] = array(
+                  "Nombre" => $archivo,
+                  //"Ruta" => $directorio . $archivo . "/",
+                  "Tamaño" => 0,
+                  "Modificado" => filemtime($directorio . $archivo)
+                );
+            } else if (is_readable($directorio . $archivo)) {
+
+                $fecha = new Carbon(filemtime($directorio . $archivo));
+                $fecha->setTimezone('America/Caracas');
+
+                $respaldos[] = array(
+                  "Nombre" => $archivo,
+                  "Ruta" => $directorio . $archivo,
+                  "Tamaño" => substr(filesize($directorio . $archivo),0,2).'.'.substr(filesize($directorio . $archivo),2,3).' MB',
+                  "Modificado" => $fecha
+                );
+            }
+        }
+        $dir->close();
+
+        //dd($respaldos);
+        //return $res;
+
+        return view('migracion.inicio', compact('respaldos'));
     }
 }

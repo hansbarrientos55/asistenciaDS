@@ -79,8 +79,39 @@ class AusenciaController extends Controller
         $ausencia->fecha = $request->fecha;
         $ausencia->hora = $request->hora;
         $ausencia->motivo = $request->motivo;
+        $ausencia->tipo = $request->tipo;
         $ausencia->fechaausencia = $request->fechaausencia;
         $ausencia->horaausencia = $request->horaausencia;
+        
+        $mes = Carbon::parse($request->fechaausencia)->format('d F y');
+        switch($mes){
+            case 'January' : $mes = "Enero";
+            break;
+            case 'February' : $mes = "Febrero";
+            break;
+            case 'March' : $mes = "Marzo";
+            break;
+            case 'April' : $mes = "Abril";
+            break;
+            case 'May' : $mes = "Mayo";
+            break;
+            case 'June' : $mes = "Junio";
+            break;
+            case 'July' : $mes = "Julio";
+            break;
+            case 'August' : $mes = "Agosto";
+            break;
+            case 'September' : $mes = "Septiembre";
+            break;
+            case 'October' : $mes = "Octubre";
+            break;
+            case 'November' : $mes = "Noviembre";
+            break;
+            case 'December' : $mes = "Diciembre";
+            break;
+        }
+        $ausencia->mes = $mes;
+        
         $ausencia->archivo =$real;
 
         $ausencia->save();
@@ -160,8 +191,40 @@ class AusenciaController extends Controller
         $ausencia->fecha = $request->fecha;
         $ausencia->hora = $request->hora;
         $ausencia->motivo = $request->motivo;
+        $ausencia->tipo = $request->tipo;
         $ausencia->fechaausencia = $request->fechaausencia;
         $ausencia->horaausencia = $request->horaausencia;
+        
+        $mes = Carbon::parse($request->fechaausencia)->format('d F y');
+        switch($mes){
+            case 'January' : $mes = "Enero";
+            break;
+            case 'February' : $mes = "Febrero";
+            break;
+            case 'March' : $mes = "Marzo";
+            break;
+            case 'April' : $mes = "Abril";
+            break;
+            case 'May' : $mes = "Mayo";
+            break;
+            case 'June' : $mes = "Junio";
+            break;
+            case 'July' : $mes = "Julio";
+            break;
+            case 'August' : $mes = "Agosto";
+            break;
+            case 'September' : $mes = "Septiembre";
+            break;
+            case 'October' : $mes = "Octubre";
+            break;
+            case 'November' : $mes = "Noviembre";
+            break;
+            case 'December' : $mes = "Diciembre";
+            break;
+        }
+        $ausencia->mes = $mes;
+
+
 
         $ausencia->save();
 

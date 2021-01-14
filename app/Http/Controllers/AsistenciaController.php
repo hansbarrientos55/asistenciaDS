@@ -67,10 +67,11 @@ class AsistenciaController extends Controller
     public function grupo(Request $request)
     {
         $materia = $request['materia'];
+        $asignacion = Asignacion::where('docente',Auth::id())->where('materia',$materia)->value('grupo');
         $nombremateria = Materia::where('id',$materia)->value('nombremate');
-        $grupos = Grupo::where('materia_id',$materia)->get();
+        $grupos = Grupo::where('materia_id',$materia)->where('id',$asignacion)->get();
 
-        //dd($grupos);
+        //dd($asignacion);
         
         return view('asistencia.grupo', compact('grupos', 'materia', 'nombremateria'));
     }
@@ -348,8 +349,9 @@ class AsistenciaController extends Controller
         
         $asi = $request['llave'];
         $materia = $request['materia'];
+        $asignacion = Asignacion::where('docente',Auth::id())->where('materia',$materia)->value('grupo');
         $nombremateria = Materia::where('id',$materia)->value('nombremate');
-        $grupos = Grupo::where('materia_id',$materia)->get();
+        $grupos = Grupo::where('materia_id',$materia)->where('id',$asignacion)->get();
 
         //dd($grupos);
         
