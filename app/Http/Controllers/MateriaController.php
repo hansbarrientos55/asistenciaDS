@@ -13,6 +13,7 @@ use App\User;
 use App\Grupo;
 use App\Horario;
 use App\Asignacion;
+use App\Gestion;
 
 class MateriaController extends Controller
 {
@@ -243,7 +244,7 @@ class MateriaController extends Controller
         }
         
         //Gestion::destroy($id);
-        $gestion = Gestion::findOrFail($id);
+        $gestion = Materia::findOrFail($id);
         $gestion->estaactivo = 'Activo';
         $gestion->save();
 
