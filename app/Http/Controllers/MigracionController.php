@@ -224,7 +224,7 @@ class MigracionController extends Controller
         $mensuales = Mensual::all();
         $salida .= "\n INSERT INTO \"mensuals\" (\"id\", \"fecha\", \"hora\", \"mes\", \"user_id\", \"usuario\", \"horas\", \"asistidas\", \"faltas\", \"licencia\",\"baja\",\"comision\",\"totalpagables\",\"vistobueno\", \"firma\", \"archivo\", \"created_at\", \"updated_at\") VALUES \n";
         foreach($mensuales as $list){
-            $salida .= "(".$list->id.", '".$list->fecha."', '".$list->hora."', '".$list->mes."', '".$list->user_id."', '".$list->usuario."', '".$list->horas."', '".$list->asistidas."', '".$list->faltas."', '".$list->licencia."', '".$list->baja."', '".$list->comision."', '".$list->totalpagables."', '".$list->vistobueno."', '".$list->firma."', '".$list->horas."', '".$list->archivo."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->fecha."', '".$list->hora."', '".$list->mes."', '".$list->user_id."', '".$list->usuario."', '".$list->horas."', '".$list->asistidas."', '".$list->faltas."', '".$list->licencia."', '".$list->baja."', '".$list->comision."', '".$list->totalpagables."', '".$list->vistobueno."', '".$list->firma."', '".$list->archivo."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
@@ -467,7 +467,7 @@ class MigracionController extends Controller
         $mensuales = Mensual::all();
         $salida .= "\n INSERT INTO `mensuals` (`id`, `fecha`, `hora`, `mes`, `user_id`, `usuario`, `horas`, `asistidas`, `faltas`, `licencia`,`baja`,`comision`,`totalpagables`,`vistobueno`, `firma`, `archivo`, `created_at`, `updated_at`) VALUES \n";
         foreach($mensuales as $list){
-            $salida .= "(".$list->id.", '".$list->fecha."', '".$list->hora."', '".$list->mes."', '".$list->user_id."', '".$list->usuario."', '".$list->horas."', '".$list->asistidas."', '".$list->faltas."', '".$list->licencia."', '".$list->baja."', '".$list->comision."', '".$list->totalpagables."', '".$list->vistobueno."', '".$list->firma."', '".$list->horas."', '".$list->archivo."', '".$list->created_at."', '".$list->updated_at."'),";
+            $salida .= "(".$list->id.", '".$list->fecha."', '".$list->hora."', '".$list->mes."', '".$list->user_id."', '".$list->usuario."', '".$list->horas."', '".$list->asistidas."', '".$list->faltas."', '".$list->licencia."', '".$list->baja."', '".$list->comision."', '".$list->totalpagables."', '".$list->vistobueno."', '".$list->firma."', '".$list->archivo."', '".$list->created_at."', '".$list->updated_at."'),";
 
         }
         $salida = substr($salida,0,-1);
