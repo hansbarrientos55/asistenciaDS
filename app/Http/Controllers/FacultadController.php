@@ -166,7 +166,7 @@ class FacultadController extends Controller
     {
         //Facultad::destroy($id);
         $facultad = Facultad::findOrFail($id);
-        $facultad->estaactivo('Archivado');
+        $facultad->estaactivo = 'Archivado';
         $facultad->save();
 
         $depas = Departamento::where('facultad_id',$id)->get();
@@ -208,7 +208,7 @@ class FacultadController extends Controller
     {
         //Facultad::destroy($id);
         $facultad = Facultad::findOrFail($id);
-        $facultad->estaactivo('Activo');
+        $facultad->estaactivo ='Activo';
         $facultad->save();
 
         $depas = Departamento::where('facultad_id',$id)->get();
